@@ -25,7 +25,12 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/common-color.css",
+              "src/assets/css/common-font.css",
+              "src/assets/css/common-height.css",
+              "src/assets/css/common-tag.css",
+              "src/assets/css/common-width.css"
             ],
             "scripts": []
           },
