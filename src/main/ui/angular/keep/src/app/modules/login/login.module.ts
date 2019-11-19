@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -11,7 +12,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
   declarations: [LoginComponent, RegistrationComponent, ResetPasswordComponent],
   imports: [
     CommonModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    ReactiveFormsModule
   ]
 })
 export class LoginModule { }

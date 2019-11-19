@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  constructor() { }
+  private resetPasswordForm: FormGroup = undefined;
+
+  constructor(formBuilder: FormBuilder) {
+    this.resetPasswordForm = formBuilder.group({
+      email : ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
   }

@@ -8,12 +8,14 @@
                     <div class="col-md-3 p-0 m-0">&nbsp;</div>
                     <div class="col-md-6 p-0 m-0">
                         <h2 class="text-center p-3 m-2">Login</h2>
-                        <form>
+                        <form [formGroup]="loginForm">
                             <div class="form-group">
-                                <input type="email" class="form-control" placeholder="Email">
+                                <input type="email" class="form-control" placeholder="Email"
+                                    formControlName="email">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password">
                             </div>
                             <div class="form-check mb-2">
                                 <input type="checkbox" class="form-check-input">

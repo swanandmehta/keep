@@ -8,24 +8,59 @@
                     <div class="col-md-3 p-0 m-0">&nbsp;</div>
                     <div class="col-md-6 p-0 m-0">
                         <h2 class="text-center p-3 m-2">Registration</h2>
-                        <form>
+                        <form [formGroup]="registrationForm" novalidate>
                             <div class="form-group">
-                                <input type="input" class="form-control" placeholder="Full Name">
+                                <input type="input" class="form-control" placeholder="Full Name"
+                                    formControlName="name">
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.name.pristine === false && 
+                                        registrationForm.controls.name.errors != null &&
+                                        registrationForm.controls.name.errors.required === true">
+                                    Name is required to create Keep profile
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="input" class="form-control" placeholder="Email Address">
+                                <input type="input" class="form-control" placeholder="Email Address"
+                                    formControlName="email">
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.email.pristine === false && 
+                                        registrationForm.controls.email.errors != null &&
+                                        registrationForm.controls.email.errors.required === true">
+                                    Email Address is required to create Keep profile
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Password">
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password">
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.password.pristine === false && 
+                                        registrationForm.controls.password.errors != null &&
+                                        registrationForm.controls.password.errors.required === true">
+                                    Please provide password to create Keep profile
+                                </div>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" placeholder="Repeat password">
+                                <input type="password" class="form-control" placeholder="Repeat password"
+                                    formControlName="confirmPassword">
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.confirmPassword.pristine === false && 
+                                        registrationForm.controls.confirmPassword.errors != null &&
+                                        registrationForm.controls.confirmPassword.errors.required === true">
+                                    Please provide password confirmation to create Keep profile
+                                </div>
                             </div>
                             <div class="form-check mb-2">
-                                <input type="checkbox" class="form-check-input">
-                                <label class="form-check-label" >I accept the 
+                                <input type="checkbox" class="form-check-input" formControlName="acceptConditions">
+                                <label class="form-check-label">
+                                    I accept the 
                                     <a href="#" class="link"><u>Terms of Service</u></a>
                                 </label>
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.acceptConditions.pristine === false && 
+                                        registrationForm.controls.acceptConditions.errors != null &&
+                                        registrationForm.controls.acceptConditions.errors.valid === false">
+                                    Please accept Terms of Service
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button class="btn btn-primary btn-block">Create Account</button>
