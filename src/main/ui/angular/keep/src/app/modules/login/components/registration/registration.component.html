@@ -8,10 +8,16 @@
                     <div class="col-md-3 p-0 m-0">&nbsp;</div>
                     <div class="col-md-6 p-0 m-0">
                         <h2 class="text-center p-3 m-2">Registration</h2>
-                        <form [formGroup]="registrationForm" novalidate>
+                        <form [formGroup]="registrationForm" novalidate (ngSubmit)="submit()">
                             <div class="form-group">
                                 <input type="input" class="form-control" placeholder="Full Name"
                                     formControlName="name">
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.name.pristine === false && 
+                                        registrationForm.controls.name.errors != null &&
+                                        registrationForm.controls.name.errors.required === true">
+                                    Name is required to create Keep profile
+                                </div>
                                 <div class="form-error p-1" 
                                     *ngIf="registrationForm.controls.name.pristine === false && 
                                         registrationForm.controls.name.errors != null &&
@@ -27,6 +33,12 @@
                                         registrationForm.controls.email.errors != null &&
                                         registrationForm.controls.email.errors.required === true">
                                     Email Address is required to create Keep profile
+                                </div>
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.controls.email.pristine === false && 
+                                        registrationForm.controls.email.errors != null &&
+                                        registrationForm.controls.email.errors.email === true">
+                                    Please provide valid email address
                                 </div>
                             </div>
                             <div class="form-group">
@@ -48,6 +60,12 @@
                                         registrationForm.controls.confirmPassword.errors.required === true">
                                     Please provide password confirmation to create Keep profile
                                 </div>
+                                <div class="form-error p-1" 
+                                    *ngIf="registrationForm.pristine === false && 
+                                        registrationForm.errors != null &&
+                                        registrationForm.errors.missMatchPass === true">
+                                    Password do not matches
+                                </div>
                             </div>
                             <div class="form-check mb-2">
                                 <input type="checkbox" class="form-check-input" formControlName="acceptConditions">
@@ -63,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-primary btn-block">Create Account</button>
+                                <button type="submit" [disabled]="registrationForm.status !== 'VALID'" class="btn btn-primary btn-block">Create Account</button>
                             </div>
                             <div class="form-group text-center ">
                                 <label >
