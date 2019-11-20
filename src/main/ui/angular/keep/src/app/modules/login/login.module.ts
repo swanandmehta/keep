@@ -5,6 +5,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,7 +14,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
   imports: [
     CommonModule,
     LoginRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class LoginModule { }
