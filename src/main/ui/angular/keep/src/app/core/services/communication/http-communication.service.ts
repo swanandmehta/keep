@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
-import { HttpRequestConfig } from './../../config/http-request-config';
-import { IHttpCommunicationService } from './../interface/i-http-communication-service';
+import { HttpRequestConfig } from '../../../config/http-request-config';
+import { IHttpCommunicationService } from '../../interface/communication/i-http-communication-service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 

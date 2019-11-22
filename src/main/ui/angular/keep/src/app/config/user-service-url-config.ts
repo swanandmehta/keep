@@ -4,4 +4,8 @@ export class UserServiceUrlConfig {
         return 'user/validate-email?email=' + email;
     }
 
+    public static createUserUrl(): string {
+        return 'user/save';
+    }
+
 }

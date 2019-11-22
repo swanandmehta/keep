@@ -6,7 +6,7 @@ describe('HttpCommunicationService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: HttpCommunicationService = TestBed.get(HttpCommunicationService);
+    const service: HttpCommunicationService<any> = TestBed.get(HttpCommunicationService);
     expect(service).toBeTruthy();
   });
 });
