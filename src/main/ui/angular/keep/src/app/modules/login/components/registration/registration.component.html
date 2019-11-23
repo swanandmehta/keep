@@ -14,7 +14,7 @@
                                     formControlName="name">
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.name.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.name.errors != null &&
+                                        registrationForm.controls.name.errors !== null &&
                                         registrationForm.controls.name.errors.required === true">
                                     Name is required to create Keep profile
                                 </div>
@@ -24,19 +24,19 @@
                                     formControlName="email">
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.email.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.email.errors != null &&
+                                        registrationForm.controls.email.errors !== null &&
                                         registrationForm.controls.email.errors.required === true">
                                     Email Address is required to create Keep profile
                                 </div>
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.email.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.email.errors != null &&
+                                        registrationForm.controls.email.errors !== null &&
                                         registrationForm.controls.email.errors.email === true">
                                     Please provide valid email address
                                 </div>
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.email.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.email.errors != null &&
+                                        registrationForm.controls.email.errors !== null &&
                                         registrationForm.controls.email.errors.emailExist === true">
                                     Email address is already associated with Keep profile
                                 </div>
@@ -46,7 +46,7 @@
                                     formControlName="password">
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.password.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.password.errors != null &&
+                                        registrationForm.controls.password.errors !== null &&
                                         registrationForm.controls.password.errors.required === true">
                                     Please provide password to create Keep profile
                                 </div>
@@ -56,13 +56,13 @@
                                     formControlName="confirmPassword">
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.confirmPassword.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.confirmPassword.errors != null &&
+                                        registrationForm.controls.confirmPassword.errors !== null &&
                                         registrationForm.controls.confirmPassword.errors.required === true">
                                     Please provide password confirmation to create Keep profile
                                 </div>
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.pristine === false || isSubmited === true) && 
-                                        registrationForm.errors != null &&
+                                        registrationForm.errors !== null &&
                                         registrationForm.errors.missMatchPass === true">
                                     Password and confirm password does not matches
                                 </div>
@@ -75,7 +75,7 @@
                                 </label>
                                 <div class="form-error p-1" 
                                     *ngIf="(registrationForm.controls.acceptConditions.pristine === false || isSubmited === true) && 
-                                        registrationForm.controls.acceptConditions.errors != null &&
+                                        registrationForm.controls.acceptConditions.errors !== null &&
                                         registrationForm.controls.acceptConditions.errors.valid === false">
                                     Please accept Terms of Service
                                 </div>

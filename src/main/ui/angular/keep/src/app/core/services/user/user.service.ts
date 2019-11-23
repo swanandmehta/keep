@@ -1,8 +1,8 @@
+import { ServerConfig } from './../../../config/server-config';
 import { ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserServiceUrlConfig } from '../../../config/user-service-url-config';
-import { ServerConfig } from '../../../config/server-config';
 import { User } from '../../../modules/login/class/user';
 import { HttpCommunicationService } from '../communication/http-communication.service';
 import { Injectable } from '@angular/core';
@@ -32,6 +32,11 @@ export class UserService {
 
   public create(user: User): Observable<User> {
     const url = ServerConfig.serverUrl + UserServiceUrlConfig.createUserUrl();
+    return this.commService.post(url, user);
+  }
+
+  public login(user: User): Observable<User> {
+    const url = ServerConfig.serverUrl + UserServiceUrlConfig.loginUserUrl();
     return this.commService.post(url, user);
   }
 }

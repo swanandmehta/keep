@@ -8,4 +8,8 @@ export class UserServiceUrlConfig {
         return '/user/save';
     }
 
+    public static loginUserUrl(): string {
+        return '/user/login';
+    }
+
 }
