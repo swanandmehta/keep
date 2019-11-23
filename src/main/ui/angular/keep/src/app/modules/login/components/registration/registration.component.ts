@@ -1,3 +1,7 @@
+import { LoggerService } from './../../../../core/services/logger/logger.service';
+import { IErrorHandler } from './../../../../core/interface/logger/i-error-handler';
+import { LoggerLevel } from './../../../../shared/enum/logger-level.enum';
+import { ISuccessHandler } from './../../../../core/interface/logger/i-success-handler';
 import { Observable, PartialObserver } from 'rxjs';
 import { User } from './../../class/user';
 import { UserService } from '../../../../core/services/user/user.service';
@@ -17,9 +21,14 @@ export class RegistrationComponent implements OnInit {
   private registrationForm: FormGroup = undefined;
   private isSubmited = false;
   private userService: UserService = undefined;
+  private successHandler: ISuccessHandler = undefined;
+  private errorHandler: IErrorHandler = undefined;
 
-  constructor(formBuilder: FormBuilder, userService: UserService) {
+  constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService) {
     this.userService = userService;
+    this.successHandler = loggerService;
+    this.errorHandler = loggerService;
+
     this.registrationForm = formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email], EmailDoesNotExist(userService)],
@@ -37,15 +46,16 @@ export class RegistrationComponent implements OnInit {
     if (this.registrationForm.valid) {
       const user: User = this.registrationForm.value;
       const userObservable: Observable<User> = this.userService.create(user);
-      const callbackHandler: PartialObserver<User> = {
+      const observableHandle: PartialObserver<User> = {
         next : (createdUser: User) => {
-          console.log(user);
+          this.successHandler.handleSuccess(createdUser, 'User Created', LoggerLevel.L);
         },
         error : (error: any) => {
-          console.log(error);
+          this.errorHandler.handleError(error, 'Failed to create user', LoggerLevel.H);
         }
-      }
-      userObservable.subscribe();
+      };
+
+      userObservable.subscribe(observableHandle);
     }
   }
 

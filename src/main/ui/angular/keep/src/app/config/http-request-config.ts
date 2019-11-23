@@ -1,4 +1,4 @@
-import { HttpHeaders } from '@angular/common/http'
+import { HttpHeaders } from '@angular/common/http';
 
 export class HttpRequestConfig {
 
@@ -6,6 +6,6 @@ export class HttpRequestConfig {
 
     public static readonly HttpRequestConfig = {
         headers : HttpRequestConfig.httpHeaders
-    }
+    };
 
 }
