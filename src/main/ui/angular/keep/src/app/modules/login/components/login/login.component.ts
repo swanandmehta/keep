@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
 
   private invalidLogin = false;
   private isSubmited = false;
+  private serverFailure = false;
 
   constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService, router: Router) {
     this.userService = userService;
@@ -45,12 +46,18 @@ export class LoginComponent implements OnInit {
 
       const partialUserObserver: PartialObserver<User> = {
         next : (loggedInUser: User) => {
-          this.successHandler.handleSuccess(loggedInUser, 'User logged In', LoggerLevel.L);
-          this.router.navigate(['/reset-password']);
+          if (loggedInUser !== null && loggedInUser !== undefined) {
+            this.successHandler.handleSuccess(loggedInUser, 'User logged In', LoggerLevel.L);
+            this.router.navigate(['/reset-password']);
+          } else {
+            this.successHandler.handleSuccess(user, 'User failed to login', LoggerLevel.L);
+            this.invalidLogin = true;
+          }
+
         },
         error : (error: any) => {
-          this.errorHandler.handleError(error, 'User failed to login', LoggerLevel.M);
-          this.invalidLogin = true;
+          this.errorHandler.handleError(error, 'Server exception at the time of login', LoggerLevel.H);
+          this.serverFailure = true;
         }
       };
 

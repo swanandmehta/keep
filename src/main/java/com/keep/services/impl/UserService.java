@@ -40,5 +40,11 @@ public class UserService extends CrudService<UserDto, User> implements IUserServ
 		User user = userRepository.findByEmailEquals(email);
 		return toDto(user);
 	}
+
+	@Override
+	public UserDto login(UserDto userDto) {
+		User user = userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
+		return toDto(user);
+	}
 	
 }

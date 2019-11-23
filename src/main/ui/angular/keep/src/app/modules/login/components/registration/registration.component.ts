@@ -53,6 +53,7 @@ export class RegistrationComponent implements OnInit {
     if (this.registrationForm.valid) {
       const user: User = this.registrationForm.value;
       const userObservable: Observable<User> = this.userService.create(user);
+
       const observableHandle: PartialObserver<User> = {
         next : (createdUser: User) => {
           this.successHandler.handleSuccess(createdUser, 'User Created', LoggerLevel.L);

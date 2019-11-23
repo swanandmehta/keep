@@ -31,4 +31,9 @@ public class KeepService implements IKeepService {
 	public UserDto saveUser(UserDto userDto) {
 		return userService.persist(userDto);
 	}
+
+	@Override
+	public UserDto login(UserDto userDto) {
+		return userService.login(userDto);
+	}
 }

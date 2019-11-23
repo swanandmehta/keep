@@ -33,6 +33,10 @@
                                 <div class="form-error p-1" *ngIf="invalidLogin === true">
                                     Email Address and password does not match.
                                 </div>
+                                <div class="form-error p-1" *ngIf="serverFailure === true">
+                                        Communication with server failed.
+                                        Please contact Keep Support
+                                </div>
                             </div>
                             <div class="form-check mb-2">
                                 <input type="checkbox" class="form-check-input">
