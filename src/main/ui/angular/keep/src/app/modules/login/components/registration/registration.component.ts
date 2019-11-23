@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { MustBeTrue } from 'src/app/shared/validator/must-be-true';
 import { MustBeSame } from 'src/app/shared/validator/must-be-same';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registration',
@@ -19,19 +20,24 @@ import { MustBeSame } from 'src/app/shared/validator/must-be-same';
 export class RegistrationComponent implements OnInit {
 
   private registrationForm: FormGroup = undefined;
-  private isSubmited = false;
   private userService: UserService = undefined;
   private successHandler: ISuccessHandler = undefined;
   private errorHandler: IErrorHandler = undefined;
+  private router: Router;
 
-  constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService) {
+  private isSubmited = false;
+  private showCustomError = false;
+  private showRedirectMessage = false;
+
+  constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService, router: Router) {
     this.userService = userService;
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
+    this.router = router;
 
     this.registrationForm = formBuilder.group({
       name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email], EmailDoesNotExist(userService)],
+      email: ['', [Validators.required, Validators.email], EmailDoesNotExist(userService).bind(this)],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       acceptConditions: [false, [Validators.required, MustBeTrue]]
@@ -43,15 +49,22 @@ export class RegistrationComponent implements OnInit {
 
   submit(): void {
     this.isSubmited = true;
+    this.showCustomError = false;
     if (this.registrationForm.valid) {
       const user: User = this.registrationForm.value;
       const userObservable: Observable<User> = this.userService.create(user);
       const observableHandle: PartialObserver<User> = {
         next : (createdUser: User) => {
           this.successHandler.handleSuccess(createdUser, 'User Created', LoggerLevel.L);
+          this.showRedirectMessage = true;
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 3000);
+
         },
         error : (error: any) => {
           this.errorHandler.handleError(error, 'Failed to create user', LoggerLevel.H);
+          this.showCustomError = true;
         }
       };
 
