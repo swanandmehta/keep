@@ -48,11 +48,7 @@ export class LoginComponent implements OnInit {
         next : (loggedInUser: User) => {
           if (loggedInUser !== null && loggedInUser !== undefined) {
             this.successHandler.handleSuccess(loggedInUser, 'User logged In', LoggerLevel.L);
-<<<<<<< HEAD
             this.router.navigate(['/dashboard']);
-=======
-            this.router.navigate(['/reset-password']);
->>>>>>> branch 'Feature/dashboard' of https://github.com/swanandmehta/keep.git
           } else {
             this.successHandler.handleSuccess(user, 'User failed to login', LoggerLevel.L);
             this.invalidLogin = true;
