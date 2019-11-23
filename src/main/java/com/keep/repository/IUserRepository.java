@@ -3,7 +3,7 @@
  */
 package com.keep.repository;
 
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.stereotype.Repository;
 
 import com.keep.entity.User;
 
@@ -11,7 +11,9 @@ import com.keep.entity.User;
  * @author swanandm
  *
  */
-@NoRepositoryBean
+@Repository
 public interface IUserRepository extends ICrudRepository<User> {
+
+	User findByEmailEquals(String email);
 
 }

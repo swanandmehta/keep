@@ -6,8 +6,6 @@ package com.keep.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
 import com.keep.iservices.ICrudService;
 import com.keep.repository.ICrudRepository;
 
@@ -15,7 +13,6 @@ import com.keep.repository.ICrudRepository;
  * @author swanandm
  *
  */
-@Service
 public abstract class CrudService<Dto, Entity> implements ICrudService<Dto, Entity> {
 	
 	private final ICrudRepository<Entity> crudRepository;

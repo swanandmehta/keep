@@ -5,6 +5,7 @@ package com.keep.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,16 +27,14 @@ public class KeepController {
 	public KeepController(KeepService keepService) {
 		this.keepService = keepService;
 	}
-	
-	@GetMapping
-	@RequestMapping(path="/user/validate-email")
+		
+	@GetMapping(path="/user/validate-email")
 	public UserDto validateEmail(@RequestParam(name="email") String email) {
 		return keepService.validateEmail(email);
 	}
 	
-	@PostMapping
-	@RequestMapping(path="/user/save")
-	public UserDto saveUser(UserDto userDto) {
+	@PostMapping(path="/user/save")
+	public UserDto saveUser(@RequestBody UserDto userDto) {
 		return keepService.saveUser(userDto);
 	}
 	

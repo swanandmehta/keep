@@ -3,37 +3,42 @@
  */
 package com.keep.services.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.keep.dto.UserDto;
 import com.keep.entity.User;
 import com.keep.iservices.IUserServices;
 import com.keep.repository.IUserRepository;
+import com.keep.transformer.UserTransformer;
 
 /**
  * @author swanandm
  *
  */
+@Service
 public class UserService extends CrudService<UserDto, User> implements IUserServices {
+	
+	private final IUserRepository userRepository;
 	
 	public UserService(IUserRepository userRepository) {
 		super(userRepository);
+		this.userRepository = userRepository;
 	}
 
 	@Override
 	public UserDto toDto(User entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return UserTransformer.transform(entity);
 	}
 
 	@Override
 	public User toEntity(UserDto dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return UserTransformer.transform(dto);
 	}
 
 	@Override
 	public UserDto validateEmail(String email) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userRepository.findByEmailEquals(email);
+		return toDto(user);
 	}
 	
 }

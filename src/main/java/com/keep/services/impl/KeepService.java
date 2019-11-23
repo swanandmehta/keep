@@ -3,6 +3,8 @@
  */
 package com.keep.services.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.keep.dto.UserDto;
 import com.keep.iservices.IKeepService;
 import com.keep.iservices.IUserServices;
@@ -11,6 +13,7 @@ import com.keep.iservices.IUserServices;
  * @author swanandm
  *
  */
+@Service
 public class KeepService implements IKeepService {
 	
 	private final IUserServices userService;
@@ -26,7 +29,6 @@ public class KeepService implements IKeepService {
 
 	@Override
 	public UserDto saveUser(UserDto userDto) {
-		// TODO Auto-generated method stub
-		return null;
+		return userService.persist(userDto);
 	}
 }
