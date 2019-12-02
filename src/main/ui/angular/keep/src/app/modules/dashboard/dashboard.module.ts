@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -13,7 +14,8 @@ import { ApplicationComponent } from './components/application/application.compo
   declarations: [DashboardComponent, SearchComponent, ProfileComponent, SidebarComponent, ApplicationComponent],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FontAwesomeModule
   ]
 })
 export class DashboardModule { }
