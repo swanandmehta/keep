@@ -1,3 +1,11 @@
 .background-light{
     background-color:#3598dc;
 }
+
+.background-darkgray{
+    background-color: darkgray;
+}
+
+.background-transparent{
+    background-color: transparent;
+}
