@@ -5,5 +5,5 @@
 
 .high-light-element :hover{
     transition: 100ms;
-    background-color: darkgray;
+    background-color: lightgray;
 }

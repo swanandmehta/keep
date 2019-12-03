@@ -1,3 +1,6 @@
+import { Notification } from 'src/app/modules/dashboard/class/notification';
+import { Observable } from 'rxjs';
+import { NotificationService } from './../../../../core/services/data-transfer/notification.service';
 import { IconDefinition, faHome, faCogs, faClipboardList, faSignOutAlt, faPhoneAlt, faHiking } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
@@ -13,12 +16,28 @@ export class SidebarComponent implements OnInit {
   private activityLogIcon: IconDefinition = faClipboardList;
   private logoutIcon: IconDefinition = faSignOutAlt;
   private supportIcon: IconDefinition = faPhoneAlt;
-  private activityIcon: IconDefinition = faHiking;
+  private notificationIcon: IconDefinition = faHiking;
 
+  private activatedMenu = 'Home';
+  private notificationCount = 0;
 
-  constructor() { }
+  constructor(private notificationService: NotificationService) {
+    this.notificationCount = 0;
+    this.notificationService.getObserver().subscribe((notification: Notification) => {
+
+      if (notification !== null) {
+        this.notificationService.saveNotification(notification);
+        this.notificationCount = this.notificationCount + 1;
+      }
+
+    });
+  }
 
   ngOnInit() {
+  }
+
+  private changeMenu(menuName: string): void {
+    this.activatedMenu = menuName;
   }
 
 }
