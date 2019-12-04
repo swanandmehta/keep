@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faClock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-notification',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
+
+  private clockIcon: IconDefinition = faClock;
 
   constructor() { }
 
