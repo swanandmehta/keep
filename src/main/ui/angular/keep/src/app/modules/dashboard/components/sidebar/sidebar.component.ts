@@ -1,8 +1,7 @@
 import { Notification } from 'src/app/modules/dashboard/class/notification';
-import { Observable } from 'rxjs';
 import { NotificationService } from './../../../../core/services/data-transfer/notification.service';
 import { IconDefinition, faHome, faCogs, faClipboardList, faSignOutAlt, faPhoneAlt, faHiking } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  @Input() private contentType: string;
+  @Output() private menuChange: EventEmitter<string> = new EventEmitter();
+
   private homeIcon: IconDefinition = faHome;
   private settingIcon: IconDefinition = faCogs;
   private activityLogIcon: IconDefinition = faClipboardList;
@@ -18,7 +20,6 @@ export class SidebarComponent implements OnInit {
   private supportIcon: IconDefinition = faPhoneAlt;
   private notificationIcon: IconDefinition = faHiking;
 
-  private activatedMenu = 'Home';
   private notificationCount = 0;
 
   constructor(private notificationService: NotificationService) {
@@ -37,7 +38,8 @@ export class SidebarComponent implements OnInit {
   }
 
   private changeMenu(menuName: string): void {
-    this.activatedMenu = menuName;
+    this.contentType = menuName;
+    this.menuChange.emit(menuName);
   }
 
 }

@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  private contentType: string;
+
+  constructor() {
+    this.contentType = 'Home';
+  }
 
   ngOnInit() {
+
+  }
+
+  private changeContent(contentType: string): void {
+    this.contentType = contentType;
   }
 
 }

@@ -1,13 +1,13 @@
 <div class="col-md-12 p-0 m-0">
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Home','non-selected-option' : activatedMenu !== 'Home'}">
+        [ngClass]="{'selected-option': contentType === 'Home','non-selected-option' : contentType !== 'Home'}">
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Home')">
             <fa-icon [icon]="homeIcon"></fa-icon>
             Home
         </h5>
     </div>
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Notifications','non-selected-option' : activatedMenu !== 'Notifications'}">
+        [ngClass]="{'selected-option': contentType === 'Notifications','non-selected-option' : contentType !== 'Notifications'}">
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Notifications')">
             <fa-icon [icon]="notificationIcon"></fa-icon>
             Notifications
@@ -15,28 +15,28 @@
         </h5>
     </div>
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Setting','non-selected-option' : activatedMenu !== 'Setting'}">
+        [ngClass]="{'selected-option': contentType === 'Setting','non-selected-option' : contentType !== 'Setting'}">
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Setting')">
             <fa-icon [icon]="settingIcon"></fa-icon>
             Setting
         </h5>
     </div>
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Activity log','non-selected-option' : activatedMenu !== 'Activity log'}">      
+        [ngClass]="{'selected-option': contentType === 'Activity log','non-selected-option' : contentType !== 'Activity log'}">      
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Activity log')">
             <fa-icon [icon]="activityLogIcon"></fa-icon>
             Activity log
         </h5>
     </div>
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Support','non-selected-option' : activatedMenu !== 'Support'}">
+        [ngClass]="{'selected-option': contentType === 'Support','non-selected-option' : contentType !== 'Support'}">
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Support')">
             <fa-icon [icon]="supportIcon"></fa-icon>
             Support
         </h5>
     </div>
     <div class="row col-md-12 p-0 m-0"
-        [ngClass]="{'selected-option': activatedMenu === 'Logout','non-selected-option' : activatedMenu !== 'Logout'}">
+        [ngClass]="{'selected-option': contentType === 'Logout','non-selected-option' : contentType !== 'Logout'}">
         <h5 class="col-md-12 p-0 py-2 m-0" (click)="changeMenu('Logout')">
             <fa-icon [icon]="logoutIcon"></fa-icon>
             Logout

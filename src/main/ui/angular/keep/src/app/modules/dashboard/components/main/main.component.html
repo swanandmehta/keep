@@ -1,0 +1,23 @@
+<div *ngIf="contentType === 'Home'">
+    <app-application-container></app-application-container>
+</div>
+
+<div *ngIf="contentType === 'Notifications'">
+    <app-notification></app-notification>
+</div>
+
+<div *ngIf="contentType === 'Setting'">
+    <app-settings></app-settings>
+</div>
+
+<div *ngIf="contentType === 'Activity log'">
+    <app-activity-log></app-activity-log>
+</div>
+
+<div *ngIf="contentType === 'Support'">
+    <app-support></app-support>
+</div>
+
+<div *ngIf="contentType === 'Logout'">
+    <app-logout></app-logout>
+</div>
