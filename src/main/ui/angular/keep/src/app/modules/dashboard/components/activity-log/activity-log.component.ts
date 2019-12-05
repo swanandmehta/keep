@@ -1,3 +1,4 @@
+import { IconDefinition, faClock } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./activity-log.component.css']
 })
 export class ActivityLogComponent implements OnInit {
+
+  private clockIcon: IconDefinition = faClock;
 
   constructor() { }
 
