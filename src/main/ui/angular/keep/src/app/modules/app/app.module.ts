@@ -1,3 +1,4 @@
+import { KeepModule } from './../keep/keep.module';
 import { LoginModule } from './../login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -14,7 +15,8 @@ import { DashboardModule } from '../dashboard/dashboard.module';
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    DashboardModule
+    DashboardModule,
+    KeepModule
   ],
   providers: [],
   bootstrap: [AppComponent]
