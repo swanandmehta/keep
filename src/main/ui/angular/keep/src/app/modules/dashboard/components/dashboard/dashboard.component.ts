@@ -10,7 +10,7 @@ export class DashboardComponent implements OnInit {
   private contentType: string;
 
   constructor() {
-    this.contentType = 'Support';
+    this.contentType = 'Activity log';
   }
 
   ngOnInit() {
