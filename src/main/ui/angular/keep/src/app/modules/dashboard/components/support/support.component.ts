@@ -1,3 +1,4 @@
+import { IconDefinition, faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./support.component.css']
 })
 export class SupportComponent implements OnInit {
+
+  private phoneIcon: IconDefinition = faPhoneAlt;
+  private emailIcon: IconDefinition = faEnvelope;
 
   constructor() { }
 
