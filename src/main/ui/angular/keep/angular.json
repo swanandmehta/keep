@@ -31,7 +31,8 @@
               "src/assets/css/common-height.css",
               "src/assets/css/common-tag.css",
               "src/assets/css/common-width.css",
-              "src/assets/css/common-border.css"
+              "src/assets/css/common-border.css",
+              "src/assets/css/common-scrollbar.css"
             ],
             "scripts": []
           },

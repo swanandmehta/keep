@@ -9,9 +9,10 @@ import { NavComponent } from './components/nav/nav.component';
 import { NewNoteComponent } from './components/new-note/new-note.component';
 import { ListingComponent } from './components/listing/listing.component';
 import { MainComponent } from './components/main/main.component';
+import { ListingNoteComponent } from './components/listing-note/listing-note.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent, ListingComponent, MainComponent],
+  declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent, ListingComponent, MainComponent, ListingNoteComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
