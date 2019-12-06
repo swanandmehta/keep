@@ -1,3 +1,4 @@
+import { faClock, IconDefinition, faList } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-note.component.css']
 })
 export class NewNoteComponent implements OnInit {
+
+  private reminderIcon: IconDefinition = faClock;
+  private checkListIcon: IconDefinition = faList;
 
   constructor() { }
 
