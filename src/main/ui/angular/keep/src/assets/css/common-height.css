@@ -21,3 +21,7 @@
 .height-100{
     min-height: 100vh
 }
+
+.height-150-px{
+    max-height: 150px;
+}
