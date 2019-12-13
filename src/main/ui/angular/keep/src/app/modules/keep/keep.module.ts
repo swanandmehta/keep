@@ -1,6 +1,7 @@
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { KeepRoutingModule } from './keep-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -11,14 +12,20 @@ import { ListingComponent } from './components/listing/listing.component';
 import { MainComponent } from './components/main/main.component';
 import { ListingNoteComponent } from './components/listing-note/listing-note.component';
 import { ListingCheckListComponent } from './components/listing-check-list/listing-check-list.component';
+import { NewCheckListComponent } from './components/new-check-list/new-check-list.component';
+import { NewReminderComponent } from './components/new-reminder/new-reminder.component';
+import { NewNotepadComponent } from './components/new-notepad/new-notepad.component';
 
 @NgModule({
-  declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent, 
-    ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent],
+  declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
+    ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
-    FontAwesomeModule
-  ]
+    FontAwesomeModule,
+    NgbModalModule
+  ],
+  bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent]
 })
 export class KeepModule { }

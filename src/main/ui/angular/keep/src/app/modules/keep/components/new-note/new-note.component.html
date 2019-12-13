@@ -2,14 +2,19 @@
     <form>
         <div class="col-md-10 p-0 m-0">
             <div class="col-md-12 p-0 m-0 input-group">
-                <input type="text" class="form-control" placeholder="Take a note..." />
+                <input type="text" class="form-control" placeholder="Search" />
                 <div class="input-group-append">
-                    <span class="input-group-text">
+                    <span class="input-group-text" (click)="open('Note')">
+                        <fa-icon [icon]="noteIcon"></fa-icon>
+                    </span>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text" (click)="open('CheckList')">
                         <fa-icon [icon]="checkListIcon"></fa-icon>
                     </span>
                 </div>
                 <div class="input-group-append">
-                    <span class="input-group-text">
+                    <span class="input-group-text" (click)="open('Reminder')">
                         <fa-icon [icon]="reminderIcon"></fa-icon>
                     </span>
                 </div>
