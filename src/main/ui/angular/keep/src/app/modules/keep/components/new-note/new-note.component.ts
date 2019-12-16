@@ -1,9 +1,10 @@
+import { ModelConfig } from './../../../../config/model-config';
 import { NewReminderComponent } from './../new-reminder/new-reminder.component';
 import { NewCheckListComponent } from './../new-check-list/new-check-list.component';
 import { NewNotepadComponent } from './../new-notepad/new-notepad.component';
 import { faClock, IconDefinition, faList, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-note',
@@ -26,13 +27,14 @@ export class NewNoteComponent implements OnInit {
   }
 
   private open(type: string): void {
-    let openedModel;
+    let openedModel: NgbModalRef;
+    const modelOptions = ModelConfig.newNoteModelOptions;
     if (type === 'Note') {
-      openedModel = this.modelService.open(NewNotepadComponent);
+      openedModel = this.modelService.open(NewNotepadComponent, modelOptions);
     } else if (type === 'CheckList') {
-      openedModel = this.modelService.open(NewCheckListComponent);
+      openedModel = this.modelService.open(NewCheckListComponent, modelOptions);
     } else if (type === 'Reminder') {
-      openedModel = this.modelService.open(NewReminderComponent);
+      openedModel = this.modelService.open(NewReminderComponent, modelOptions);
     }
   }
 

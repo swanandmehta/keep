@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-notepad',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewNotepadComponent implements OnInit {
 
-  constructor() { }
+  private activeModel: NgbActiveModal;
+  constructor(activeModel: NgbActiveModal) {
+    this.activeModel =  activeModel;
+  }
 
   ngOnInit() {
   }
