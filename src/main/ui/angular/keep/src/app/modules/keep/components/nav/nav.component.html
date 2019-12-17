@@ -2,6 +2,12 @@
 
     <div class="col-md-12 p-0 py-3 m-0">
         <h5 class="col-md-12 p-0 m-0">
+            <fa-icon [icon]="allIcon"></fa-icon>&nbsp;&nbsp;All
+        </h5>
+    </div>
+
+    <div class="col-md-12 p-0 py-3 m-0">
+        <h5 class="col-md-12 p-0 m-0">
             <fa-icon [icon]="noteIcon"></fa-icon>&nbsp;&nbsp;Notes
         </h5>
     </div>
@@ -22,7 +28,7 @@
             </p>
 
             <p class="col-md-2 p-0 m-0 text-right">
-                <fa-icon [icon]="addNewIcon"></fa-icon>
+                <fa-icon [icon]="addNewIcon" (click)="openNewLabel()"></fa-icon>
             </p>
         </div>
     </div>

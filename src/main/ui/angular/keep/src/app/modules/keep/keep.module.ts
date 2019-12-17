@@ -16,11 +16,12 @@ import { NewCheckListComponent } from './components/new-check-list/new-check-lis
 import { NewReminderComponent } from './components/new-reminder/new-reminder.component';
 import { NewNotepadComponent } from './components/new-notepad/new-notepad.component';
 import { ListingReminderComponent } from './components/listing-reminder/listing-reminder.component';
+import { NewLabelComponent } from './components/new-label/new-label.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
-    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent],
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
@@ -29,6 +30,6 @@ import { ListingReminderComponent } from './components/listing-reminder/listing-
     NgbDatepickerModule,
     NgbTimepickerModule
   ],
-  bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent]
+  bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent, NewLabelComponent]
 })
 export class KeepModule { }
