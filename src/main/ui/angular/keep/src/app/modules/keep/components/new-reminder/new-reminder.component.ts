@@ -1,3 +1,4 @@
+import { IconDefinition, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-reminder.component.css']
 })
 export class NewReminderComponent implements OnInit {
+
+  private calenderIcon: IconDefinition = faCalendarAlt;
 
   constructor() { }
 

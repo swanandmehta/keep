@@ -1,7 +1,7 @@
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { KeepRoutingModule } from './keep-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -24,7 +24,9 @@ import { NewNotepadComponent } from './components/new-notepad/new-notepad.compon
     CommonModule,
     KeepRoutingModule,
     FontAwesomeModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbDatepickerModule,
+    NgbTimepickerModule
   ],
   bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent]
 })
