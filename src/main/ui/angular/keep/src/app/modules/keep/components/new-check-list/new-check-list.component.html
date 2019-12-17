@@ -1,1 +1,62 @@
-<p>new-check-list works!</p>
+<div class="modal-header">
+        <h5 class="modal-title">Checklist</h5>
+        <button type="button" class="close" (click)="activeModel.dismiss('dismiss')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12 p-0 m-0">
+            <div class="col-md-12 m-0 p-0">
+                <div class="m-3 p-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Interesting Heading...">
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div class="col-md-12 p-0 m-0">
+            <div class="m-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Interesting Task...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 p-0 m-0">
+            <div class="m-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Interesting Task...">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 p-0 m-0">
+            <hr>
+        </div>
+        <div class="col-md-12 p-0 m-0">
+            <div class="m-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <input type="checkbox">
+                        </div>
+                    </div>
+                    <input type="text" class="form-control text-strikethrough" value="Task which i completed" placeholder="Interesting Task...">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-dark">
+            <fa-icon [icon]="addIcon"></fa-icon>
+        </button>
+        <button type="button" class="btn btn-dark" (click)="activeModel.close('save')">Close</button>
+    </div>

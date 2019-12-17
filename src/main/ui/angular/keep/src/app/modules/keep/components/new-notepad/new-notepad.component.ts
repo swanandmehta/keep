@@ -9,6 +9,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class NewNotepadComponent implements OnInit {
 
   private activeModel: NgbActiveModal;
+
   constructor(activeModel: NgbActiveModal) {
     this.activeModel =  activeModel;
   }

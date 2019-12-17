@@ -2,3 +2,7 @@
     font-size: 15px;
     color: rgb(146, 0, 29);
 }
+
+.text-strikethrough {
+    text-decoration: line-through;
+}

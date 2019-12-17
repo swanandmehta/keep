@@ -1,9 +1,11 @@
+import { IHttpCommunicationService } from './../../interface/communication/i-http-communication-service';
+import { User } from './../../../modules/login/class/user';
+import { ICommunicationService } from './../../interface/communication/i-communication-service';
 import { ServerConfig } from './../../../config/server-config';
 import { ValidationErrors } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { UserServiceUrlConfig } from '../../../config/user-service-url-config';
-import { User } from '../../../modules/login/class/user';
 import { HttpCommunicationService } from '../communication/http-communication.service';
 import { Injectable } from '@angular/core';
 
@@ -12,7 +14,7 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
-  private commService: HttpCommunicationService<User>;
+  private commService: IHttpCommunicationService<User>;
 
   constructor(httpCommunicationService: HttpCommunicationService<User>) {
     this.commService = httpCommunicationService;
