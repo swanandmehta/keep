@@ -15,11 +15,12 @@ import { ListingCheckListComponent } from './components/listing-check-list/listi
 import { NewCheckListComponent } from './components/new-check-list/new-check-list.component';
 import { NewReminderComponent } from './components/new-reminder/new-reminder.component';
 import { NewNotepadComponent } from './components/new-notepad/new-notepad.component';
+import { ListingReminderComponent } from './components/listing-reminder/listing-reminder.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
-    NewCheckListComponent, NewReminderComponent, NewNotepadComponent],
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
