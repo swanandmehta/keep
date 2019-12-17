@@ -1,5 +1,6 @@
 import { IconDefinition, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-reminder',
@@ -9,8 +10,11 @@ import { Component, OnInit } from '@angular/core';
 export class NewReminderComponent implements OnInit {
 
   private calenderIcon: IconDefinition = faCalendarAlt;
+  private activeModel: NgbActiveModal;
 
-  constructor() { }
+  constructor(activeModel: NgbActiveModal) {
+    this.activeModel = activeModel;
+  }
 
   ngOnInit() {
   }
