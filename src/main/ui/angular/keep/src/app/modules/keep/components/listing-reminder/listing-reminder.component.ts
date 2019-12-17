@@ -1,3 +1,4 @@
+import { IconDefinition, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listing-reminder.component.css']
 })
 export class ListingReminderComponent implements OnInit {
+
+  private optionIcon: IconDefinition = faBars;
 
   constructor() { }
 

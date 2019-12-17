@@ -1,3 +1,4 @@
+import { IconDefinition, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listing-check-list.component.css']
 })
 export class ListingCheckListComponent implements OnInit {
+
+  private optionIcon: IconDefinition = faBars;
 
   constructor() { }
 
