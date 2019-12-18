@@ -20,11 +20,12 @@ import { NewLabelComponent } from './components/new-label/new-label.component';
 import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { SettingsComponent } from './components/settings/settings.component';
+import { SettingComponent } from './components/setting/setting.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
-    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent],
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,

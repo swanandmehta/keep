@@ -2,7 +2,7 @@ import { NewLabelComponent } from './../new-label/new-label.component';
 import { ModelConfig } from './../../../../config/model-config';
 import { IconDefinition, faLightbulb, faClock, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark, faArchive, faTrashAlt, faCogs, faPen } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -21,11 +21,13 @@ export class NavComponent implements OnInit {
   private trashIcon: IconDefinition = faTrashAlt;
   private settingsIcon: IconDefinition = faCogs;
   private modelService: NgbModal;
-  private currentPage: string;
+
+  @Input() private currentPage: string;
+  @Output() private onPageChange: EventEmitter<string> = undefined;
 
   constructor(modelService: NgbModal) {
     this.modelService = modelService;
-    this.currentPage = 'All';
+    this.onPageChange = new EventEmitter<string> ();
   }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class NavComponent implements OnInit {
 
   private openPage(nameOfThePage: string): void {
     this.currentPage = nameOfThePage;
+    this.onPageChange.emit(this.currentPage);
   }
 
 }

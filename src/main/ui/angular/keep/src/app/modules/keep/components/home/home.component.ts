@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  private currentPage = 'All';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  private pageChanged(pageName: string): void {
+    this.currentPage = pageName;
   }
 
 }
