@@ -1,31 +1,38 @@
-<div class="col-md-12 p-0 pl-2 m-0">
-
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="allIcon"></fa-icon>&nbsp;&nbsp;All
-        </h5>
+<div class="col-md-12 p-0 p-0 m-0">
+    <div [ngClass]="{'selected-option': currentPage === 'All', 'non-selected-option': currentPage !== 'All' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0" 
+            (click)="openPage('All')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="allIcon"></fa-icon>&nbsp;&nbsp;All
+            </h5>
+        </div>
     </div>
 
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="noteIcon"></fa-icon>&nbsp;&nbsp;Notes
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Notes', 'non-selected-option': currentPage !== 'Notes' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+            (click)="openPage('Notes')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="noteIcon"></fa-icon>&nbsp;&nbsp;Notes
+            </h5>
+        </div>
     </div>
-    
 
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="reminderIcon"></fa-icon>&nbsp;Reminders
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Reminders', 'non-selected-option': currentPage !== 'Reminders' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+            (click)="openPage('Reminders')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="reminderIcon"></fa-icon>&nbsp;Reminders
+            </h5>
+        </div>
     </div>
 
     <hr/>
 
-    <div class="col-md-12 p-0 pb-4 m-0">
+    <div class="col-md-12 p-0 pb-4 pl-2 m-0">
         <div class="row col-md-12 p-0 m-0">
-            <p class="col-md-10 p-0 m-0 text-left">
+            <h6 class="col-md-10 p-0 m-0 text-left">
                 Labels
-            </p>
+            </h6>
 
             <p class="col-md-2 p-0 m-0 text-right">
                 <fa-icon [icon]="addNewIcon" (click)="openNewLabel()"></fa-icon>
@@ -33,30 +40,51 @@
         </div>
     </div>
 
-    <div class="col-md-12 p-0 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Test Label Name1', 'non-selected-option': currentPage !== 'Test Label Name1' }">
+        <div class="col-md-12 p-0 py-3 pl-2 m-0"
+            (click)="openPage('Test Label Name1')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name1
+            </h5>
+        </div>
+    </div>
+
+    <div [ngClass]="{'selected-option': currentPage === 'Test Label Name2', 'non-selected-option': currentPage !== 'Test Label Name2' }">
+        <div class="col-md-12 p-0 py-3 pl-2 m-0"
+            (click)="openPage('Test Label Name2')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name2
+            </h5>
+        </div>
     </div>
 
     <hr/>
 
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="archiveIcon"></fa-icon>&nbsp;Archive
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Archive', 'non-selected-option': currentPage !== 'Archive' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+            (click)="openPage('Archive')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="archiveIcon"></fa-icon>&nbsp;Archive
+            </h5>
+        </div>
     </div>
     
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="trashIcon"></fa-icon>&nbsp;Trash
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Trash', 'non-selected-option': currentPage !== 'Trash' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+            (click)="openPage('Trash')">
+            <h5 class="col-md-12 p-0 m-0">
+                <fa-icon [icon]="trashIcon"></fa-icon>&nbsp;Trash
+            </h5>
+        </div>
     </div>
 
-    <div class="col-md-12 p-0 py-3 m-0">
-        <h5 class="col-md-12 p-0 m-0">
-            <fa-icon [icon]="settingsIcon"></fa-icon>&nbsp;Settings
-        </h5>
+    <div [ngClass]="{'selected-option': currentPage === 'Settings', 'non-selected-option': currentPage !== 'Settings' }">
+        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+            (click)="openPage('Settings')">
+            <h5 class="col-md-12 p-0 m-0" >
+                <fa-icon [icon]="settingsIcon"></fa-icon>&nbsp;Settings
+            </h5>
+        </div>
     </div>
 
 </div>

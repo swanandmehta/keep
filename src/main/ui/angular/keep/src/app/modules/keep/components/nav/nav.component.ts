@@ -21,9 +21,11 @@ export class NavComponent implements OnInit {
   private trashIcon: IconDefinition = faTrashAlt;
   private settingsIcon: IconDefinition = faCogs;
   private modelService: NgbModal;
+  private currentPage: string;
 
   constructor(modelService: NgbModal) {
     this.modelService = modelService;
+    this.currentPage = 'All';
   }
 
   ngOnInit() {
@@ -33,6 +35,10 @@ export class NavComponent implements OnInit {
     const modelOptions = ModelConfig.newNoteModelOptions;
     const modelComponent = NewLabelComponent;
     this.modelService.open(modelComponent, modelOptions);
+  }
+
+  private openPage(nameOfThePage: string): void {
+    this.currentPage = nameOfThePage;
   }
 
 }

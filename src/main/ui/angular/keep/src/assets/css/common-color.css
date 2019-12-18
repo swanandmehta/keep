@@ -9,3 +9,12 @@
 .background-transparent{
     background-color: transparent;
 }
+
+.selected-option {
+    font-weight: bold;
+    background-color: darkgray;
+}
+
+.non-selected-option :hover {
+    background-color: lightgray;
+}
