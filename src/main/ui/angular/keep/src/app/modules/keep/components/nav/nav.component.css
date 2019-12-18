@@ -1,0 +1,4 @@
+.labels-component-height {
+    max-height: 100px;
+    overflow-y: scroll;
+}

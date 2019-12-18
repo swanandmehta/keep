@@ -18,9 +18,9 @@
     </div>
 
     <div [ngClass]="{'selected-option': currentPage === 'Reminders', 'non-selected-option': currentPage !== 'Reminders' }">
-        <div class="col-md-12 p-0 pl-2 py-3 m-0"
+        <div class="col-md-12 p-0 pl-2 py-3 m-0 "
             (click)="openPage('Reminders')">
-            <h5 class="col-md-12 p-0 m-0">
+            <h5 class="col-md-12 p-0 m-0 text-truncate">
                 <fa-icon [icon]="reminderIcon"></fa-icon>&nbsp;Reminders
             </h5>
         </div>
@@ -40,24 +40,26 @@
         </div>
     </div>
 
-    <div [ngClass]="{'selected-option': currentPage === 'Test Label Name1', 'non-selected-option': currentPage !== 'Test Label Name1' }">
-        <div class="col-md-12 p-0 py-3 pl-2 m-0"
-            (click)="openPage('Test Label Name1')">
-            <h5 class="col-md-12 p-0 m-0">
-                <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name1
-            </h5>
+    <div class="labels-component-height">
+        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name1', 'non-selected-option': currentPage !== 'Test Label Name1' }">
+            <div class="col-md-12 p-0 py-3 pl-2 m-0"
+                (click)="openPage('Test Label Name1')">
+                <h5 class="col-md-12 p-0 m-0 text-truncate">
+                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name1
+                </h5>
+            </div>
+        </div>
+
+        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name2', 'non-selected-option': currentPage !== 'Test Label Name2' }">
+            <div class="col-md-12 p-0 py-3 pl-2 m-0"
+                (click)="openPage('Test Label Name2')">
+                <h5 class="col-md-12 p-0 m-0 text-truncate">
+                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name2
+                </h5>
+            </div>
         </div>
     </div>
-
-    <div [ngClass]="{'selected-option': currentPage === 'Test Label Name2', 'non-selected-option': currentPage !== 'Test Label Name2' }">
-        <div class="col-md-12 p-0 py-3 pl-2 m-0"
-            (click)="openPage('Test Label Name2')">
-            <h5 class="col-md-12 p-0 m-0">
-                <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name2
-            </h5>
-        </div>
-    </div>
-
+    
     <hr/>
 
     <div [ngClass]="{'selected-option': currentPage === 'Archive', 'non-selected-option': currentPage !== 'Archive' }">

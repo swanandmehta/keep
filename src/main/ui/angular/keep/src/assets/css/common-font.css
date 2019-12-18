@@ -6,3 +6,7 @@
 .text-strikethrough {
     text-decoration: line-through;
 }
+
+.text-overflow-ellipsis {
+    text-overflow: ellipsis;
+}
