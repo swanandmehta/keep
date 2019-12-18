@@ -17,11 +17,14 @@ import { NewReminderComponent } from './components/new-reminder/new-reminder.com
 import { NewNotepadComponent } from './components/new-notepad/new-notepad.component';
 import { ListingReminderComponent } from './components/listing-reminder/listing-reminder.component';
 import { NewLabelComponent } from './components/new-label/new-label.component';
+import { ArchiveComponent } from './components/archive/archive.component';
+import { TrashComponent } from './components/trash/trash.component';
+import { SettingsComponent } from './components/settings/settings.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
-    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent],
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
