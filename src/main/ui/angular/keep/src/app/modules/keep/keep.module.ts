@@ -1,7 +1,7 @@
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModalModule, NgbDatepickerModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbDatepickerModule, NgbTimepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { KeepRoutingModule } from './keep-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -21,18 +21,22 @@ import { ArchiveComponent } from './components/archive/archive.component';
 import { TrashComponent } from './components/trash/trash.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SettingComponent } from './components/setting/setting.component';
+import { DocumentDropdownOptionsComponent } from './components/document-dropdown-options/document-dropdown-options.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
-    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent, NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent],
+    NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent,
+    NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent, 
+    DocumentDropdownOptionsComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
     FontAwesomeModule,
     NgbModalModule,
     NgbDatepickerModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    NgbDropdownModule
   ],
   bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent, NewLabelComponent]
 })
