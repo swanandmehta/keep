@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   private currentPage = 'All';
+  private hideNav = false;
 
   constructor() { }
 
@@ -16,6 +17,10 @@ export class HomeComponent implements OnInit {
 
   private pageChanged(pageName: string): void {
     this.currentPage = pageName;
+  }
+
+  private hideNavChange(hideNav: boolean): void {
+    this.hideNav = hideNav;
   }
 
 }

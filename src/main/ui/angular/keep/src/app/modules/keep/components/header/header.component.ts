@@ -1,5 +1,5 @@
 import { IconDefinition, faBars, faSearch, faRedoAlt, faTh, faLayerGroup, faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -16,9 +16,21 @@ export class HeaderComponent implements OnInit {
   private bellIcon: IconDefinition = faBell;
   private logoutIcon: IconDefinition = faPowerOff;
 
-  constructor() { }
+  @Input() private hideNav: boolean;
+  @Output() private hideNavEvent: EventEmitter<boolean> = undefined;
+
+  constructor() {
+    this.hideNavEvent = new EventEmitter<boolean>();
+  }
 
   ngOnInit() {
+  }
+
+  private hideNavMenu(): void {
+    console.log(this.hideNav);
+    this.hideNav = !this.hideNav;
+    console.log(this.hideNav);
+    this.hideNavEvent.emit(this.hideNav);
   }
 
 }

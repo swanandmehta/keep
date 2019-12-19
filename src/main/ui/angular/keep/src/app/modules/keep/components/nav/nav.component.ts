@@ -21,13 +21,14 @@ export class NavComponent implements OnInit {
   private trashIcon: IconDefinition = faTrashAlt;
   private settingsIcon: IconDefinition = faCogs;
   private modelService: NgbModal;
+  private hideNavMenu: boolean;
 
   @Input() private currentPage: string;
-  @Output() private onPageChange: EventEmitter<string> = undefined;
+  @Output() private pageChangeEvent: EventEmitter<string> = undefined;
 
   constructor(modelService: NgbModal) {
     this.modelService = modelService;
-    this.onPageChange = new EventEmitter<string> ();
+    this.pageChangeEvent = new EventEmitter<string>();
   }
 
   ngOnInit() {
@@ -41,7 +42,7 @@ export class NavComponent implements OnInit {
 
   private openPage(nameOfThePage: string): void {
     this.currentPage = nameOfThePage;
-    this.onPageChange.emit(this.currentPage);
+    this.pageChangeEvent.emit(this.currentPage);
   }
 
 }

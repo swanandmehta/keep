@@ -1,13 +1,13 @@
 <div class="height-100 background">
     <div class="row col-md-12 p-0 m-0">
         <div class="col-md-12 p-0 m-0">
-            <app-header></app-header>
+            <app-header [hideNav]="hideNav" (hideNavEvent)="hideNavChange($event)"></app-header>
         </div>
         <div class="row col-md-12 p-0 m-0">
-            <div class="col-md-2 p-0 m-0">
-                <app-nav [currentPage]="currentPage" (onPageChange)="pageChanged($event)"></app-nav>
+            <div *ngIf="hideNav === false" class="col-md-2 p-0 m-0">
+                <app-nav [currentPage]="currentPage" (pageChangeEvent)="pageChanged($event)"></app-nav>
             </div>
-            <div class="col-md-10 p-0 m-0">
+            <div [ngClass]="{'col-md-10' : hideNav === false, 'col-md-12' : hideNav === true}" class="p-0 m-0">
                 <app-main [currentPage]="currentPage"></app-main>
             </div>
         </div>
