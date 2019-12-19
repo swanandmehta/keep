@@ -1,23 +1,62 @@
-<div class="col-md-12 p-0 m-0">
-    <div class="row col-md-12 p-0 m-0">
-        <div class="col-md-3 p-0 m-0">
-            <app-listing-note></app-listing-note>
-        </div>
-        <div class="col-md-3 p-0 m-0">
-            <app-listing-note></app-listing-note>
-        </div>
-        <div class="col-md-3 p-0 m-0">
-            <app-listing-check-list></app-listing-check-list>
-        </div>
-        <div class="col-md-3 p-0 m-0">
-            <app-listing-check-list></app-listing-check-list>
-        </div>
-    </div>
+<div *ngIf="isGridView; then GridView; else ListView"></div>
 
-    <div class="row col-md-12 p-0 m-0">
-        <div class="col-md-3 p-0 m-0">
-            <app-listing-reminder></app-listing-reminder>
-        </div>    
-    </div>
+<ng-template #GridView>
+    <div class="col-md-12 p-0 m-0">
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-note></app-listing-note>
+            </div>
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-note></app-listing-note>
+            </div>
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-check-list></app-listing-check-list>
+            </div>
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-check-list></app-listing-check-list>
+            </div>
+        </div>
 
-</div>
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-reminder></app-listing-reminder>
+            </div>    
+        </div>
+
+    </div>
+</ng-template>
+
+<ng-template #ListView>
+    <div class="col-md-12 p-0 m-0">
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-note></app-listing-note>
+            </div>
+        </div>
+
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-note></app-listing-note>
+            </div>
+        </div>
+        
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-check-list></app-listing-check-list>
+            </div>
+        </div>
+        
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-check-list></app-listing-check-list>
+            </div>
+        </div>
+
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-reminder></app-listing-reminder>
+            </div>    
+        </div>
+
+    </div>
+</ng-template>

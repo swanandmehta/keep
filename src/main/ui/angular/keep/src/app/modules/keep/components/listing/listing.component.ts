@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-listing',
@@ -6,6 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listing.component.css']
 })
 export class ListingComponent implements OnInit {
+
+  private isGridView;
+
+  @Input()
+  private set gridView(isGridView: boolean) {
+    this.isGridView = isGridView;
+  }
 
   constructor() { }
 

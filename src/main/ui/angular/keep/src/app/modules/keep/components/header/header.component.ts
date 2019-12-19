@@ -17,20 +17,29 @@ export class HeaderComponent implements OnInit {
   private logoutIcon: IconDefinition = faPowerOff;
 
   @Input() private hideNav: boolean;
+  @Input() private gridListingView: boolean;
   @Output() private hideNavEvent: EventEmitter<boolean> = undefined;
+  @Output() private toggleListingEvent: EventEmitter<boolean> = undefined;
 
   constructor() {
     this.hideNavEvent = new EventEmitter<boolean>();
+    this.toggleListingEvent = new EventEmitter<boolean>();
   }
 
   ngOnInit() {
   }
 
   private hideNavMenu(): void {
-    console.log(this.hideNav);
     this.hideNav = !this.hideNav;
-    console.log(this.hideNav);
     this.hideNavEvent.emit(this.hideNav);
+  }
+
+  private toggleListingView(gridListingView: boolean): void {
+    if (this.gridListingView === gridListingView) {
+      return;
+    }
+    this.gridListingView = gridListingView;
+    this.toggleListingEvent.emit(this.gridListingView);
   }
 
 }

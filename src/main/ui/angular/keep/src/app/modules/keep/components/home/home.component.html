@@ -1,14 +1,15 @@
 <div class="height-100 background">
     <div class="row col-md-12 p-0 m-0">
         <div class="col-md-12 p-0 m-0">
-            <app-header [hideNav]="hideNav" (hideNavEvent)="hideNavChange($event)"></app-header>
+            <app-header [hideNav]="hideNav" (hideNavEvent)="hideNavChange($event)" 
+                [gridListingView]="gridListingView" (toggleListingEvent)="changeListingView($event)"></app-header>
         </div>
         <div class="row col-md-12 p-0 m-0">
             <div *ngIf="hideNav === false" class="col-md-2 p-0 m-0">
                 <app-nav [currentPage]="currentPage" (pageChangeEvent)="pageChanged($event)"></app-nav>
             </div>
             <div [ngClass]="{'col-md-10' : hideNav === false, 'col-md-12' : hideNav === true}" class="p-0 m-0">
-                <app-main [currentPage]="currentPage"></app-main>
+                <app-main [gridListingView]="gridListingView" [currentPage]="currentPage"></app-main>
             </div>
         </div>
     </div>

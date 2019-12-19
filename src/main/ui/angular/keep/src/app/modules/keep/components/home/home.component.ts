@@ -9,6 +9,7 @@ export class HomeComponent implements OnInit {
 
   private currentPage = 'All';
   private hideNav = false;
+  private gridListingView = true;
 
   constructor() { }
 
@@ -21,6 +22,10 @@ export class HomeComponent implements OnInit {
 
   private hideNavChange(hideNav: boolean): void {
     this.hideNav = hideNav;
+  }
+
+  private changeListingView(gridListingView: boolean): void {
+    this.gridListingView = gridListingView;
   }
 
 }

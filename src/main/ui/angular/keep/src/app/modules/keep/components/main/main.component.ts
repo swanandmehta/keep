@@ -8,6 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class MainComponent implements OnInit {
 
   private pageName = undefined;
+  private gridView;
+
+  @Input()
+  private set gridListingView(gridView: boolean) {
+    this.gridView = gridView;
+  }
 
   @Input()
   private set currentPage(currentPage: string) {
