@@ -28,4 +28,8 @@ export class HomeComponent implements OnInit {
     this.gridListingView = gridListingView;
   }
 
+  private toggleAlertView(alertPageName: string): void {
+    this.currentPage = alertPageName;
+  }
+
 }

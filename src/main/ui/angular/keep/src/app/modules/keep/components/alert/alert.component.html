@@ -1,0 +1,21 @@
+<div *ngIf="isGridView; then GridView; else ListView"></div>
+
+<ng-template #GridView>
+    <div class="col-md-12 p-0 m-0">
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-3 p-0 m-0">
+                <app-listing-reminder></app-listing-reminder>
+            </div>    
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #ListView>
+    <div class="col-md-12 p-0 m-0">
+        <div class="row col-md-12 p-0 m-0">
+            <div class="col-md-12 p-0 m-0">
+                <app-listing-reminder></app-listing-reminder>
+            </div>    
+        </div>
+    </div>
+</ng-template>

@@ -22,13 +22,14 @@ import { TrashComponent } from './components/trash/trash.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { DocumentDropdownOptionsComponent } from './components/document-dropdown-options/document-dropdown-options.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
     NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent,
     NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent, 
-    DocumentDropdownOptionsComponent],
+    DocumentDropdownOptionsComponent, AlertComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,

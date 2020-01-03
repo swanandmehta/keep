@@ -1,8 +1,16 @@
-<div *ngIf="pageName === 'Settings'; else listing">
+<div *ngIf="pageName === 'Settings'; else alert">
     <div class="col-md-12 p-0 m-0">
         <app-setting></app-setting>
     </div>
 </div>
+
+<ng-template #alert>
+    <div *ngIf="pageName === 'Alert'; else listing">
+        <div class="col-md-12 p-0 m-0">
+            <app-alert [gridView]="gridView"></app-alert>
+        </div>
+    </div>
+</ng-template>
 
 <ng-template #listing>
     <div class="col-md-12 p-0 m-0">

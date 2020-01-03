@@ -20,10 +20,12 @@ export class HeaderComponent implements OnInit {
   @Input() private gridListingView: boolean;
   @Output() private hideNavEvent: EventEmitter<boolean> = undefined;
   @Output() private toggleListingEvent: EventEmitter<boolean> = undefined;
+  @Output() private toggleAlertViewEvent: EventEmitter<string> = undefined;
 
   constructor() {
     this.hideNavEvent = new EventEmitter<boolean>();
     this.toggleListingEvent = new EventEmitter<boolean>();
+    this.toggleAlertViewEvent = new EventEmitter<string>();
   }
 
   ngOnInit() {
@@ -40,6 +42,10 @@ export class HeaderComponent implements OnInit {
     }
     this.gridListingView = gridListingView;
     this.toggleListingEvent.emit(this.gridListingView);
+  }
+
+  private toggleAlertView(): void {
+    this.toggleAlertViewEvent.emit('Alert');
   }
 
 }

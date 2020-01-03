@@ -2,7 +2,8 @@
     <div class="row col-md-12 p-0 m-0">
         <div class="col-md-12 p-0 m-0">
             <app-header [hideNav]="hideNav" (hideNavEvent)="hideNavChange($event)" 
-                [gridListingView]="gridListingView" (toggleListingEvent)="changeListingView($event)"></app-header>
+                [gridListingView]="gridListingView" (toggleListingEvent)="changeListingView($event)"
+                (toggleAlertViewEvent)="toggleAlertView($event)"></app-header>
         </div>
         <div class="row col-md-12 p-0 m-0">
             <div *ngIf="hideNav === false" class="col-md-2 p-0 m-0">
