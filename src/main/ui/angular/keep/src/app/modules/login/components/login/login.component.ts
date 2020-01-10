@@ -1,3 +1,5 @@
+import { SessionService } from './../../../../core/services/session/session.service';
+import { ISessionService } from './../../../../core/interface/session/i-session-service';
 import { LoggerService } from './../../../../core/services/logger/logger.service';
 import { ISuccessHandler } from './../../../../core/interface/logger/i-success-handler';
 import { IErrorHandler } from './../../../../core/interface/logger/i-error-handler';
@@ -21,16 +23,20 @@ export class LoginComponent implements OnInit {
   private errorHandler: IErrorHandler = undefined;
   private successHandler: ISuccessHandler = undefined;
   private router: Router = undefined;
+  private sessionService: ISessionService;
 
   private invalidLogin = false;
   private isSubmited = false;
   private serverFailure = false;
 
-  constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService, router: Router) {
+  constructor(formBuilder: FormBuilder, userService: UserService,
+              loggerService: LoggerService, router: Router,
+              sessionService: SessionService) {
     this.userService = userService;
     this.errorHandler = loggerService;
     this.successHandler = loggerService;
     this.router = router;
+    this.sessionService = sessionService;
 
     this.loginForm = formBuilder.group({
       email : ['', [Validators.required, Validators.email]],
@@ -48,6 +54,7 @@ export class LoginComponent implements OnInit {
         next : (loggedInUser: User) => {
           if (loggedInUser !== null && loggedInUser !== undefined) {
             this.successHandler.handleSuccess(loggedInUser, 'User logged In', LoggerLevel.L);
+            this.sessionService.saveValue('userId', loggedInUser.id.toString());
             this.router.navigate(['/dashboard']);
           } else {
             this.successHandler.handleSuccess(user, 'User failed to login', LoggerLevel.L);

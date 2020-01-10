@@ -1,3 +1,4 @@
+import { PremitiveTypeValidationUtil } from './../../util/premitive-type-validation-util';
 import { ISessionService } from './../../interface/session/i-session-service';
 import { Injectable } from '@angular/core';
 
@@ -11,13 +12,16 @@ export class SessionService implements ISessionService {
   constructor() {
     const sessionValue: string = sessionStorage.getItem('keep');
 
-    if (sessionValue !== null || sessionValue !== undefined) {
+    if (sessionValue !== null && sessionValue !== undefined) {
 
       const saveValues: Map<string, string> = JSON.parse(sessionValue);
-      saveValues.forEach((value: string, key: string) => {
-        this.keep.set(key, value);
-      });
 
+      for (const key in saveValues) {
+        if (PremitiveTypeValidationUtil.validateString(key) === true) {
+          this.keep.set(key, saveValues[key]);
+        }
+
+      }
     }
 
   }
@@ -54,7 +58,13 @@ export class SessionService implements ISessionService {
   }
 
   private updateSessionStorage(): void {
-    sessionStorage.setItem('keep', JSON.stringify(this.keep));
+    const sessionJson = {};
+
+    this.keep.forEach((value: string, key: string) => {
+      sessionJson[key] = value;
+    });
+
+    sessionStorage.setItem('keep', JSON.stringify(sessionJson));
   }
 
 }
