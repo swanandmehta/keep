@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { IconDefinition, faBars, faSearch, faRedoAlt, faTh, faLayerGroup, faBell, faPowerOff } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   private stackIcon: IconDefinition = faLayerGroup;
   private bellIcon: IconDefinition = faBell;
   private logoutIcon: IconDefinition = faPowerOff;
+  private searchForm: FormGroup;
 
   @Input() private hideNav: boolean;
   @Input() private gridListingView: boolean;
