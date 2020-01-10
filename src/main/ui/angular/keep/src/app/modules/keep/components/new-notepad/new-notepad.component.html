@@ -5,21 +5,25 @@
     </button>
 </div>
 <div class="modal-body">
-    <div class="col-md-12 p-0 m-0">
-        <div class="col-md-12 m-0 p-0">
-            <div class="m-3 p-0">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Interesting Heading...">
+    <form (form)="newNotePad">
+        <div class="col-md-12 p-0 m-0">
+            <div class="col-md-12 m-0 p-0">
+                <div class="m-3 p-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Interesting Heading..."
+                            formControlName="heading">
+                    </div>
+                </div>
+                <div class="m-3 p-0">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="10" placeholder="Start typing away..."
+                            formControlName="note"></textarea>
+                    </div>                
                 </div>
             </div>
-            <div class="m-3 p-0">
-                <div class="form-group">
-                    <textarea class="form-control" rows="10" placeholder="Start typing away..."></textarea>
-                </div>                
-            </div>
         </div>
-    </div>
+    </form>
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-dark" (click)="activeModel.close('save')">Close</button>
+    <button type="button" class="btn btn-dark" (click)="close()">Close</button>
 </div>

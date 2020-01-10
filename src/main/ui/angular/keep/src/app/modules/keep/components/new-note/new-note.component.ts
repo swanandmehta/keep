@@ -1,3 +1,4 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModelConfig } from './../../../../config/model-config';
 import { NewReminderComponent } from './../new-reminder/new-reminder.component';
 import { NewCheckListComponent } from './../new-check-list/new-check-list.component';
@@ -17,9 +18,15 @@ export class NewNoteComponent implements OnInit {
   private checkListIcon: IconDefinition = faList;
   private noteIcon: IconDefinition = faClipboard;
   private modelService: NgbModal;
+  private newNoteForm: FormGroup;
+  private formBuilder: FormBuilder;
 
-  constructor(modelService: NgbModal) {
+  constructor(modelService: NgbModal, formBuilder: FormBuilder) {
     this.modelService = modelService;
+    this.formBuilder = formBuilder;
+    this.newNoteForm = formBuilder.group({
+      search: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
