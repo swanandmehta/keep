@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.keep.services.impl;
+package com.keep.impl;
 
 import org.springframework.stereotype.Service;
 
 import com.keep.dto.UserDto;
-import com.keep.iservices.IKeepService;
-import com.keep.iservices.IUserServices;
+import com.keep.services.IKeepService;
+import com.keep.services.IUserServices;
 
 /**
  * @author swanandm

@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.keep.dto.ApplicationDto;
 import com.keep.dto.UserDto;
-import com.keep.iservices.IKeepService;
-import com.keep.services.impl.KeepService;
+import com.keep.impl.KeepService;
+import com.keep.services.IKeepService;
 
 /**
  * @author swanandm
@@ -45,5 +46,8 @@ public class KeepController {
 	}
 	
 	//Applications
-	
+	@GetMapping(path="/applications")
+	public ApplicationDto get(@RequestParam(name="userId") Integer userId) {
+		return null;
+	}
 }

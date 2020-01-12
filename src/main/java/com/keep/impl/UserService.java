@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.keep.services.impl;
+package com.keep.impl;
 
 import org.springframework.stereotype.Service;
 
 import com.keep.dto.UserDto;
 import com.keep.entity.User;
-import com.keep.iservices.IUserServices;
 import com.keep.repository.IUserRepository;
+import com.keep.services.IUserServices;
 import com.keep.transformer.UserTransformer;
 
 /**

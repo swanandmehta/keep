@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.keep.services.impl;
+package com.keep.impl;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.keep.iservices.ICrudService;
 import com.keep.repository.ICrudRepository;
+import com.keep.services.ICrudService;
 
 /**
  * @author swanandm
