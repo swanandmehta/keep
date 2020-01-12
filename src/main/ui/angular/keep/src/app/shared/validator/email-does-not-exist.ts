@@ -1,4 +1,4 @@
-import { User } from './../../modules/login/class/user';
+import { User } from '../../modules/login/dto/user';
 import { Observable } from 'rxjs';
 import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from 'src/app/core/services/user/user.service';

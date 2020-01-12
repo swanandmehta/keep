@@ -4,7 +4,7 @@ import { LoggerService } from './../../../../core/services/logger/logger.service
 import { ISuccessHandler } from './../../../../core/interface/logger/i-success-handler';
 import { IErrorHandler } from './../../../../core/interface/logger/i-error-handler';
 import { Observable, PartialObserver } from 'rxjs';
-import { User } from './../../class/user';
+import { User } from '../../dto/user';
 import { UserService } from 'src/app/core/services/user/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

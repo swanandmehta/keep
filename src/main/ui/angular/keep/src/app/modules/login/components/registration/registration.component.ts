@@ -3,7 +3,7 @@ import { IErrorHandler } from './../../../../core/interface/logger/i-error-handl
 import { LoggerLevel } from './../../../../shared/enum/logger-level.enum';
 import { ISuccessHandler } from './../../../../core/interface/logger/i-success-handler';
 import { Observable, PartialObserver } from 'rxjs';
-import { User } from './../../class/user';
+import { User } from '../../dto/user';
 import { UserService } from '../../../../core/services/user/user.service';
 import { EmailDoesNotExist } from './../../../../shared/validator/email-does-not-exist';
 import { Component, OnInit } from '@angular/core';

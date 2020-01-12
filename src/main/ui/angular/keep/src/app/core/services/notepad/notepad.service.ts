@@ -1,7 +1,7 @@
 import { NotepadServiceUrlConfig } from './../../../config/notepad-service-url-config';
 import { ServerConfig } from './../../../config/server-config';
 import { HttpCommunicationService } from './../communication/http-communication.service';
-import { Note } from './../../../modules/keep/class/note';
+import { Note } from '../../../modules/keep/dto/note';
 import { IHttpCommunicationService } from './../../interface/communication/i-http-communication-service';
 import { Injectable } from '@angular/core';
 import { Observer, Observable } from 'rxjs';

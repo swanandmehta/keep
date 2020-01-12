@@ -1,4 +1,4 @@
-import { Notification } from './../../../modules/dashboard/class/notification';
+import { Notification } from '../../../modules/dashboard/dto/notification';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { IDataTransfer } from './../../interface/data-transfer/i-data-transfer';
 import { Injectable } from '@angular/core';

@@ -1,5 +1,5 @@
 import { IHttpCommunicationService } from './../../interface/communication/i-http-communication-service';
-import { User } from './../../../modules/login/class/user';
+import { User } from '../../../modules/login/dto/user';
 import { ICommunicationService } from './../../interface/communication/i-communication-service';
 import { ServerConfig } from './../../../config/server-config';
 import { ValidationErrors } from '@angular/forms';

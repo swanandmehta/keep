@@ -1,4 +1,4 @@
-import { Notification } from 'src/app/modules/dashboard/class/notification';
+import { Notification } from 'src/app/modules/dashboard/dto/notification';
 import { NotificationService } from './../../../../core/services/data-transfer/notification.service';
 import { IconDefinition, faHome, faCogs, faClipboardList, faSignOutAlt, faPhoneAlt, faHiking } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
