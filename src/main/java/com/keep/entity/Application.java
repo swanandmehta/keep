@@ -3,6 +3,8 @@
  */
 package com.keep.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,6 +42,17 @@ public class Application implements IKeepEntity {
 	@OneToOne(cascade= {}, fetch=FetchType.LAZY)
 	@JoinColumn(name="CREATED_BY", insertable=false, updatable=false)
 	private User creator;
+	
+	@OneToMany(cascade= {}, fetch=FetchType.LAZY)
+	@JoinTable(
+		name="APP_USERS",
+		joinColumns=@JoinColumn(name="APP_ID"),
+		inverseJoinColumns=@JoinColumn(name="USER_ID")
+	)
+	private Set<User> userList;
+	
+	@OneToMany(cascade= {}, fetch=FetchType.LAZY, mappedBy="application")
+	private Set<ApplicationUser> applicationUserList;
 
 	public Integer getId() {
 		return id;
@@ -77,6 +92,22 @@ public class Application implements IKeepEntity {
 
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+
+	public Set<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(Set<User> userList) {
+		this.userList = userList;
+	}
+
+	public Set<ApplicationUser> getApplicationUserList() {
+		return applicationUserList;
+	}
+
+	public void setApplicationUserList(Set<ApplicationUser> applicationUserList) {
+		this.applicationUserList = applicationUserList;
 	}
 
 }

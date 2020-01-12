@@ -6,20 +6,14 @@ package com.keep.services;
 import java.util.List;
 
 import com.keep.dto.ApplicationDto;
-import com.keep.dto.UserDto;
+import com.keep.entity.Application;
 
 /**
  * @author swanandm
  *
  */
-public interface IKeepService {
-
-	UserDto validateEmail(String email);
-
-	UserDto saveUser(UserDto userDto);
-
-	UserDto login(UserDto userDto);
+public interface IApplicationService extends ICrudService<ApplicationDto, Application> {
 
 	List<ApplicationDto> getApplications(Integer userId);
-
+	
 }

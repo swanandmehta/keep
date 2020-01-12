@@ -3,6 +3,8 @@
  */
 package com.keep.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,7 +49,7 @@ public class KeepController {
 	
 	//Applications
 	@GetMapping(path="/applications")
-	public ApplicationDto get(@RequestParam(name="userId") Integer userId) {
-		return null;
+	public List<ApplicationDto> get(@RequestParam(name="userId") Integer userId) {
+		return keepService.getApplications(userId);
 	}
 }

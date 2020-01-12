@@ -3,11 +3,17 @@
  */
 package com.keep.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -34,6 +40,17 @@ public class User implements IKeepEntity {
 	
 	@Column(name="TERMS_AND_CONDTIONS")
 	private String teamsAndConditions;
+	
+	@OneToMany(cascade= {}, fetch=FetchType.LAZY)
+	@JoinTable(
+		name="APP_USERS",
+		joinColumns=@JoinColumn(name="USER_ID"),
+		inverseJoinColumns=@JoinColumn(name="APP_ID")
+	)
+	private Set<Application> applicationList;
+	
+	@OneToMany(cascade= {}, fetch=FetchType.LAZY, mappedBy="user")
+	private Set<ApplicationUser> applicationUserList;
 
 	public Integer getId() {
 		return id;
@@ -73,6 +90,22 @@ public class User implements IKeepEntity {
 
 	public void setTeamsAndConditions(String teamsAndConditions) {
 		this.teamsAndConditions = teamsAndConditions;
+	}
+
+	public Set<Application> getApplicationList() {
+		return applicationList;
+	}
+
+	public void setApplicationList(Set<Application> applicationList) {
+		this.applicationList = applicationList;
+	}
+
+	public Set<ApplicationUser> getApplicationUserList() {
+		return applicationUserList;
+	}
+
+	public void setApplicationUserList(Set<ApplicationUser> applicationUserList) {
+		this.applicationUserList = applicationUserList;
 	}
 	
 }

@@ -37,7 +37,7 @@ public class ApplicationUser implements IKeepEntity {
 	private User user;
 	
 	@OneToOne(cascade= {}, fetch=FetchType.LAZY)
-	@JoinColumn(name="APP_ID")
+	@JoinColumn(name="APP_ID", insertable=false, updatable=false)
 	private Application application;
 
 	public Integer getId() {
