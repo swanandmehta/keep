@@ -27,7 +27,8 @@ public class KeepController {
 	public KeepController(KeepService keepService) {
 		this.keepService = keepService;
 	}
-		
+	
+	//USER
 	@GetMapping(path="/user/validate-email")
 	public UserDto validateEmail(@RequestParam(name="email") String email) {
 		return keepService.validateEmail(email);
@@ -42,5 +43,7 @@ public class KeepController {
 	public UserDto login(@RequestBody UserDto userDto) {
 		return keepService.login(userDto);
 	}
+	
+	//Applications
 	
 }

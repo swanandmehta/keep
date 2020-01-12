@@ -1,7 +1,10 @@
 export class UserServiceUrlConfig {
 
     public static getValidateEmailUrl(email: string): string {
-        return '/user/validate-email?email=' + email;
+        let url = '/user/validate-email';
+        url = url + '?';
+        url = url + 'email=' + email;
+        return url;
     }
 
     public static createUserUrl(): string {

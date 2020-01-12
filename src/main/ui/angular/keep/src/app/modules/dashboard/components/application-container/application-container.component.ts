@@ -1,3 +1,5 @@
+import { Application } from './../../dto/application';
+import { ApplicationsService } from '../../../../core/services/applications/applications.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationContainerComponent implements OnInit {
 
-  constructor() { }
+  private applicationsService: ApplicationsService;
+  private userApplicationList: Array<Application>;
+
+  constructor(applicationsService: ApplicationsService) {
+    this.applicationsService = applicationsService;
+    this.userApplicationList = applicationsService.getUserApplications();
+  }
 
   ngOnInit() {
   }
