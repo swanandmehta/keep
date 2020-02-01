@@ -5,6 +5,7 @@ package com.keep.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,9 +34,6 @@ public class Application implements IKeepEntity {
 	@Column(name="NAME")
 	private String name;
 	
-	@Column(name="IMG_DIR")
-	private String imgLocation;
-	
 	@Column(name="CREATED_BY")
 	private Integer creatorId;
 	
@@ -53,6 +51,9 @@ public class Application implements IKeepEntity {
 	
 	@OneToMany(cascade= {}, fetch=FetchType.LAZY, mappedBy="application")
 	private Set<ApplicationUser> applicationUserList;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "application")
+	private Image image;
 
 	public Integer getId() {
 		return id;
@@ -68,14 +69,6 @@ public class Application implements IKeepEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getImgLocation() {
-		return imgLocation;
-	}
-
-	public void setImgLocation(String imgLocation) {
-		this.imgLocation = imgLocation;
 	}
 
 	public Integer getCreatorId() {
@@ -108,6 +101,14 @@ public class Application implements IKeepEntity {
 
 	public void setApplicationUserList(Set<ApplicationUser> applicationUserList) {
 		this.applicationUserList = applicationUserList;
+	}
+
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 }

@@ -7,6 +7,11 @@ public class ApplicationTransformer {
 
 	public static ApplicationDto transform(Application entity) {
 		ApplicationDto dto = new ApplicationDto();
+		dto.setId(entity.getId());
+		dto.setName(entity.getName());
+		if(entity.getImage() != null) {
+			dto.setImg(entity.getImage().getData());
+		}
 		return dto;
 	}
 
