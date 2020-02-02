@@ -9,9 +9,8 @@ public class ApplicationTransformer {
 		ApplicationDto dto = new ApplicationDto();
 		dto.setId(entity.getId());
 		dto.setName(entity.getName());
-		if(entity.getImage() != null) {
-			dto.setImg(entity.getImage().getData());
-		}
+		dto.setImg(entity.getConfig().getImg().getData());
+		dto.setUrl(entity.getConfig().getUrl());
 		return dto;
 	}
 

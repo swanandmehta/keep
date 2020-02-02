@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Application } from '../../dto/application';
 
 @Component({
   selector: 'app-application',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationComponent implements OnInit {
 
+  public properties: Application
+
+  @Input("value")
+  public set value(properties: Application) {
+    this.properties = properties;
+  };
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
 }

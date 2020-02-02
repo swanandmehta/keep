@@ -15,9 +15,9 @@ CREATE SCHEMA IF NOT EXISTS `keep` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4
 USE `keep` ;
 
 -- -----------------------------------------------------
--- Table `keep`.`users`
+-- Table `keep`.`USERS`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `keep`.`users` (
+CREATE TABLE IF NOT EXISTS `keep`.`USERS` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NAME` VARCHAR(255) NOT NULL,
   `EMAIL` VARCHAR(255) NOT NULL,
@@ -33,21 +33,20 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `keep`.`app`
+-- Table `keep`.`APP`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `keep`.`app` (
+CREATE TABLE IF NOT EXISTS `keep`.`APP` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `NAME` VARCHAR(255) NOT NULL,
-  `IMG_DIR` VARCHAR(255) NOT NULL,
   `CREATED_BY` INT(11) NOT NULL,
   `CTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
   UNIQUE INDEX `NAME_UNIQUE` (`NAME` ASC) VISIBLE,
-  INDEX `FK_USER_idx` (`CREATED_BY` ASC) VISIBLE,
-  CONSTRAINT `FK_USER`
+  INDEX `FK_USER_IDX` (`CREATED_BY` ASC) INVISIBLE,
+  CONSTRAINT `FK_APP_TO_USER`
     FOREIGN KEY (`CREATED_BY`)
-    REFERENCES `keep`.`users` (`ID`)
+    REFERENCES `keep`.`USERS` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT)
 ENGINE = InnoDB
@@ -56,9 +55,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `keep`.`users_app`
+-- Table `keep`.`USERS_APP`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `keep`.`users_app` (
+CREATE TABLE IF NOT EXISTS `keep`.`USERS_APP` (
   `ID` INT(11) NOT NULL AUTO_INCREMENT,
   `USER_ID` INT(11) NOT NULL,
   `APP_ID` INT(11) NOT NULL,
@@ -67,34 +66,55 @@ CREATE TABLE IF NOT EXISTS `keep`.`users_app` (
   PRIMARY KEY (`ID`),
   INDEX `FK_USERS_idx` (`USER_ID` ASC) VISIBLE,
   INDEX `FK_APP_idx` (`APP_ID` ASC) VISIBLE,
-  CONSTRAINT `FK_APP`
+  CONSTRAINT `FK_USERS_APP_TO_APP`
     FOREIGN KEY (`APP_ID`)
-    REFERENCES `keep`.`app` (`ID`)
+    REFERENCES `keep`.`APP` (`ID`)
     ON DELETE RESTRICT
     ON UPDATE RESTRICT,
-  CONSTRAINT `FK_USERS`
+  CONSTRAINT `FK_USERS_APP_TO_USERS`
     FOREIGN KEY (`USER_ID`)
-    REFERENCES `keep`.`users` (`ID`))
+    REFERENCES `keep`.`USERS` (`ID`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `keep`.`app_img`
+-- Table `keep`.`IMG`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `keep`.`app_img` (
+CREATE TABLE IF NOT EXISTS `keep`.`IMG` (
   `ID` INT NOT NULL AUTO_INCREMENT,
-  `APP_ID` INT NOT NULL,
   `DATA` MEDIUMTEXT NOT NULL,
   `CTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ID`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `keep`.`APP_CONFIG`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `keep`.`APP_CONFIG` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `APP_ID` INT NOT NULL,
+  `IMG_ID` INT NOT NULL,
+  `URL` VARCHAR(255) NOT NULL,
+  `CTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `UTS` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`ID`),
-  CONSTRAINT `FK_APP`
-    FOREIGN KEY (`ID`)
-    REFERENCES `keep`.`app` (`ID`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT)
+  INDEX `FK_IMG_IDX` (`IMG_ID` ASC) VISIBLE,
+  INDEX `FK_APP_IDX` (`APP_ID` ASC) VISIBLE,
+  UNIQUE INDEX `UNIQUE` (`APP_ID` ASC) VISIBLE,
+  CONSTRAINT `FK_APP_CONFIG_TO_IMG`
+    FOREIGN KEY (`IMG_ID`)
+    REFERENCES `keep`.`IMG` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK_APP_CONFIG_TO_APP`
+    FOREIGN KEY (`APP_ID`)
+    REFERENCES `keep`.`APP` (`ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

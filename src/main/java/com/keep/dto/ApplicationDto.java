@@ -12,6 +12,7 @@ public class ApplicationDto implements IKeepDto {
 	private Integer id;
 	private String name;
 	private String img;
+	private String url;
 	
 	public Integer getId() {
 		return id;
@@ -30,6 +31,12 @@ public class ApplicationDto implements IKeepDto {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	

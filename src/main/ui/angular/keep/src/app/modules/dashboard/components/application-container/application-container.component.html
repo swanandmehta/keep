@@ -1,20 +1,5 @@
 <div class="row col-md-12 p-0 m-0">
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
-    </div>
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
-    </div>
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
-    </div>
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
-    </div>
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
-    </div>
-    <div class="col-md-2 p-0 m-0">
-        <app-application></app-application>
+    <div *ngFor="let appliction of userApplicationList" class="col-md-2 p-0 m-0">
+        <app-application [value]=appliction></app-application>
     </div>
 </div>

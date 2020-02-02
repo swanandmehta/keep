@@ -52,8 +52,8 @@ public class Application implements IKeepEntity {
 	@OneToMany(cascade= {}, fetch=FetchType.LAZY, mappedBy="application")
 	private Set<ApplicationUser> applicationUserList;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "application")
-	private Image image;
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "appliction")
+	private AplicationConfig config;
 
 	public Integer getId() {
 		return id;
@@ -103,12 +103,12 @@ public class Application implements IKeepEntity {
 		this.applicationUserList = applicationUserList;
 	}
 
-	public Image getImage() {
-		return image;
+	public AplicationConfig getConfig() {
+		return config;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
+	public void setConfig(AplicationConfig config) {
+		this.config = config;
 	}
 
 }
