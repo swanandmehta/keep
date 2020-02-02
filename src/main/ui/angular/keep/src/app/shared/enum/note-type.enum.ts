@@ -1,5 +1,5 @@
 export enum NoteType {
-    Reminder,
-    Note,
-    Checklist
+    Reminder = "Reminder",
+    Note = "Note",
+    Checklist = "CheckList"
 }

@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Note } from '../../dto/note';
+import { ListingService } from 'src/app/core/services/listing/listing.service';
+import { IListing } from 'src/app/core/interface/listing/i-listing';
 
 @Component({
   selector: 'app-listing',
@@ -7,14 +10,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ListingComponent implements OnInit {
 
-  private isGridView;
+  private listingService: IListing;
+
+  public isGridView: boolean;
+  public notes : Array<Note>;
 
   @Input()
   private set gridView(isGridView: boolean) {
     this.isGridView = isGridView;
   }
 
-  constructor() { }
+  constructor(listingService: ListingService) {
+    this.listingService = listingService;
+    this.notes = listingService.getNotes();
+  }
 
   ngOnInit() {
   }

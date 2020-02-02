@@ -10,4 +10,6 @@ export interface IListing {
 
     getNote(noteId: number) : Array<Note>;
 
+    getNotes(): Array<Note>;
+
 }
