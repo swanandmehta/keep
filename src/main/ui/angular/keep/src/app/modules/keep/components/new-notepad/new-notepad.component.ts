@@ -17,19 +17,21 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewNotepadComponent implements OnInit {
 
-  private activeModel: NgbActiveModal;
-  private newNotePad: FormGroup;
+  public  activeModel: NgbActiveModal;
+  public newNotePad: FormGroup;
+  
   private formBuilder: FormBuilder;
   private notepadService: NotepadService;
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NotepadService,
-              loggerService: LoggerService, ) {
+              loggerService: LoggerService) {
     this.activeModel =  activeModel;
     this.notepadService = notepadService;
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
+    this.formBuilder = formBuilder;
     this.newNotePad = this.formBuilder.group({
       heading : ['', [Validators.required]],
       note : ['']

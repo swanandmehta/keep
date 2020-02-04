@@ -58,13 +58,15 @@ export class ListingService implements IListing {
         });
 
         this.successHandler.handleSuccess(noteList, "User with id " + userId + " loaded notes.", LoggerLevel.L);
+
+        return this.notes;
       },
       error : (error: any) => {
         this.errorHandler.handleError(error, "User with id " + userId + " failed to load notes.", LoggerLevel.H);
       }
     }
     this.commService.post(url, listingCriteriaDto).subscribe(noteListingPartialObserver);
-    return null;
+    return this.notes;
   }
 
   getNotesByStatus(userId: number, archivalLevelList: Array<ArchiveLevel>): Array<Note> {
