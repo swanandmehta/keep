@@ -6,7 +6,10 @@ package com.keep.impl;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.keep.dto.NoteDto;
+import com.keep.dto.NotesSearchCriteria;
 import com.keep.entity.Note;
 import com.keep.repository.INoteRepository;
 import com.keep.services.INoteServices;
@@ -15,6 +18,7 @@ import com.keep.services.INoteServices;
  * @author swanandm
  *
  */
+@Service
 public class NoteService extends CrudService<NoteDto, Note> implements INoteServices {
 	
 	private final INoteRepository noteRepository;
@@ -26,12 +30,14 @@ public class NoteService extends CrudService<NoteDto, Note> implements INoteServ
 
 	@Override
 	public NoteDto toDto(Note entity) {
-		return null;
+		NoteDto dto = new NoteDto();
+		return dto;
 	}
 
 	@Override
 	public Note toEntity(NoteDto dto) {
-		return null;
+		Note entity = new Note();
+		return entity;
 	}
 
 	@Override
@@ -57,6 +63,11 @@ public class NoteService extends CrudService<NoteDto, Note> implements INoteServ
 	@Override
 	public void deleteById(Integer id) {
 
+	}
+
+	@Override
+	public List<NoteDto> getNotes(NotesSearchCriteria searchDto, Integer userId) {
+		return toDtos(this.noteRepository.findAll());
 	}
 
 }

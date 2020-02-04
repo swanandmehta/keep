@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.keep.dto.ApplicationDto;
+import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
 import com.keep.dto.UserDto;
 import com.keep.services.IApplicationService;
@@ -53,7 +54,12 @@ public class KeepService implements IKeepService {
 	}
 
 	@Override
-	public List<?> getNotes(NotesSearchCriteria searchDto, Integer userId) {
-		return null;
+	public List<NoteDto> getNote(NotesSearchCriteria searchDto, Integer userId) {
+		return noteService.getNotes(searchDto, userId);
+	}
+
+	@Override
+	public NoteDto saveNote(NoteDto noteDto) {
+		return noteService.persist(noteDto);
 	}
 }
