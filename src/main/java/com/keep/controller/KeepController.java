@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.keep.dto.ApplicationDto;
+import com.keep.dto.NotesSearchCriteria;
 import com.keep.dto.UserDto;
 import com.keep.impl.KeepService;
 import com.keep.services.IKeepService;
@@ -49,7 +50,13 @@ public class KeepController {
 	
 	//Applications
 	@GetMapping(path="/applications")
-	public List<ApplicationDto> get(@RequestParam(name="userId") Integer userId) {
+	public List<ApplicationDto> getAppliction(@RequestParam(name="userId") Integer userId) {
 		return keepService.getApplications(userId);
+	}
+	
+	//Keep Application
+	@PostMapping(path="/keep/listing")
+	public List<?> getNotes(@RequestParam(name="userId") Integer userId, @RequestBody NotesSearchCriteria searchDto) {
+		return keepService.getNotes(searchDto, userId);
 	}
 }

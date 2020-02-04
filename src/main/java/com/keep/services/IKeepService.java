@@ -6,6 +6,7 @@ package com.keep.services;
 import java.util.List;
 
 import com.keep.dto.ApplicationDto;
+import com.keep.dto.NotesSearchCriteria;
 import com.keep.dto.UserDto;
 
 /**
@@ -21,5 +22,7 @@ public interface IKeepService {
 	UserDto login(UserDto userDto);
 
 	List<ApplicationDto> getApplications(Integer userId);
+
+	List<?> getNotes(NotesSearchCriteria searchDto, Integer userId);
 
 }
