@@ -63,7 +63,7 @@ public class KeepController {
 	
 	
 	@PostMapping(path="/keep/note")
-	public NoteDto saveNote(NoteDto noteDto) {
+	public NoteDto saveNote(@RequestBody NoteDto noteDto) {
 		return keepService.saveNote(noteDto);
 	}
 }
