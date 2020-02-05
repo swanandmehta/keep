@@ -13,7 +13,9 @@ export class NotepadService {
 
   private commService: IHttpCommunicationService<Note>;
 
-  constructor(commService: HttpCommunicationService<Note>) { }
+  constructor(commService: HttpCommunicationService<Note>) {
+    this.commService = commService;
+  }
 
   public save(note: Note): Observable<Note> {
     const url = ServerConfig.serverUrl + NotepadServiceUrlConfig.getSaveNoteUrl();

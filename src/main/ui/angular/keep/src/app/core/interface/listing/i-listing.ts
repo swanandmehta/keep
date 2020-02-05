@@ -12,4 +12,6 @@ export interface IListing {
 
     getNotes(): Array<Note>;
 
+    addNote(note: Note): void;
+
 }
