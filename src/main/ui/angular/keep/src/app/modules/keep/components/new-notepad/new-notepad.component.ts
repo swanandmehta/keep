@@ -71,6 +71,8 @@ export class NewNotepadComponent implements OnInit {
         }
       };
 
+      this.activeModel.close('save');
+
       noteObserver.subscribe(partialNoteObserver);
 
     } else {

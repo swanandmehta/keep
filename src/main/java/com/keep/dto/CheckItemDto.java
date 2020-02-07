@@ -11,7 +11,7 @@ public class CheckItemDto implements IKeepDto {
 	
 	private Integer id;
 	private String text;
-	private String status;
+	private boolean status;
 	
 	public Integer getId() {
 		return id;
@@ -25,10 +25,10 @@ public class CheckItemDto implements IKeepDto {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public String getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 	

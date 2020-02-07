@@ -7,3 +7,5 @@ INSERT INTO keep.app_config(APP_ID, IMG_ID, URL) values (X, Y, '/keep');
 INSERT INTO keep.users_app (USER_ID, APP_ID) values(X, Y);
 
 INSERT INTO keep.checkpad_state(name) values('True'),('False');
+
+INSERT INTO keep.reminder_repeat_type (NAME) values ('One-time'),('Hourly'),('Daily'),('Weekly'),('Monthly'),('Yearly'),('Custom');

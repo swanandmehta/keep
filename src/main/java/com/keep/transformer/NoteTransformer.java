@@ -94,7 +94,7 @@ public class NoteTransformer {
 		checkpad.getCheckpadItem().stream().forEach(element->{
 			CheckItemDto dto = new CheckItemDto();
 			dto.setId(element.getId());
-			dto.setStatus(element.getCheckpadState().getName());
+			dto.setStatus(Boolean.parseBoolean(element.getCheckpadState().getName()));
 			dto.setText(element.getData());
 			checkItemDtoList.add(dto);
 		});

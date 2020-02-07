@@ -7,10 +7,10 @@ import com.keep.exception.InvalidInputException;
 
 public class NoteUtil {
 
-	public static CheckpadState getCheckPadState(String status) {
+	public static CheckpadState getCheckPadState(boolean status) {
 		List<CheckpadState> checkpandStateList = GlobalDataUtil.getCheckpadStates(); 
 		for(CheckpadState state : checkpandStateList) {
-			if(state.getName().equalsIgnoreCase(status)) {
+			if(state.getName().equalsIgnoreCase(Boolean.toString(status))) {
 				return state;
 			}
 		}

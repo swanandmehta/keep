@@ -15,6 +15,7 @@ import { ISuccessHandler } from '../../interface/logger/i-success-handler';
 import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
+import { CheckList } from 'src/app/modules/keep/dto/check-list';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,7 @@ export class ListingService implements IListing {
     const noteListingPartialObserver: PartialObserver<Array<Note>> = {
       next : (noteList : Array<Note>) => {
         noteList.forEach((note: Note)=>{
+          this.validateNote(note);
           this.notes.push(note);
         });
 
@@ -84,6 +86,10 @@ export class ListingService implements IListing {
 
   addNote(note: Note): void {
     this.notes.push(note);
+  }
+
+  private validateNote(note: Note):void {
+
   }
 
 }

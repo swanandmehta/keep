@@ -16,4 +16,14 @@ export class PremitiveTypeValidationUtil {
         return false;
     }
 
+    public static convertStringToBool(value: string): boolean{
+        if(value === 'true' || value === 'True'){
+            return true;
+        }else if(value === 'false' || value === 'False') {
+            return false;
+        }
+
+        return undefined;
+    }
+
 }
