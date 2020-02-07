@@ -4,12 +4,13 @@ import { HttpCommunicationService } from './../communication/http-communication.
 import { Note } from '../../../modules/keep/dto/note';
 import { IHttpCommunicationService } from './../../interface/communication/i-http-communication-service';
 import { Injectable } from '@angular/core';
-import { Observer, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { INoteService } from '../../interface/checkpad/i-note-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NotepadService {
+export class NotepadService implements INoteService  {
 
   private commService: IHttpCommunicationService<Note>;
 

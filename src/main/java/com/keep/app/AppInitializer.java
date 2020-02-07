@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  *
  */
 @SpringBootApplication(scanBasePackages={"com.keep.config", "com.keep.controller", 
-		"com.keep.impl", "com.keep.repository"})
+		"com.keep.impl", "com.keep.repository", "com.keep.runner"})
 @EnableJpaRepositories(basePackages = {"com.keep.repository"})
 @EntityScan(basePackages= {"com.keep.entity"})
 public class AppInitializer {

@@ -8,7 +8,7 @@
                     <app-listing-note  [note]="note"></app-listing-note>
                 </div>
                 <div class="col-md-12 p-0 m-0" *ngIf="note.type === 'CheckList'">
-                    <app-listing-check-list></app-listing-check-list>
+                    <app-listing-check-list [note]="note" ></app-listing-check-list>
                 </div>
                 <div class="col-md-12 p-0 m-0" *ngIf="note.type === 'Reminder'">
                     <app-listing-reminder></app-listing-reminder>
@@ -23,10 +23,10 @@
         <div class="row col-md-12 p-0 m-0">
             <div *ngFor="let note of notes">
                 <div *ngIf="note.type === 'Note'" class="col-md-12 p-0 m-0">
-                    <app-listing-note></app-listing-note>
+                    <app-listing-note [note]="note"></app-listing-note>
                 </div>
                 <div *ngIf="note.type === 'CheckList'" class="col-md-12 p-0 m-0">
-                    <app-listing-check-list></app-listing-check-list>
+                    <app-listing-check-list [note]="note" ></app-listing-check-list>
                 </div>
                 <div *ngIf="note.type === 'Reminder'" class="col-md-12 p-0 m-0">
                     <app-listing-reminder></app-listing-reminder>

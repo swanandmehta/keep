@@ -5,3 +5,5 @@ INSERT INTO keep.app (NAME, CREATED_BY) values ('Keep', X);
 INSERT INTO keep.app_config(APP_ID, IMG_ID, URL) values (X, Y, '/keep');
 
 INSERT INTO keep.users_app (USER_ID, APP_ID) values(X, Y);
+
+INSERT INTO keep.checkpad_state(name) values('True'),('False');

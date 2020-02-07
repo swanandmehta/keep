@@ -3,6 +3,8 @@
  */
 package com.keep.dto;
 
+import java.util.List;
+
 /**
  * @author swanandm
  *
@@ -14,6 +16,7 @@ public class NoteDto implements IKeepDto {
 	private Integer userId;
 	private String type;
 	private Integer id;
+	private List<CheckItemDto> itemList;
 	
 	public String getHeading() {
 		return heading;
@@ -44,6 +47,12 @@ public class NoteDto implements IKeepDto {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public List<CheckItemDto> getItemList() {
+		return itemList;
+	}
+	public void setItemList(List<CheckItemDto> itemList) {
+		this.itemList = itemList;
 	}
 	
 }

@@ -3,11 +3,12 @@
  */
 package com.keep.entity;
 
-import javax.persistence.Column;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,38 +19,15 @@ import javax.persistence.Table;
 @Table(name = "CHECKPAD")
 public class Checkpad extends Note implements IKeepEntity {
 
-	@Column(name = "DATA")
-	private String data;
-	
-	@Column(name = "CHECKPAD_STATE_ID")
-	private Integer checkpadStateId;
-	
-	@OneToOne(cascade = {}, fetch = FetchType.LAZY)
-	@JoinColumn(name = "CHECKPAD_STATE_ID", insertable = false, updatable = false)
-	private CheckpadState checkpadState;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "checkpad")
+	private Set<CheckpadItem> checkpadItem;
 
-	public String getData() {
-		return data;
+	public Set<CheckpadItem> getCheckpadItem() {
+		return checkpadItem;
 	}
 
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public Integer getCheckpadStateId() {
-		return checkpadStateId;
-	}
-
-	public void setCheckpadStateId(Integer checkpadStateId) {
-		this.checkpadStateId = checkpadStateId;
-	}
-
-	public CheckpadState getCheckpadState() {
-		return checkpadState;
-	}
-
-	public void setCheckpadState(CheckpadState checkpadState) {
-		this.checkpadState = checkpadState;
+	public void setCheckpadItem(Set<CheckpadItem> checkpadItem) {
+		this.checkpadItem = checkpadItem;
 	}
 	
 }

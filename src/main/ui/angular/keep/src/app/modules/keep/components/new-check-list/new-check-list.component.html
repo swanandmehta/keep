@@ -5,58 +5,35 @@
         </button>
     </div>
     <div class="modal-body">
-        <div class="col-md-12 p-0 m-0">
-            <div class="col-md-12 m-0 p-0">
-                <div class="m-3 p-0">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Interesting Heading...">
-                    </div>
-                </div>                
-            </div>
-        </div>
-        <div class="col-md-12 p-0 m-0">
-            <div class="m-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox">
+        <div [formGroup]="checkListForm">
+            <div class="col-md-12 p-0 m-0">
+                <div class="col-md-12 m-0 p-0">
+                    <div class="m-3 p-0">
+                        <div class="form-group">
+                            <input type="text" formControlName="heading" class="form-control" placeholder="Interesting Heading...">
                         </div>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Interesting Task...">
+                    </div>                
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 p-0 m-0">
-            <div class="m-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox">
+            <div *ngFor="let task of getTaskControls()">
+                <div [formGroup]="task" class="col-md-12 p-0 m-0">
+                    <div class="m-3">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input formControlName="status" type="checkbox">
+                                </div>
+                            </div>
+                            <input type="text" formControlName="text" class="form-control" placeholder="Interesting Task...">
                         </div>
                     </div>
-                    <input type="text" class="form-control" placeholder="Interesting Task...">
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12 p-0 m-0">
-            <hr>
-        </div>
-        <div class="col-md-12 p-0 m-0">
-            <div class="m-3">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox">
-                        </div>
-                    </div>
-                    <input type="text" class="form-control text-strikethrough" value="Task which i completed" placeholder="Interesting Task...">
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-dark">
-            <fa-icon [icon]="addIcon"></fa-icon>
+            <fa-icon [icon]="addIcon" (click)="addNewEntry()"></fa-icon>
         </button>
-        <button type="button" class="btn btn-dark" (click)="activeModel.close('save')">Close</button>
+        <button type="button" class="btn btn-dark" (click)="close()">Close</button>
     </div>
