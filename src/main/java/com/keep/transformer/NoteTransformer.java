@@ -3,13 +3,17 @@
  */
 package com.keep.transformer;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.keep.dto.CheckItemDto;
+import com.keep.dto.DateDto;
 import com.keep.dto.NoteDto;
+import com.keep.dto.TimeDto;
 import com.keep.entity.Checkpad;
 import com.keep.entity.CheckpadItem;
 import com.keep.entity.Note;
@@ -34,10 +38,23 @@ public class NoteTransformer {
 		case Note:
 			return getNotepad(dto);
 		case Reminder:
-			return null;
+			return getReminder(dto);
 		default:
 			throw new InvalidCaseException("Could not find valid case for Note type");
 		}		
+	}
+
+	private static Note getReminder(NoteDto dto) {
+		Reminder reminder = new Reminder();
+		reminder.setUserId(dto.getUserId());
+		reminder.setHeading(dto.getHeading());
+		reminder.setReminderTypeId(ReminderTypeTransformer.getReminderTypeId(dto.getRepeat()));
+		
+		LocalDateTime triggerTime = LocalDateTime.of(dto.getDate().getYear(), dto.getDate().getMonth(), 
+				dto.getDate().getDay(), dto.getTime().getHour(), dto.getTime().getHour(), dto.getTime().getSecond());
+		
+		reminder.setTriggerTime(Timestamp.valueOf(triggerTime));
+		return reminder;
 	}
 
 	private static Note getNotepad(NoteDto dto) {
@@ -78,12 +95,32 @@ public class NoteTransformer {
 			dto.setType(NoteType.Note.getType());
 			dto.setNote(((Notepad) entity).getData());
 		} else if(entity instanceof Reminder) {
+			LocalDateTime localDateTime = ((Reminder) entity).getTriggerTime().toLocalDateTime();
 			dto.setType(NoteType.Reminder.getType());
+			dto.setRepeat(ReminderTypeTransformer.getReminderTypeName(((Reminder) entity).getReminderTypeId()));
+			dto.setDate(getDate(localDateTime));
+			dto.setTime(getTime(localDateTime));
 		} else if(entity instanceof Checkpad) {
 			dto.setType(NoteType.Checklist.getType());
 			dto.setItemList(getItemList(entity));
 		}
 		
+		return dto;
+	}
+
+	private static DateDto getDate(LocalDateTime localDateTime) {
+		DateDto dto = new DateDto();
+		dto.setDay(localDateTime.getDayOfMonth());
+		dto.setMonth(localDateTime.getMonthValue());
+		dto.setYear(localDateTime.getYear());
+		return dto;
+	}
+
+	private static TimeDto getTime(LocalDateTime localDateTime) {
+		TimeDto dto = new TimeDto();
+		dto.setHour(localDateTime.getHour());
+		dto.setMinute(localDateTime.getMinute());
+		dto.setSecond(localDateTime.getSecond());
 		return dto;
 	}
 

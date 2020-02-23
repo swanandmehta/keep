@@ -11,7 +11,7 @@
                     <app-listing-check-list [note]="note" ></app-listing-check-list>
                 </div>
                 <div class="col-md-12 p-0 m-0" *ngIf="note.type === 'Reminder'">
-                    <app-listing-reminder></app-listing-reminder>
+                    <app-listing-reminder [note]="note"></app-listing-reminder>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@
                     <app-listing-check-list [note]="note" ></app-listing-check-list>
                 </div>
                 <div *ngIf="note.type === 'Reminder'" class="col-md-12 p-0 m-0">
-                    <app-listing-reminder></app-listing-reminder>
+                    <app-listing-reminder [note]="note"></app-listing-reminder>
                 </div>    
             </div>
         </div>

@@ -7,6 +7,19 @@ import { validateTime } from 'src/app/shared/validator/time';
 import { IListing } from 'src/app/core/interface/listing/i-listing';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { ReminderType } from '../../dto/reminder-type';
+import { NotepadService } from 'src/app/core/services/notepad/notepad.service';
+import { PartialObserver } from 'rxjs';
+import { Note } from '../../dto/note';
+import { ISuccessHandler } from 'src/app/core/interface/logger/i-success-handler';
+import { IErrorHandler } from 'src/app/core/interface/logger/i-error-handler';
+import { LoggerService } from 'src/app/core/services/logger/logger.service';
+import { Reminder } from '../../dto/reminder';
+import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
+import { Date } from 'src/app/shared/dto/date';
+import { Time } from 'src/app/shared/dto/time';
+import { NoteType } from 'src/app/shared/enum/note-type.enum';
+import { ISessionService } from 'src/app/core/interface/session/i-session-service';
+import { SessionService } from 'src/app/core/services/session/session.service';
 
 @Component({
   selector: 'app-new-reminder',
@@ -23,21 +36,30 @@ export class NewReminderComponent implements OnInit {
 
   private formBuilder: FormBuilder;
   private listingService: IListing;
+  private notepadService: NotepadService;
+  private successHandler: ISuccessHandler;
+  private errorHandler: IErrorHandler
+  private sessionService: ISessionService;
   
 
-  constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, listingService: ListingService) {
+  constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, listingService: ListingService,
+      notepadService: NotepadService, loggerService: LoggerService, sessionService: SessionService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;
     this.isSubmited = false;
     this.listingService = listingService;
+    this.notepadService = notepadService;
+    this.successHandler = loggerService;
+    this.errorHandler = loggerService;
+    this.sessionService = sessionService;
 
     this.reminderTypeList = this.listingService.getReminderType();
 
     this.newReminderForm = this.formBuilder.group({
       heading : ['', Validators.required],
-      date : [{}, [Validators.required, validateDate] ],
-      time : [{}, [Validators.required, validateTime] ],
-      repeat: [this.reminderTypeList[0].id, Validators.required]
+      date : [new Date(), [Validators.required, validateDate] ],
+      time : [new Time(), [Validators.required, validateTime] ],
+      repeat: [this.reminderTypeList[0].name, Validators.required]
     });
   }
 
@@ -46,7 +68,31 @@ export class NewReminderComponent implements OnInit {
 
   public close(): void {
     this.isSubmited = true;
-    console.log(this.newReminderForm.value);    
+    if(this.newReminderForm.valid == true){
+      const reminder: Reminder = this.newReminderForm.value as Reminder;
+
+      reminder.type = NoteType.Reminder;
+      reminder.userId =  Number(this.sessionService.getValue("userId"));
+
+      const observer:PartialObserver<Note> = this.getObserver(reminder);
+      this.notepadService.save(reminder).subscribe(observer);
+    }
+  }
+
+  private getObserver(reminder: Reminder) : PartialObserver<Note> {
+    const observer:PartialObserver<Note> = {
+      next: (savedReminder: Note) => {
+        this.listingService.addNote(savedReminder);
+        this.successHandler.handleSuccess(savedReminder, 'User with Id ' + reminder.userId
+          + ' saved note.', LoggerLevel.L);
+      },
+      error: (error: Note) => {
+        this.errorHandler.handleError(error, 'User with Id ' + reminder.userId
+        + ' failed to save note.', LoggerLevel.H);
+      }
+    }
+
+    return observer;
   }
 
 }

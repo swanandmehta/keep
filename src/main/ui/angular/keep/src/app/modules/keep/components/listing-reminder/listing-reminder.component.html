@@ -2,10 +2,10 @@
     <div class="col-md-12 m-0 p-0">
         <div class="m-3 p-0">
             <div class="float-left">
-                <h6>Heading</h6>
+                <h6>{{value.heading}}</h6>
             </div>
             <div class="float-right">
-                <h6 >
+                <h6>
                     <app-document-dropdown-options></app-document-dropdown-options>
                 </h6>
             </div>
@@ -13,19 +13,14 @@
         </div>
         <div class="m-3 p-0 overflow-auto height-150-px">
             <p>
-                <strong>What :</strong>
-                <br>
-                Name of the task
-            </p>
-            <p>
                 <strong>When :</strong>
                 <br>
-                YYYY/MM/DD HH:MM:SS AA
+                {{value.date.year}}/{{value.date.month}}/{{value.date.day}} {{value.time.hour}}:{{value.time.minute}}:{{value.time.second}}
             </p>
             <p>
                 <strong>Repeat :</strong>
                 <br>
-                Repeat conditon
+                {{value.repeat}}
             </p>
         </div>
     </div>

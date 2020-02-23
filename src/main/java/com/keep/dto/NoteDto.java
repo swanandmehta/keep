@@ -17,6 +17,9 @@ public class NoteDto implements IKeepDto {
 	private String type;
 	private Integer id;
 	private List<CheckItemDto> itemList;
+	private DateDto date;
+	private TimeDto time;
+	private String repeat;
 	
 	public String getHeading() {
 		return heading;
@@ -53,6 +56,24 @@ public class NoteDto implements IKeepDto {
 	}
 	public void setItemList(List<CheckItemDto> itemList) {
 		this.itemList = itemList;
+	}
+	public DateDto getDate() {
+		return date;
+	}
+	public void setDate(DateDto date) {
+		this.date = date;
+	}
+	public TimeDto getTime() {
+		return time;
+	}
+	public void setTime(TimeDto time) {
+		this.time = time;
+	}
+	public String getRepeat() {
+		return repeat;
+	}
+	public void setRepeat(String repeat) {
+		this.repeat = repeat;
 	}
 	
 }
