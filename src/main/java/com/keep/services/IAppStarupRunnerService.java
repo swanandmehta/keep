@@ -11,4 +11,6 @@ public interface IAppStarupRunnerService {
 
 	void loadCheckitemStateValues();
 
+	void loadReminderTypeRepostiory();
+
 }

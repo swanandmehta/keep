@@ -5,51 +5,59 @@
     </button>
 </div>
 <div class="modal-body">
-    <div class="col-md-12 p-0 m-0">
-        <div class="col-md-12 m-0 p-0">
-            <div class="m-3 p-0">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Thing which you have to do...">
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 m-0 p-0">
-        <div class="m-3 p-0">
-            <div class="form-group">
-                <div class="input-group">
-                    <input class="form-control" placeholder="YYYY-MM-DD" name="date" ngbDatepicker #date="ngbDatepicker">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary calendar" (click)="date.toggle()" type="button">
-                                <fa-icon [icon]="calenderIcon"></fa-icon>
-                        </button>
+    <form [formGroup]="newReminderForm">
+        <div class="col-md-12 p-0 m-0">
+            <div class="col-md-12 m-0 p-0">
+                <div class="m-3 p-0">
+                    <div class="form-group">
+                        <input type="text" class="form-control" formControlName="heading"
+                            placeholder="Thing which you have to do...">
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-md-12 m-0 p-0">
-        <div class="m-3 p-0">
-            <div class="form-group">
-                <div class="input-group">
-                    <ngb-timepicker [meridian]="'OFF'" [spinners]="OFF" [seconds]="'ON'"></ngb-timepicker>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-12 m-0 p-0">
-        <div class="m-3 p-0">
-            <div class="form-group">
+        <div class="col-md-12 m-0 p-0">
+            <div class="m-3 p-0">
                 <div class="form-group">
-                    <select class="form-control">
-                        <option selected>Does not repeat</option>
-                    </select>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="YYYY-MM-DD" 
+                            formControlName="date"
+                            name="date" ngbDatepicker #date="ngbDatepicker">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" 
+                                (click)="date.toggle()" type="button">
+                                    <fa-icon [icon]="calenderIcon"></fa-icon>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-12 m-0 p-0">
+            <div class="m-3 p-0">
+                <div class="form-group">
+                    <div class="input-group">
+                        <ngb-timepicker formControlName="time"
+                            [meridian]="true" [spinners]="false" [seconds]="true">
+                        </ngb-timepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 m-0 p-0">
+            <div class="m-3 p-0">
+                <div class="form-group">
+                    <div class="form-group">
+                        <select class="form-control" formControlName="repeat">
+                            <option selected>Does not repeat</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     
 </div>
 <div class="modal-footer">
-    <button type="button" class="btn btn-dark" (click)="activeModel.close('save')">Close</button>
+    <button type="button" class="btn btn-dark" (click)="close()">Save</button>
 </div>

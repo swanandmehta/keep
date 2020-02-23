@@ -22,7 +22,7 @@ import { NoteType } from 'src/app/shared/enum/note-type.enum';
 })
 export class NewNotepadComponent implements OnInit {
 
-  public  activeModel: NgbActiveModal;
+  public activeModel: NgbActiveModal;
   public newNotePad: FormGroup;
 
   private formBuilder: FormBuilder;

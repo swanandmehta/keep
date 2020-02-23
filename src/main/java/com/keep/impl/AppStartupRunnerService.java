@@ -28,8 +28,12 @@ public class AppStartupRunnerService implements IAppStarupRunnerService {
 	@Override
 	public void loadCheckitemStateValues() {
 		GlobalDataUtil.setCheckpadStates(checkItemStateRepository.findAll());
-		GlobalDataUtil.setReminderTypes(reminderTypeRepostiory.findAll());
 		
+	}
+
+	@Override
+	public void loadReminderTypeRepostiory() {
+		GlobalDataUtil.setReminderTypes(reminderTypeRepostiory.findAll());		
 	}
 	
 }

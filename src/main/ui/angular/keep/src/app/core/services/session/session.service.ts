@@ -7,20 +7,20 @@ import { Injectable } from '@angular/core';
 })
 export class SessionService implements ISessionService {
 
-  private keep: Map<string, string> = new Map();
+  private keep: any = {};
 
   constructor() {
     const sessionValue: string | null = sessionStorage.getItem('keep');
 
     if (sessionValue !== null && sessionValue !== undefined) {
 
-      const saveValues: Map<string, string> = JSON.parse(sessionValue);
+      const saveValues: any = JSON.parse(sessionValue);
 
       for (const key in saveValues) {
         if (PremitiveTypeValidationUtil.validateString(key) === true) {
-          const value : string | undefined = saveValues.get(key);
+          const value : string | undefined = saveValues[key];
           if(value !== undefined){
-            this.keep.set(key, value);
+            this.keep[key] = value;
           }
         }
 
@@ -30,25 +30,25 @@ export class SessionService implements ISessionService {
   }
 
   saveValue(key: string, value: string): void {
-    this.keep.set(key, value);
+    this.keep[key] = value;
 
     this.updateSessionStorage();
   }
 
-  saveAll(update: Map<string, string>): void {
-    update.forEach((value: string, key: string) => {
-      this.keep.set(key, value);
-    });
+  saveAll(update: any): void {
+    for(const key in update){
+      this.keep[key] = update[key];
+    }
 
     this.updateSessionStorage();
   }
 
   getValue(key: string): string | undefined {
-    return this.keep.get(key);
+    return this.keep[key];
   }
 
   getAll() {
-    const keepCopy: Map<string, string> = new Map();
+    const keepCopy: any = {};
     Object.assign(keepCopy, this.keep);
     return keepCopy;
   }
@@ -57,15 +57,15 @@ export class SessionService implements ISessionService {
     this.keep.delete(key);
   }
   removeAll(): void {
-    this.keep = new Map<string, string>();
+    this.keep = {};
   }
 
   private updateSessionStorage(): void {
-    const sessionJson = new Map<string, string>();
+    const sessionJson: any = {};
 
-    this.keep.forEach((value: string, key: string) => {
-      sessionJson.set(key, value);
-    });
+    for(const key in this.keep){
+      sessionJson[key] = this.keep[key];
+    }
 
     sessionStorage.setItem('keep', JSON.stringify(sessionJson));
   }
