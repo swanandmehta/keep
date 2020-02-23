@@ -8,6 +8,7 @@ import java.util.List;
 import com.keep.dto.ApplicationDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 
 /**
@@ -27,5 +28,7 @@ public interface IKeepService {
 	List<NoteDto> getNote(NotesSearchCriteria searchDto, Integer userId);
 
 	NoteDto saveNote(NoteDto noteDto);
+
+	List<ReminderTypeDto> getReminderType();
 
 }

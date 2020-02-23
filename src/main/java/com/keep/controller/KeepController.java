@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.keep.dto.ApplicationDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 import com.keep.impl.KeepService;
 import com.keep.services.IKeepService;
@@ -33,7 +34,7 @@ public class KeepController {
 		this.keepService = keepService;
 	}
 	
-	//USER
+	//User
 	@GetMapping(path="/user/validate-email")
 	public UserDto validateEmail(@RequestParam(name="email") String email) {
 		return keepService.validateEmail(email);
@@ -65,5 +66,12 @@ public class KeepController {
 	@PostMapping(path="/keep/note")
 	public NoteDto saveNote(@RequestBody NoteDto noteDto) {
 		return keepService.saveNote(noteDto);
+	}
+	
+	
+	//Global data
+	@GetMapping(path="/keep/reminderType")
+	public List<ReminderTypeDto> getReminderType(){
+		return keepService.getReminderType();
 	}
 }

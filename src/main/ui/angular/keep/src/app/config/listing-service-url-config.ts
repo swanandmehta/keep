@@ -16,4 +16,9 @@ export class ListingServiceUrlConfig {
         return criteria;
     }
 
+    public static getReminderTypes(): string {
+        let url: string = "/keep/reminderType";
+        return url;
+    }
+
 }

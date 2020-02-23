@@ -10,11 +10,14 @@ import org.springframework.stereotype.Service;
 import com.keep.dto.ApplicationDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 import com.keep.services.IApplicationService;
 import com.keep.services.IKeepService;
 import com.keep.services.INoteServices;
 import com.keep.services.IUserServices;
+import com.keep.transformer.ReminderTypeTransformer;
+import com.keep.utils.GlobalDataUtil;
 
 /**
  * @author swanandm
@@ -61,5 +64,10 @@ public class KeepService implements IKeepService {
 	@Override
 	public NoteDto saveNote(NoteDto noteDto) {
 		return noteService.persist(noteDto);
+	}
+
+	@Override
+	public List<ReminderTypeDto> getReminderType() {
+		return ReminderTypeTransformer.transform(GlobalDataUtil.getReminderTypes());
 	}
 }

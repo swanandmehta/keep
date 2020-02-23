@@ -15,6 +15,7 @@ import { ISuccessHandler } from '../../interface/logger/i-success-handler';
 import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
+import { ReminderType } from 'src/app/modules/keep/dto/reminder-type';
 
 @Injectable({
   providedIn: 'root'
@@ -22,20 +23,43 @@ import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 export class ListingService implements IListing {
   
   private commService: IHttpCommunicationService<Array<Note>>;
+  private remiderTypeCommService: IHttpCommunicationService<Array<ReminderType>>;
   private sessionService: ISessionService;
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler;
   private notes: Array<Note>;
+  private reminderTypeList: Array<ReminderType>;
 
   constructor(commService: HttpCommunicationService<Array<Note>>, sessionService: SessionService,
-      loggerService: LoggerService) {
+      loggerService: LoggerService, remiderTypeCommService: HttpCommunicationService<Array<ReminderType>>) {
     this.commService = commService;
     this.sessionService = sessionService;
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
+    this.remiderTypeCommService = remiderTypeCommService;
 
     this.notes = new Array<Note>();
+    this.reminderTypeList = new Array<ReminderType>();
     this.getDefaultNotes();
+    this.loadReminderTypes();
+  }
+
+  private loadReminderTypes(): void{
+    const url = ServerConfig.serverUrl + ListingServiceUrlConfig.getReminderTypes();
+    const observer: PartialObserver<Array<ReminderType>> = {
+      next : (typeList: Array<ReminderType>) =>{
+        typeList.forEach((reminderType: ReminderType) => {
+          this.reminderTypeList.push(reminderType)
+        });
+
+        this.successHandler.handleSuccess(typeList, "User was able to load reminder type", LoggerLevel.L);
+      },
+
+      error : (error: any) => {
+        this.errorHandler.handleError(error, "User failed to load reminder type", LoggerLevel.H);
+      }
+    }
+    this.remiderTypeCommService.get(url).subscribe(observer);
   }
 
   private getDefaultNotes(): void {
@@ -91,6 +115,10 @@ export class ListingService implements IListing {
 
   addNote(note: Note): void {
     this.notes.push(note);
+  }
+
+  getReminderType(): Array<ReminderType> {
+    return this.reminderTypeList;
   }
 
 }
