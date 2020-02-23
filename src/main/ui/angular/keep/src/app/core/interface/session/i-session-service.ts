@@ -4,7 +4,7 @@ export interface ISessionService {
 
     saveAll(update: Map<string, string>): void;
 
-    getValue(key: string): string;
+    getValue(key: string): string | undefined;
 
     getAll(): Map<string, string>;
 

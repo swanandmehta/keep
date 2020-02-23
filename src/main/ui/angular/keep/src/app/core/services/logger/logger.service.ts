@@ -12,7 +12,7 @@ export class LoggerService implements IErrorHandler, ISuccessHandler {
 
   constructor() { }
 
-  private logStore = [];
+  private logStore = new Array<Log>();
 
   public handleError(response: any, message: string, level: LoggerLevel): void {
     this.saveLog(response, message, level, LogType.E);

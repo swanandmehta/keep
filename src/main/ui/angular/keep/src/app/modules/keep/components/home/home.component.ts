@@ -7,28 +7,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  private currentPage = 'All';
-  private hideNav = false;
-  private gridListingView = true;
+  public currentPage = 'All';
+  public hideNav = false;
+  public gridListingView = true;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  private pageChanged(pageName: string): void {
+  public pageChanged(pageName: string): void {
     this.currentPage = pageName;
   }
 
-  private hideNavChange(hideNav: boolean): void {
+  public hideNavChange(hideNav: boolean): void {
     this.hideNav = hideNav;
   }
 
-  private changeListingView(gridListingView: boolean): void {
+  public changeListingView(gridListingView: boolean): void {
     this.gridListingView = gridListingView;
   }
 
-  private toggleAlertView(alertPageName: string): void {
+  public toggleAlertView(alertPageName: string): void {
     this.currentPage = alertPageName;
   }
 

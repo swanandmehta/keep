@@ -5,7 +5,7 @@ import { NewCheckListComponent } from './../new-check-list/new-check-list.compon
 import { NewNotepadComponent } from './../new-notepad/new-notepad.component';
 import { faClock, IconDefinition, faList, faClipboard } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-new-note',
@@ -14,12 +14,12 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewNoteComponent implements OnInit {
 
-  private reminderIcon: IconDefinition = faClock;
-  private checkListIcon: IconDefinition = faList;
-  private noteIcon: IconDefinition = faClipboard;
+  public reminderIcon: IconDefinition = faClock;
+  public checkListIcon: IconDefinition = faList;
+  public noteIcon: IconDefinition = faClipboard;
   private modelService: NgbModal;
-  private newNoteForm: FormGroup;
-  private formBuilder: FormBuilder;
+  public newNoteForm: FormGroup;
+  public formBuilder: FormBuilder;
 
   constructor(modelService: NgbModal, formBuilder: FormBuilder) {
     this.modelService = modelService;
@@ -33,15 +33,14 @@ export class NewNoteComponent implements OnInit {
 
   }
 
-  private open(type: string): void {
-    let openedModel: NgbModalRef;
+  public open(type: string): void {
     const modelOptions = ModelConfig.newNoteModelOptions;
     if (type === 'Note') {
-      openedModel = this.modelService.open(NewNotepadComponent, modelOptions);
+      this.modelService.open(NewNotepadComponent, modelOptions);
     } else if (type === 'CheckList') {
-      openedModel = this.modelService.open(NewCheckListComponent, modelOptions);
+      this.modelService.open(NewCheckListComponent, modelOptions);
     } else if (type === 'Reminder') {
-      openedModel = this.modelService.open(NewReminderComponent, modelOptions);
+      this.modelService.open(NewReminderComponent, modelOptions);
     }
   }
 

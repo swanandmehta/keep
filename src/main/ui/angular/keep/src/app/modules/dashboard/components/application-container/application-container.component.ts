@@ -9,12 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplicationContainerComponent implements OnInit {
 
-  private applicationsService: ApplicationsService;
   public userApplicationList: Array<Application>;
 
-  constructor(applicationsService: ApplicationsService) {
-    this.applicationsService = applicationsService;
-    this.userApplicationList = applicationsService.getUserApplications();
+  constructor(private applicationsService: ApplicationsService) {
+    this.userApplicationList = this.applicationsService.getUserApplications();
   }
 
   ngOnInit() {

@@ -11,7 +11,7 @@ export class ListingNoteComponent implements OnInit {
   public value: Notepad;
 
   @Input("note")
-  private set note(value: Notepad){
+  public set note(value: Notepad){
     this.value = value;
   }
 

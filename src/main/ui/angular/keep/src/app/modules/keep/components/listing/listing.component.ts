@@ -10,13 +10,13 @@ import { IListing } from 'src/app/core/interface/listing/i-listing';
 })
 export class ListingComponent implements OnInit {
 
-  private listingService: IListing;
+  public listingService: IListing;
 
   public isGridView: boolean;
   public notes : Array<Note>;
 
   @Input()
-  private set gridView(isGridView: boolean) {
+  public set gridView(isGridView: boolean) {
     this.isGridView = isGridView;
   }
 

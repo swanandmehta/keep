@@ -8,7 +8,7 @@ import { faClock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 })
 export class NotificationComponent implements OnInit {
 
-  private clockIcon: IconDefinition = faClock;
+  public clockIcon: IconDefinition = faClock;
 
   constructor() { }
 

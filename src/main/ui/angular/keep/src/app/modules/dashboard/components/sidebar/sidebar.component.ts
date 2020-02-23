@@ -10,15 +10,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  @Input() private contentType: string;
+  @Input() public contentType: string;
   @Output() private menuChange: EventEmitter<string> = new EventEmitter();
 
-  private homeIcon: IconDefinition = faHome;
-  private settingIcon: IconDefinition = faCogs;
-  private activityLogIcon: IconDefinition = faClipboardList;
-  private logoutIcon: IconDefinition = faSignOutAlt;
-  private supportIcon: IconDefinition = faPhoneAlt;
-  private notificationIcon: IconDefinition = faHiking;
+  public homeIcon: IconDefinition = faHome;
+  public settingIcon: IconDefinition = faCogs;
+  public activityLogIcon: IconDefinition = faClipboardList;
+  public logoutIcon: IconDefinition = faSignOutAlt;
+  public supportIcon: IconDefinition = faPhoneAlt;
+  public notificationIcon: IconDefinition = faHiking;
 
   private notificationCount = 0;
 
@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
   }
 
-  private changeMenu(menuName: string): void {
+  public changeMenu(menuName: string): void {
     this.contentType = menuName;
     this.menuChange.emit(menuName);
   }

@@ -8,7 +8,7 @@ import { faSearch, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 })
 export class SearchComponent implements OnInit {
 
-  private searchIcon: IconDefinition = faSearch;
+  public searchIcon: IconDefinition = faSearch;
 
   constructor() {  }
 

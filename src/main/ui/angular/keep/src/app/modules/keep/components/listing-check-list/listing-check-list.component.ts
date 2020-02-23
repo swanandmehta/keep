@@ -11,7 +11,7 @@ export class ListingCheckListComponent implements OnInit {
   public value: CheckList;
 
   @Input("note")
-  private set note(value: CheckList){
+  public set note(value: CheckList){
     this.value = value;
   }
 

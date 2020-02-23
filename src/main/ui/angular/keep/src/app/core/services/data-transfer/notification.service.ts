@@ -8,12 +8,12 @@ import { Injectable } from '@angular/core';
 })
 export class NotificationService implements IDataTransfer<Notification> {
 
-  private notificationSubject: Subject<Notification> = new BehaviorSubject(null);
+  private notificationSubject: Subject<Notification>;
   private notificationList: Array<Notification> = [];
-  private notificationObserver: Observable<Notification> = undefined;
 
   constructor() {
-    this.notificationObserver = this.getObserver();
+    const notification: Notification = new Notification();
+    this.notificationSubject = new BehaviorSubject(notification);
   }
 
   sendData(dataToSend: Notification): void {
@@ -25,7 +25,7 @@ export class NotificationService implements IDataTransfer<Notification> {
   }
 
   saveNotification(notification: Notification): void {
-    this.notificationList.push(Notification);
+    this.notificationList.push(notification);
   }
 
 }

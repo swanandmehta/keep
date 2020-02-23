@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  private resetPasswordForm: FormGroup = undefined;
+  public resetPasswordForm: FormGroup;
 
   constructor(formBuilder: FormBuilder) {
     this.resetPasswordForm = formBuilder.group({

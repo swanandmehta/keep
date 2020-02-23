@@ -23,7 +23,7 @@ export class PremitiveTypeValidationUtil {
             return false;
         }
 
-        return undefined;
+        return false;
     }
 
 }

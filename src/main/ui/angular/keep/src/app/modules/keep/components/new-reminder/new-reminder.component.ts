@@ -9,8 +9,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewReminderComponent implements OnInit {
 
-  private calenderIcon: IconDefinition = faCalendarAlt;
-  private activeModel: NgbActiveModal;
+  public calenderIcon: IconDefinition = faCalendarAlt;
+  public activeModel: NgbActiveModal;
 
   constructor(activeModel: NgbActiveModal) {
     this.activeModel = activeModel;

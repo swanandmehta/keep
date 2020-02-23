@@ -7,10 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AlertComponent implements OnInit {
 
-  private isGridView;
+  public isGridView: boolean;
 
   @Input()
-  private set gridView(isGridView: boolean) {
+  public set gridView(isGridView: boolean) {
     this.isGridView = isGridView;
   }
 

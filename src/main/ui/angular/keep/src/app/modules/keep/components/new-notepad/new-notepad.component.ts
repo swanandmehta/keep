@@ -51,15 +51,15 @@ export class NewNotepadComponent implements OnInit {
   ngOnInit() {
   }
 
-  private close(): void {
+  public close(): void {
     if (this.newNotePad.valid) {
       let notepad: Notepad = this.newNotePad.value;
       notepad.userId = Number(this.sessionService.getValue("userId"));
       notepad.type = NoteType.Note;
       const noteObserver: Observable<Note> = this.notepadService.save(notepad);
 
-      const partialNoteObserver: PartialObserver<Notepad> = {
-        next: (savedNote: Notepad) => {
+      const partialNoteObserver: PartialObserver<Note> = {
+        next: (savedNote: Note) => {
           this.successHandler.handleSuccess(savedNote, 'User with Id ' + notepad.userId
           + ' saved note.', LoggerLevel.L);
 

@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewLabelComponent implements OnInit {
 
-  private activeModel: NgbActiveModal;
+  public activeModel: NgbActiveModal;
 
   constructor(activeModel: NgbActiveModal) {
     this.activeModel = activeModel;

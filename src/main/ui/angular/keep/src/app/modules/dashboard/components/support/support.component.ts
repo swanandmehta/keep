@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SupportComponent implements OnInit {
 
-  private phoneIcon: IconDefinition = faPhoneAlt;
-  private emailIcon: IconDefinition = faEnvelope;
+  public phoneIcon: IconDefinition = faPhoneAlt;
+  public emailIcon: IconDefinition = faEnvelope;
 
   constructor() { }
 

@@ -10,7 +10,7 @@ export class SessionService implements ISessionService {
   private keep: Map<string, string> = new Map();
 
   constructor() {
-    const sessionValue: string = sessionStorage.getItem('keep');
+    const sessionValue: string | null = sessionStorage.getItem('keep');
 
     if (sessionValue !== null && sessionValue !== undefined) {
 
@@ -18,7 +18,10 @@ export class SessionService implements ISessionService {
 
       for (const key in saveValues) {
         if (PremitiveTypeValidationUtil.validateString(key) === true) {
-          this.keep.set(key, saveValues[key]);
+          const value : string | undefined = saveValues.get(key);
+          if(value !== undefined){
+            this.keep.set(key, value);
+          }
         }
 
       }
@@ -40,7 +43,7 @@ export class SessionService implements ISessionService {
     this.updateSessionStorage();
   }
 
-  getValue(key: string): string {
+  getValue(key: string): string | undefined {
     return this.keep.get(key);
   }
 
@@ -58,10 +61,10 @@ export class SessionService implements ISessionService {
   }
 
   private updateSessionStorage(): void {
-    const sessionJson = {};
+    const sessionJson = new Map<string, string>();
 
     this.keep.forEach((value: string, key: string) => {
-      sessionJson[key] = value;
+      sessionJson.set(key, value);
     });
 
     sessionStorage.setItem('keep', JSON.stringify(sessionJson));

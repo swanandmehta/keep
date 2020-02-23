@@ -9,22 +9,22 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  private menuHideShowIcon: IconDefinition = faBars;
-  private searchIcon: IconDefinition = faSearch;
-  private refreshIcon: IconDefinition = faRedoAlt;
-  private gridIcon: IconDefinition = faTh;
-  private stackIcon: IconDefinition = faLayerGroup;
-  private bellIcon: IconDefinition = faBell;
-  private logoutIcon: IconDefinition = faPowerOff;
-  private formBuilder: FormBuilder;
+  public menuHideShowIcon: IconDefinition = faBars;
+  public searchIcon: IconDefinition = faSearch;
+  public refreshIcon: IconDefinition = faRedoAlt;
+  public gridIcon: IconDefinition = faTh;
+  public stackIcon: IconDefinition = faLayerGroup;
+  public bellIcon: IconDefinition = faBell;
+  public logoutIcon: IconDefinition = faPowerOff;
+  public formBuilder: FormBuilder;
 
   public searchForm: FormGroup;
 
   @Input() private hideNav: boolean;
   @Input() private gridListingView: boolean;
-  @Output() private hideNavEvent: EventEmitter<boolean> = undefined;
-  @Output() private toggleListingEvent: EventEmitter<boolean> = undefined;
-  @Output() private toggleAlertViewEvent: EventEmitter<string> = undefined;
+  @Output() private hideNavEvent: EventEmitter<boolean>;
+  @Output() private toggleListingEvent: EventEmitter<boolean>;
+  @Output() private toggleAlertViewEvent: EventEmitter<string>;
 
   constructor(formBuilder: FormBuilder) {
     this.hideNavEvent = new EventEmitter<boolean>();
@@ -39,12 +39,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  private hideNavMenu(): void {
+  public hideNavMenu(): void {
     this.hideNav = !this.hideNav;
     this.hideNavEvent.emit(this.hideNav);
   }
 
-  private toggleListingView(gridListingView: boolean): void {
+  public toggleListingView(gridListingView: boolean): void {
     if (this.gridListingView === gridListingView) {
       return;
     }
@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
     this.toggleListingEvent.emit(this.gridListingView);
   }
 
-  private toggleAlertView(): void {
+  public toggleAlertView(): void {
     this.toggleAlertViewEvent.emit('Alert');
   }
 

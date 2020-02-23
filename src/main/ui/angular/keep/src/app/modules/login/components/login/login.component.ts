@@ -18,16 +18,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  private loginForm: FormGroup = undefined;
-  private userService: UserService = undefined;
-  private errorHandler: IErrorHandler = undefined;
-  private successHandler: ISuccessHandler = undefined;
-  private router: Router = undefined;
+  private loginForm: FormGroup;
+  private userService: UserService;
+  private errorHandler: IErrorHandler;
+  private successHandler: ISuccessHandler;
+  private router: Router;
   private sessionService: ISessionService;
 
-  private invalidLogin = false;
-  private isSubmited = false;
-  private serverFailure = false;
+  public invalidLogin = false;
+  public isSubmited = false;
+  public serverFailure = false;
 
   constructor(formBuilder: FormBuilder, userService: UserService,
               loggerService: LoggerService, router: Router,

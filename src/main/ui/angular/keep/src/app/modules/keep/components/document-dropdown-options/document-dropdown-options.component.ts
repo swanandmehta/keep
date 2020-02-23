@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentDropdownOptionsComponent implements OnInit {
 
-  private optionIcon: IconDefinition = faBars;
+  public optionIcon: IconDefinition = faBars;
 
   constructor() { }
 

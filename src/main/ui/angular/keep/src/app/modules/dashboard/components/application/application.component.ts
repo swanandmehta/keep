@@ -8,7 +8,7 @@ import { Application } from '../../dto/application';
 })
 export class ApplicationComponent implements OnInit {
 
-  public properties: Application
+  public properties: Application;
 
   @Input("value")
   public set value(properties: Application) {

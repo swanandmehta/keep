@@ -8,9 +8,9 @@ import { faPhoneAlt, faBell, faUser, IconDefinition } from '@fortawesome/free-so
 })
 export class ProfileComponent implements OnInit {
 
-  private contactIcon: IconDefinition = faPhoneAlt;
-  private notificationIcon: IconDefinition = faBell;
-  private userIcon: IconDefinition = faUser;
+  public contactIcon: IconDefinition = faPhoneAlt;
+  public notificationIcon: IconDefinition = faBell;
+  public userIcon: IconDefinition = faUser;
 
   constructor() { }
 

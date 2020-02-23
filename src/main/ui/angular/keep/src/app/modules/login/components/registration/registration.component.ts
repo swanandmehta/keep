@@ -7,7 +7,7 @@ import { User } from '../../dto/user';
 import { UserService } from '../../../../core/services/user/user.service';
 import { EmailDoesNotExist } from './../../../../shared/validator/email-does-not-exist';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustBeTrue } from 'src/app/shared/validator/must-be-true';
 import { MustBeSame } from 'src/app/shared/validator/must-be-same';
 import { Router } from '@angular/router';
@@ -19,15 +19,15 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  private registrationForm: FormGroup = undefined;
-  private userService: UserService = undefined;
-  private successHandler: ISuccessHandler = undefined;
-  private errorHandler: IErrorHandler = undefined;
+  private registrationForm: FormGroup;
+  private userService: UserService;
+  private successHandler: ISuccessHandler;
+  private errorHandler: IErrorHandler;
   private router: Router;
 
-  private isSubmited = false;
-  private showCustomError = false;
-  private showRedirectMessage = false;
+  public isSubmited = false;
+  public showCustomError = false;
+  public showRedirectMessage = false;
 
   constructor(formBuilder: FormBuilder, userService: UserService, loggerService: LoggerService, router: Router) {
     this.userService = userService;

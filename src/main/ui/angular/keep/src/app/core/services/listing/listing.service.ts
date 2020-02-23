@@ -10,12 +10,11 @@ import { ListingServiceUrlConfig } from 'src/app/config/listing-service-url-conf
 import { IListing } from '../../interface/listing/i-listing';
 import { ListingCriteria } from 'src/app/modules/keep/dto/listing-criteria';
 import { IHttpCommunicationService } from '../../interface/communication/i-http-communication-service';
-import { PartialObserver, Observable } from 'rxjs';
+import { PartialObserver } from 'rxjs';
 import { ISuccessHandler } from '../../interface/logger/i-success-handler';
 import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
-import { CheckList } from 'src/app/modules/keep/dto/check-list';
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +41,12 @@ export class ListingService implements IListing {
   private getDefaultNotes(): void {
     const userId: number =  Number(this.sessionService.getValue("userId"));
     const typeList: Array<NoteType> = new Array<NoteType>();
+    const lableList: Array<string> = new Array<string>();
+
     typeList.push(NoteType.Checklist);
     typeList.push(NoteType.Note);
     typeList.push(NoteType.Reminder);
-    this.getNotesByCriteria(userId, typeList, undefined);
+    this.getNotesByCriteria(userId, typeList, lableList);
   }
 
   public getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>): Array<Note> {
@@ -54,7 +55,6 @@ export class ListingService implements IListing {
     const noteListingPartialObserver: PartialObserver<Array<Note>> = {
       next : (noteList : Array<Note>) => {
         noteList.forEach((note: Note)=>{
-          this.validateNote(note);
           this.notes.push(note);
         });
 
@@ -73,10 +73,15 @@ export class ListingService implements IListing {
   }
 
   getNotesByStatus(userId: number, archivalLevelList: Array<ArchiveLevel>): Array<Note> {
+    //To remove compiletion error
+    userId = userId;
+    archivalLevelList = archivalLevelList;
     throw new Error("Method not implemented.");
   }
 
   getNote(noteId: number): Array<Note> {
+    //To remove compilation error
+    noteId = noteId;
     throw new Error("Method not implemented.");
   }
 
@@ -86,10 +91,6 @@ export class ListingService implements IListing {
 
   addNote(note: Note): void {
     this.notes.push(note);
-  }
-
-  private validateNote(note: Note):void {
-
   }
 
 }

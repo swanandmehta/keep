@@ -1,12 +1,18 @@
-import { FormGroup } from '@angular/forms';
+import { FormGroup, AbstractControl } from '@angular/forms';
 export function MustBeSame(formGroup: FormGroup) {
-    const password: string = formGroup.get('password').value;
-    const confimedPassword: string = formGroup.get('confirmPassword').value;
+    
+    const passwordCtrl: AbstractControl | null = formGroup.get('password');
+    const confirmPasswordCtrl: AbstractControl | null = formGroup.get('password');
 
-    if (formGroup.get('password').pristine !== true
-        && formGroup.get('confirmPassword').pristine !== true
-        && password !== confimedPassword) {
-       return {missMatchPass : true};
+    if(passwordCtrl != null && confirmPasswordCtrl != null){
+        const password: string = passwordCtrl.value;
+        const confimedPassword: string = confirmPasswordCtrl.value;
+    
+        if (passwordCtrl.pristine !== true
+            && confirmPasswordCtrl.pristine !== true
+            && password !== confimedPassword) {
+           return {missMatchPass : true};
+        }
     }
 
     return null;

@@ -15,6 +15,7 @@ import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { CheckpadService } from 'src/app/core/services/checkpad/checkpad.service';
+import { Note } from '../../dto/note';
 
 @Component({
   selector: 'app-new-check-list',
@@ -74,7 +75,7 @@ export class NewCheckListComponent implements OnInit {
       checkListDto.userId = Number(this.sessionService.getValue("userId"));
       checkListDto.type = NoteType.Checklist;
 
-      const partialCheckpadObserver: PartialObserver<CheckList> = this.getPartialCheckpadObserver();
+      const partialCheckpadObserver: PartialObserver<Note> = this.getPartialCheckpadObserver();
       this.checkpadService.save(checkListDto).subscribe(partialCheckpadObserver);
       
     }
@@ -89,9 +90,9 @@ export class NewCheckListComponent implements OnInit {
     });
   }
 
-  private getPartialCheckpadObserver(): PartialObserver<CheckList> {
-    const partialCheckpadObserver: PartialObserver<CheckList> = {
-      next : (checkpad: CheckList) => {
+  private getPartialCheckpadObserver(): PartialObserver<Note> {
+    const partialCheckpadObserver: PartialObserver<Note> = {
+      next : (checkpad: Note) => {
         this.successHandler.handleSuccess(checkpad, "User with id "+
           checkpad.userId+" saved note.", LoggerLevel.L);
         this.listingService.addNote(checkpad);

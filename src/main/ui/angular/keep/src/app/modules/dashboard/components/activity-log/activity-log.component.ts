@@ -8,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ActivityLogComponent implements OnInit {
 
-  private clockIcon: IconDefinition = faClock;
+  public clockIcon: IconDefinition;
 
-  constructor() { }
+  constructor() {
+    this.clockIcon  = faClock;
+  }
 
   ngOnInit() {
   }

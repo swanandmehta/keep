@@ -12,19 +12,19 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavComponent implements OnInit {
 
-  private allIcon: IconDefinition = faPen;
-  private noteIcon: IconDefinition = faLightbulb;
-  private reminderIcon: IconDefinition = faClock;
-  private addNewIcon: IconDefinition = faPlus;
-  private labelIcon: IconDefinition = faBookmark;
-  private archiveIcon: IconDefinition = faArchive;
-  private trashIcon: IconDefinition = faTrashAlt;
-  private settingsIcon: IconDefinition = faCogs;
+  public allIcon: IconDefinition = faPen;
+  public noteIcon: IconDefinition = faLightbulb;
+  public reminderIcon: IconDefinition = faClock;
+  public addNewIcon: IconDefinition = faPlus;
+  public labelIcon: IconDefinition = faBookmark;
+  public archiveIcon: IconDefinition = faArchive;
+  public trashIcon: IconDefinition = faTrashAlt;
+  public settingsIcon: IconDefinition = faCogs;
   private modelService: NgbModal;
-  private hideNavMenu: boolean;
+  public hideNavMenu: boolean;
 
   @Input() private currentPage: string;
-  @Output() private pageChangeEvent: EventEmitter<string> = undefined;
+  @Output() private pageChangeEvent: EventEmitter<string>;
 
   constructor(modelService: NgbModal) {
     this.modelService = modelService;
@@ -34,13 +34,13 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
-  private openNewLabel(): void {
+  public openNewLabel(): void {
     const modelOptions = ModelConfig.newNoteModelOptions;
     const modelComponent = NewLabelComponent;
     this.modelService.open(modelComponent, modelOptions);
   }
 
-  private openPage(nameOfThePage: string): void {
+  public openPage(nameOfThePage: string): void {
     this.currentPage = nameOfThePage;
     this.pageChangeEvent.emit(this.currentPage);
   }
