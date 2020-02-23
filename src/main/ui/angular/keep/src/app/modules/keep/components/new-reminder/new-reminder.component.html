@@ -12,6 +12,12 @@
                     <div class="form-group">
                         <input type="text" class="form-control" formControlName="heading"
                             placeholder="Thing which you have to do...">
+                        <div class="form-error p-1" 
+                            *ngIf="(newReminderForm.controls.heading.pristine === false || isSubmited === true) && 
+                                newReminderForm.controls.heading.errors !== null &&
+                                newReminderForm.controls.heading.errors.required === true">
+                            Heading is required to create reminder.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,6 +36,17 @@
                             </button>
                         </div>
                     </div>
+                    <div class="form-error p-1" 
+                            *ngIf="(newReminderForm.controls.date.pristine === false || isSubmited === true) && 
+                                newReminderForm.controls.date.errors !== null &&
+                                ( newReminderForm.controls.date.errors.required === true ||
+                                    newReminderForm.controls.date.errors.year === true ||
+                                    newReminderForm.controls.date.errors.month === true ||
+                                    newReminderForm.controls.date.errors.day === true ||
+                                    newReminderForm.controls.date.errors.date === true
+                                )">
+                        Date is required to create reminder.
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,6 +58,17 @@
                             [meridian]="true" [spinners]="false" [seconds]="true">
                         </ngb-timepicker>
                     </div>
+                    <div class="form-error p-1" 
+                            *ngIf="(newReminderForm.controls.time.pristine === false || isSubmited === true) && 
+                                newReminderForm.controls.time.errors !== null &&
+                                ( newReminderForm.controls.time.errors.required === true ||
+                                    newReminderForm.controls.time.errors.hour === true ||
+                                    newReminderForm.controls.time.errors.minute === true ||
+                                    newReminderForm.controls.time.errors.second === true ||
+                                    newReminderForm.controls.time.errors.time === true
+                                )">
+                        Time is required to create reminder.
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,6 +79,12 @@
                         <select class="form-control" formControlName="repeat">
                             <option selected>Does not repeat</option>
                         </select>
+                        <div class="form-error p-1" 
+                            *ngIf="(newReminderForm.controls.repeat.pristine === false || isSubmited === true) && 
+                                newReminderForm.controls.repeat.errors !== null &&
+                                newReminderForm.controls.repeat.errors.required === true">
+                            Please select valid value for repeating reminder.
+                        </div>
                     </div>
                 </div>
             </div>
