@@ -27,6 +27,8 @@ export class NewCheckListComponent implements OnInit {
   public activeModel: NgbActiveModal;
   public addIcon: IconDefinition = faPlus;
   public checkListForm: FormGroup;
+  public isSubmited: boolean;
+  public failedToSave: boolean;
 
   private formBuilder: FormBuilder;
   private taskFormList: FormArray;
@@ -46,6 +48,8 @@ export class NewCheckListComponent implements OnInit {
     this.successHandler = loggerService;
     this.listingService = listingService;
     this.checkpadService = checkpadService;
+    this.isSubmited = false;
+    this.failedToSave = false;
 
     this.taskFormList = new FormArray([]);
     this.taskFormList.push(this.getTaskForm());
@@ -70,7 +74,9 @@ export class NewCheckListComponent implements OnInit {
   }
 
   public close(): void{
+    this.isSubmited = true;
     if(this.checkListForm.valid){
+
       const checkListDto: CheckList = this.checkListForm.value;
       checkListDto.userId = Number(this.sessionService.getValue("userId"));
       checkListDto.type = NoteType.Checklist;
@@ -79,8 +85,6 @@ export class NewCheckListComponent implements OnInit {
       this.checkpadService.save(checkListDto).subscribe(partialCheckpadObserver);
       
     }
-
-    this.activeModel.close('save');
   }
 
   private getTaskForm(): FormGroup{
@@ -93,11 +97,13 @@ export class NewCheckListComponent implements OnInit {
   private getPartialCheckpadObserver(): PartialObserver<Note> {
     const partialCheckpadObserver: PartialObserver<Note> = {
       next : (checkpad: Note) => {
+        this.activeModel.close('save');
         this.successHandler.handleSuccess(checkpad, "User with id "+
           checkpad.userId+" saved note.", LoggerLevel.L);
         this.listingService.addNote(checkpad);
       },
       error: (error: any) => {
+        this.failedToSave = true;
         this.errorHandler.handleError(error, 'User with Id ' + this.sessionService.getValue("userId")+ 
           ' failed to save note.', LoggerLevel.H);
       }

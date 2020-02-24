@@ -10,7 +10,14 @@
                 <div class="col-md-12 m-0 p-0">
                     <div class="m-3 p-0">
                         <div class="form-group">
-                            <input type="text" formControlName="heading" class="form-control" placeholder="Interesting Heading...">
+                            <input type="text" formControlName="heading" 
+                                class="form-control" placeholder="Interesting Heading...">
+                            <div class="form-error p-1" 
+                                *ngIf="(checkListForm.controls.heading.pristine === false || isSubmited === true) && 
+                                    checkListForm.controls.heading.errors !== null &&
+                                    checkListForm.controls.heading.errors.required === true">
+                                Please select valid value for heading.
+                            </div>
                         </div>
                     </div>                
                 </div>
@@ -24,16 +31,36 @@
                                     <input formControlName="status" type="checkbox">
                                 </div>
                             </div>
-                            <input type="text" formControlName="text" class="form-control" placeholder="Interesting Task...">
+                            <input type="text" formControlName="text" 
+                                class="form-control" placeholder="Interesting Task...">
+                        </div>
+                        <div class="form-error p-1" 
+                            *ngIf="(task.controls.text.pristine === false || isSubmited === true) && 
+                                task.controls.text.errors !== null &&
+                                task.controls.text.errors.required === true">
+                            Please select valid value for task.
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="col-md-12 p-0 m-0">
+                <div class="col-md-12 m-0 p-0">
+                    <div class="m-3 p-0">
+                        <div class="form-group">
+                            <div class="form-error p-1" 
+                                *ngIf="failedToSave === true">
+                                Failed to save to Reminder.
+                                Please contact Keep Support.
+                            </div>
+                        </div>
+                    </div>                
                 </div>
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-dark">
-            <fa-icon [icon]="addIcon" (click)="addNewEntry()"></fa-icon>
+        <button type="button" class="btn btn-dark" (click)="addNewEntry()">
+            <fa-icon [icon]="addIcon"></fa-icon>
         </button>
         <button type="button" class="btn btn-dark" (click)="close()">Save</button>
     </div>
