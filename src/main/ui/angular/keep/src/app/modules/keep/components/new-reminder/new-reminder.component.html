@@ -27,7 +27,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <input class="form-control" placeholder="YYYY-MM-DD" 
-                            formControlName="date"
+                            formControlName="date" [minDate]="minDate"
                             name="date" ngbDatepicker #date="ngbDatepicker">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary calendar" 
@@ -55,6 +55,7 @@
                 <div class="form-group">
                     <div class="input-group">
                         <ngb-timepicker formControlName="time"
+                            (ngModelChange)="timeChanged($event)"
                             [meridian]="true" [spinners]="false" [seconds]="true">
                         </ngb-timepicker>
                     </div>
@@ -84,6 +85,24 @@
                                 newReminderForm.controls.repeat.errors !== null &&
                                 newReminderForm.controls.repeat.errors.required === true">
                             Please select valid value for repeating reminder.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 m-0 p-0">
+            <div class="m-3 p-0">
+                <div class="form-group">
+                    <div class="form-group">                        
+                        <div class="form-error p-1" 
+                            *ngIf="failedToSave === true">
+                            Failed to save to Reminder.
+                            Please contact Keep Support.
+                        </div>
+                        <div class="form-error p-1" 
+                            *ngIf="newReminderForm.errors !== null && newReminderForm.errors.pastTime === true">
+                            Reminder cannot be set for past.
                         </div>
                     </div>
                 </div>

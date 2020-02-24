@@ -1,6 +1,6 @@
 import { IconDefinition, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { validateDate } from 'src/app/shared/validator/date';
 import { validateTime } from 'src/app/shared/validator/time';
@@ -20,6 +20,9 @@ import { Time } from 'src/app/shared/dto/time';
 import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { ISessionService } from 'src/app/core/interface/session/i-session-service';
 import { SessionService } from 'src/app/core/services/session/session.service';
+import { TimeUtil } from 'src/app/core/util/time-util';
+import { MinDateTodayConfig } from 'src/app/config/min-date-today-config';
+import { validatePastTime } from 'src/app/shared/validator/validate-past-time';
 
 @Component({
   selector: 'app-new-reminder',
@@ -33,6 +36,8 @@ export class NewReminderComponent implements OnInit {
   public newReminderForm: FormGroup;
   public isSubmited: boolean;
   public reminderTypeList: Array<ReminderType>;
+  public failedToSave: boolean = false;
+  public minDate: NgbDateStruct;
 
   private formBuilder: FormBuilder;
   private listingService: IListing;
@@ -52,14 +57,23 @@ export class NewReminderComponent implements OnInit {
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
     this.sessionService = sessionService;
+    this.minDate = MinDateTodayConfig.getConfig();
 
     this.reminderTypeList = this.listingService.getReminderType();
 
+    const today: Date = new Date();
+    const now: Time = new Time();
+    today.setDefault(TimeUtil.getYear(), TimeUtil.getMonth(), TimeUtil.getDay())
+    now.setDefault(TimeUtil.getHour(), TimeUtil.getMinute(), TimeUtil.getSecond());
+
     this.newReminderForm = this.formBuilder.group({
       heading : ['', Validators.required],
-      date : [new Date(), [Validators.required, validateDate] ],
-      time : [new Time(), [Validators.required, validateTime] ],
+      date : [today, [Validators.required, validateDate] ],
+      time : [now, [Validators.required, validateTime] ],
       repeat: [this.reminderTypeList[0].name, Validators.required]
+    }, {
+      updateOn : "blur",
+      validators : [validatePastTime]
     });
   }
 
@@ -85,14 +99,21 @@ export class NewReminderComponent implements OnInit {
         this.listingService.addNote(savedReminder);
         this.successHandler.handleSuccess(savedReminder, 'User with Id ' + reminder.userId
           + ' saved note.', LoggerLevel.L);
+          this.activeModel.close("Saved");
       },
       error: (error: Note) => {
+        this.failedToSave = true;
         this.errorHandler.handleError(error, 'User with Id ' + reminder.userId
         + ' failed to save note.', LoggerLevel.H);
       }
     }
 
     return observer;
+  }
+
+  public timeChanged(event: Event): void{
+    event = event;
+    this.newReminderForm.updateValueAndValidity();
   }
 
 }
