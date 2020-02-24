@@ -31,6 +31,8 @@ export class NewNotepadComponent implements OnInit {
   private errorHandler: IErrorHandler;
   private listingService: IListing;
   private sessionService: ISessionService;
+  public isSubmited: boolean;
+  public failedToSave: boolean;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NotepadService,
               loggerService: LoggerService, listingService: ListingService, sessionService: SessionService) {
@@ -41,6 +43,8 @@ export class NewNotepadComponent implements OnInit {
     this.formBuilder = formBuilder;
     this.listingService = listingService;
     this.sessionService = sessionService;
+    this.isSubmited = false;
+    this.failedToSave = false;
 
     this.newNotePad = this.formBuilder.group({
       heading : ['', [Validators.required]],
@@ -52,6 +56,7 @@ export class NewNotepadComponent implements OnInit {
   }
 
   public close(): void {
+    this.isSubmited = true;
     if (this.newNotePad.valid) {
       let notepad: Notepad = this.newNotePad.value;
       notepad.userId = Number(this.sessionService.getValue("userId"));
@@ -60,23 +65,25 @@ export class NewNotepadComponent implements OnInit {
 
       const partialNoteObserver: PartialObserver<Note> = {
         next: (savedNote: Note) => {
+          
+          this.activeModel.close('save');
+
           this.successHandler.handleSuccess(savedNote, 'User with Id ' + notepad.userId
           + ' saved note.', LoggerLevel.L);
 
           this.listingService.addNote(savedNote);
         },
         error: (error: any) => {
+
+          this.failedToSave = true;
+
           this.errorHandler.handleError(error, 'User with Id ' + notepad.userId
           + ' failed to save note.', LoggerLevel.H);
         }
       };
 
-      this.activeModel.close('save');
-
       noteObserver.subscribe(partialNoteObserver);
 
-    } else {
-      this.activeModel.close('save');
     }
 
   }

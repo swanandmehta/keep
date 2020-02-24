@@ -12,13 +12,28 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Interesting Heading..."
                             formControlName="heading">
+                        <div class="form-error p-1" 
+                            *ngIf="(newNotePad.controls.heading.pristine === false || isSubmited === true) && 
+                                newNotePad.controls.heading.errors !== null &&
+                                newNotePad.controls.heading.errors.required === true">
+                            Please select valid value for heading.
+                        </div>
                     </div>
                 </div>
                 <div class="m-3 p-0">
                     <div class="form-group">
-                        <textarea class="form-control" rows="10" placeholder="Start typing away..."
+                        <textarea class="form-control" rows="8" placeholder="Start typing away..."
                             formControlName="note"></textarea>
                     </div>                
+                </div>
+                <div class="m-3 p-0">
+                    <div class="form-group">
+                        <div class="form-error p-1" 
+                            *ngIf="failedToSave === true">
+                            Failed to save to Reminder.
+                            Please contact Keep Support.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
