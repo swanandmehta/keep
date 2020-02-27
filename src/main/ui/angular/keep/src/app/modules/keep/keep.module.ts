@@ -24,13 +24,14 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { SettingComponent } from './components/setting/setting.component';
 import { DocumentDropdownOptionsComponent } from './components/document-dropdown-options/document-dropdown-options.component';
 import { AlertComponent } from './components/alert/alert.component';
+import { NavLabelComponent } from './components/nav-label/nav-label.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
     NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent,
     NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent, 
-    DocumentDropdownOptionsComponent, AlertComponent],
+    DocumentDropdownOptionsComponent, AlertComponent, NavLabelComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,

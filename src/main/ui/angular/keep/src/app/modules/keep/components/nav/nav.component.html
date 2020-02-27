@@ -28,37 +28,7 @@
 
     <hr/>
 
-    <div class="col-md-12 p-0 pb-4 pl-2 m-0">
-        <div class="row col-md-12 p-0 m-0">
-            <h6 class="col-md-10 p-0 m-0 text-left">
-                Labels
-            </h6>
-
-            <p class="col-md-2 p-0 m-0 text-right">
-                <fa-icon [icon]="addNewIcon" (click)="openNewLabel()"></fa-icon>
-            </p>
-        </div>
-    </div>
-
-    <div class="labels-component-height">
-        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name1', 'non-selected-option': currentPage !== 'Test Label Name1' }">
-            <div class="col-md-12 p-0 py-3 pl-2 m-0"
-                (click)="openPage('Test Label Name1')">
-                <h5 class="col-md-12 p-0 m-0 text-truncate">
-                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name1
-                </h5>
-            </div>
-        </div>
-
-        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name2', 'non-selected-option': currentPage !== 'Test Label Name2' }">
-            <div class="col-md-12 p-0 py-3 pl-2 m-0"
-                (click)="openPage('Test Label Name2')">
-                <h5 class="col-md-12 p-0 m-0 text-truncate">
-                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name2
-                </h5>
-            </div>
-        </div>
-    </div>
+    <app-nav-label></app-nav-label>
     
     <hr/>
 
