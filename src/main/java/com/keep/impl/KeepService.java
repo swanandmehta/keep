@@ -8,12 +8,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.keep.dto.ApplicationDto;
+import com.keep.dto.LabelDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
 import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 import com.keep.services.IApplicationService;
 import com.keep.services.IKeepService;
+import com.keep.services.ILabelService;
 import com.keep.services.INoteServices;
 import com.keep.services.IUserServices;
 import com.keep.transformer.ReminderTypeTransformer;
@@ -29,11 +31,14 @@ public class KeepService implements IKeepService {
 	private final IUserServices userService;
 	private final IApplicationService applicationService;
 	private final INoteServices noteService;
+	private final ILabelService labelService;
 	
-	public KeepService(UserService userService, ApplicationService applicationService, NoteService noteService) {
+	public KeepService(UserService userService, ApplicationService applicationService, NoteService noteService,
+			LabelService labelService) {
 		this.userService = userService;
 		this.applicationService = applicationService;
 		this.noteService = noteService;
+		this.labelService = labelService;
 	}
 
 	@Override
@@ -69,5 +74,15 @@ public class KeepService implements IKeepService {
 	@Override
 	public List<ReminderTypeDto> getReminderType() {
 		return ReminderTypeTransformer.transform(GlobalDataUtil.getReminderTypes());
+	}
+
+	@Override
+	public List<LabelDto> getLabels(Integer userId, String label) {
+		return labelService.getByUserIdAndName(userId, label);
+	}
+
+	@Override
+	public List<LabelDto> saveLabel(LabelDto label) {
+		return labelService.toDtoList(labelService.persist(label));
 	}
 }

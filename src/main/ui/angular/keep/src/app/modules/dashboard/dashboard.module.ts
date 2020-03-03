@@ -34,7 +34,7 @@ import { LogoutComponent } from './components/logout/logout.component';
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ]
 })
 export class DashboardModule { }

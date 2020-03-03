@@ -6,6 +6,7 @@ package com.keep.services;
 import java.util.List;
 
 import com.keep.dto.ApplicationDto;
+import com.keep.dto.LabelDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.NotesSearchCriteria;
 import com.keep.dto.ReminderTypeDto;
@@ -30,5 +31,9 @@ public interface IKeepService {
 	NoteDto saveNote(NoteDto noteDto);
 
 	List<ReminderTypeDto> getReminderType();
+
+	List<LabelDto> getLabels(Integer userId, String label);
+
+	List<LabelDto> saveLabel(LabelDto label);
 
 }

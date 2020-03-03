@@ -83,6 +83,18 @@ public interface ICrudService<Dto, Entity> {
 		return elementList;
 	}
 	
+	default List<Entity> toEntityList(Entity entity){
+		List<Entity> entityList = new ArrayList<Entity>(1);
+		entityList.add(entity);
+		return entityList;
+	}
+	
+	default List<Dto> toDtoList(Dto dto){
+		List<Dto> entityList = new ArrayList<Dto>(1);
+		entityList.add(dto);
+		return entityList;
+	}
+	
 	Dto toDto(Entity entity);
 	
 	Entity toEntity(Dto dto);
