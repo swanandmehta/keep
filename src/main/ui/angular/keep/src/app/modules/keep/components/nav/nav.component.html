@@ -28,7 +28,7 @@
 
     <hr/>
 
-    <app-nav-label></app-nav-label>
+    <app-nav-label [currentPage]="currentPage" (pageChangeEvent)="pageChanged($event)"></app-nav-label>
     
     <hr/>
 

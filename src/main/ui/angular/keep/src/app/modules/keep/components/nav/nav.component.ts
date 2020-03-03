@@ -18,7 +18,7 @@ export class NavComponent implements OnInit {
   public settingsIcon: IconDefinition = faCogs;
   public hideNavMenu: boolean;
 
-  @Input() private currentPage: string;
+  @Input() private currentPage: string; 
   @Output() private pageChangeEvent: EventEmitter<string>;
 
   constructor() {
@@ -31,6 +31,11 @@ export class NavComponent implements OnInit {
   public openPage(nameOfThePage: string): void {
     this.currentPage = nameOfThePage;
     this.pageChangeEvent.emit(this.currentPage);
+  }
+
+  public pageChanged(nameOfThePage: string): void{
+    this.currentPage = nameOfThePage;
+    this.pageChangeEvent.emit(this.currentPage)
   }
 
 }

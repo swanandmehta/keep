@@ -12,6 +12,8 @@ import { ISuccessHandler } from '../../interface/logger/i-success-handler';
 import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
+import { ValidationErrors } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,19 @@ export class LabelService implements ILabelService {
         this.errorHandler.handleError(error, "User with Id "+userId+" failed to load labels", LoggerLevel.H);
       }
     }
+  }
+
+  public validateLabelName(labelName: string, userId: number): Observable<ValidationErrors> {
+    const url = ServerConfig.serverUrl + LabelServiceUrlConfig.getValidateLabelNameUrl(userId, labelName);
+    return this.commService.get(url).pipe(map((labelList: Array<Label>) => {
+      const error: ValidationErrors = {
+        labelExist: false
+      };
+      if(labelList != null && labelList !== undefined && labelList.length > 0){
+        error.labelExist = true;
+      }
+      return error;
+    }));
   }
 
 }

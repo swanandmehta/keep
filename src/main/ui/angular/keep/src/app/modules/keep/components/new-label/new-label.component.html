@@ -6,11 +6,36 @@
     </div>
     <div class="modal-body">
         <div class="col-md-12 p-0 m-0">
-            <div [formGroup]="">
+            <div [formGroup]="newLabelForm">
                 <div class="col-md-12 m-0 p-0">
                     <div class="m-3 p-0">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Work, home, personal...">
+                            <input type="text" class="form-control" 
+                                formControlName="name"
+                                placeholder="Work, home, personal...">
+                            <div class="form-error p-1" 
+                                *ngIf="(newLabelForm.controls.name.pristine === false || isSubmited === true) && 
+                                newLabelForm.controls.name.errors !== null &&
+                                newLabelForm.controls.name.errors.required === true">
+                                Please select valid value for label.
+                            </div>
+
+                            <div class="form-error p-1" 
+                                *ngIf="(newLabelForm.controls.name.pristine === false || isSubmited === true) && 
+                                newLabelForm.controls.name.errors !== null &&
+                                newLabelForm.controls.name.errors.labelExist === true">
+                                You have already created label with the same name.
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="m-3 p-0">
+                        <div class="form-group">
+                            <div class="form-error p-1" 
+                                *ngIf="isSaveFailed === true">
+                                Failed to save to label.
+                                Please contact Keep Support.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -18,5 +43,5 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-dark" (click)="activeModel.close('save')">Close</button>
+        <button type="button" class="btn btn-dark" (click)="save()">Close</button>
     </div>

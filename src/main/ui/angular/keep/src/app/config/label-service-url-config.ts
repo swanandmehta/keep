@@ -8,4 +8,8 @@ export class LabelServiceUrlConfig {
     return '/keep/label';
   }
 
+  public static getValidateLabelNameUrl(userId: number, label: string){
+    return '/keep/label?userId='+userId+'&label='+label;
+  }
+
 }

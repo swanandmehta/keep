@@ -11,6 +11,7 @@ import { LabelService } from 'src/app/core/services/label/label.service';
 import { Label } from '../../dto/label';
 import { PartialObserver } from 'rxjs';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
+import { labelNameValidator } from 'src/app/shared/validator/label-name-validator';
 
 @Component({
   selector: 'app-new-label',
@@ -28,13 +29,13 @@ export class NewLabelComponent implements OnInit {
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler;
   private sessionService: ISessionService;
-  private labalService: ILabelService;
+  private labelService: ILabelService;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, loggerService: LoggerService, 
-      sessionService: SessionService, labalService: LabelService) {
+      sessionService: SessionService, labelService: LabelService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;
-    this.labalService = labalService;
+    this.labelService = labelService;
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
     this.sessionService = sessionService;
@@ -43,7 +44,10 @@ export class NewLabelComponent implements OnInit {
     this.isSaveFailed = false;
 
     this.newLabelForm = this.formBuilder.group({
-      "labelName" : ["", Validators.required]
+      name : ["", Validators.required, labelNameValidator(labelService, 
+          Number(this.sessionService.getValue("userId")) as number).bind(this)]
+    }, {
+      updateOn : "blur"
     });
 
   }
@@ -58,7 +62,7 @@ export class NewLabelComponent implements OnInit {
       
       const observer: PartialObserver<Array<Label>> = this.getSaveObserver(label);
 
-      this.labalService.saveLabel(label).subscribe(observer);
+      this.labelService.saveLabel(label).subscribe(observer);
     }
 
   }
@@ -66,10 +70,11 @@ export class NewLabelComponent implements OnInit {
   private getSaveObserver(label: Label): PartialObserver<Array<Label>> {
     return {
       next : (labelList: Array<Label>) => {
+        this.isSaveFailed = false;
         this.successHandler.handleSuccess(labelList, "User with id "+label.userId+" save label.", LoggerLevel.L);
 
         labelList.forEach((label: Label) => {
-          this.labalService.addLabel(label);
+          this.labelService.addLabel(label);
         })
 
         this.activeModel.close('saved');

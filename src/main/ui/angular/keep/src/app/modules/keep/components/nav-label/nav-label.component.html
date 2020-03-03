@@ -12,22 +12,16 @@
     </div>
 
     <div class="labels-component-height">
-        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name1', 'non-selected-option': currentPage !== 'Test Label Name1' }">
-            <div class="col-md-12 p-0 py-3 pl-2 m-0"
-                (click)="openPage('Test Label Name1')">
-                <h5 class="col-md-12 p-0 m-0 text-truncate">
-                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name1
-                </h5>
+        <div *ngFor="let label of navLabelList">
+            <div [ngClass]="{'selected-option': currentPage === label.name, 'non-selected-option': currentPage !== label.name }">
+                <div class="col-md-12 p-0 py-3 pl-2 m-0"
+                    (click)="openPage(label)">
+                    <h5 class="col-md-12 p-0 m-0 text-truncate">
+                        <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;{{label.name}}
+                    </h5>
+                </div>
             </div>
         </div>
 
-        <div [ngClass]="{'selected-option': currentPage === 'Test Label Name2', 'non-selected-option': currentPage !== 'Test Label Name2' }">
-            <div class="col-md-12 p-0 py-3 pl-2 m-0"
-                (click)="openPage('Test Label Name2')">
-                <h5 class="col-md-12 p-0 m-0 text-truncate">
-                    <fa-icon [icon]="labelIcon"></fa-icon>&nbsp;Test Label Name2
-                </h5>
-            </div>
-        </div>
     </div>
 </div>
