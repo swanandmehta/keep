@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.keep.dto.ApplicationDto;
 import com.keep.dto.LabelDto;
 import com.keep.dto.NoteDto;
-import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ClientNotesSearchCriteria;
 import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 import com.keep.impl.KeepService;
@@ -59,7 +59,7 @@ public class KeepController {
 	
 	//Notes
 	@PostMapping(path="/keep/listing")
-	public List<NoteDto> getNotes(@RequestParam(name="userId") Integer userId, @RequestBody NotesSearchCriteria searchDto) {
+	public List<NoteDto> getNotes(@RequestParam(name="userId") Integer userId, @RequestBody ClientNotesSearchCriteria searchDto) {
 		return keepService.getNote(searchDto, userId);
 	}
 	

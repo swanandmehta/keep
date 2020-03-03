@@ -12,6 +12,6 @@ import com.keep.entity.Note;
  *
  */
 @Repository
-public interface INoteRepository extends ICrudRepository<Note> {
+public interface INoteRepository extends ICrudRepository<Note>, INoteRepositoryCustom {
 
 }

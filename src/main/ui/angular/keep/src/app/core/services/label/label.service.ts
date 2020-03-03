@@ -79,9 +79,7 @@ export class LabelService implements ILabelService {
   public validateLabelName(labelName: string, userId: number): Observable<ValidationErrors> {
     const url = ServerConfig.serverUrl + LabelServiceUrlConfig.getValidateLabelNameUrl(userId, labelName);
     return this.commService.get(url).pipe(map((labelList: Array<Label>) => {
-      const error: ValidationErrors = {
-        labelExist: false
-      };
+      const error: ValidationErrors = {};
       if(labelList != null && labelList !== undefined && labelList.length > 0){
         error.labelExist = true;
       }

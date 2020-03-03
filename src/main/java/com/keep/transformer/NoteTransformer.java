@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.keep.dto.CheckItemDto;
 import com.keep.dto.DateDto;
@@ -136,7 +137,7 @@ public class NoteTransformer {
 			checkItemDtoList.add(dto);
 		});
 		
-		return checkItemDtoList;
+		return checkItemDtoList.stream().sorted((item1, item2) -> item1.getId().compareTo(item2.getId())).collect(Collectors.toList());
 	}
 
 }

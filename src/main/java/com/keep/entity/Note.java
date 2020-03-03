@@ -3,6 +3,8 @@
  */
 package com.keep.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,6 +42,16 @@ public class Note implements IKeepEntity {
 	@OneToOne(cascade = {}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	private User user;
+	
+	@OneToMany(cascade = {}, fetch = FetchType.LAZY, mappedBy = "note")
+	private Set<NoteLabel> noteLabelSet;
+	
+	@OneToMany(cascade = {}, fetch = FetchType.LAZY)
+	@JoinTable(name = "NOTE_LABEL", 
+		joinColumns = @JoinColumn(name = "NOTE_ID"), 
+		inverseJoinColumns = @JoinColumn(name = "LABEL_ID")
+	)
+	private Set<Label> labelSet;
 
 	public Integer getId() {
 		return id;
@@ -69,6 +83,22 @@ public class Note implements IKeepEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Set<NoteLabel> getNoteLabelSet() {
+		return noteLabelSet;
+	}
+
+	public void setNoteLabelSet(Set<NoteLabel> noteLabelSet) {
+		this.noteLabelSet = noteLabelSet;
+	}
+
+	public Set<Label> getLabelSet() {
+		return labelSet;
+	}
+
+	public void setLabelSet(Set<Label> labelSet) {
+		this.labelSet = labelSet;
 	}
 	
 }

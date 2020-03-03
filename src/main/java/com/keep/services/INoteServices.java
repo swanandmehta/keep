@@ -6,7 +6,7 @@ package com.keep.services;
 import java.util.List;
 
 import com.keep.dto.NoteDto;
-import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ServerNotesSearchCriteria;
 import com.keep.entity.Note;
 
 /**
@@ -15,6 +15,6 @@ import com.keep.entity.Note;
  */
 public interface INoteServices extends ICrudService<NoteDto, Note> {
 
-	List<NoteDto> getNotes(NotesSearchCriteria searchDto, Integer userId);
+	List<NoteDto> getNotes(ServerNotesSearchCriteria searchDto, Integer userId);
 
 }

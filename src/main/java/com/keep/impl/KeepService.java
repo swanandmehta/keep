@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.keep.dto.ApplicationDto;
 import com.keep.dto.LabelDto;
 import com.keep.dto.NoteDto;
-import com.keep.dto.NotesSearchCriteria;
+import com.keep.dto.ClientNotesSearchCriteria;
 import com.keep.dto.ReminderTypeDto;
 import com.keep.dto.UserDto;
 import com.keep.services.IApplicationService;
@@ -18,6 +18,7 @@ import com.keep.services.IKeepService;
 import com.keep.services.ILabelService;
 import com.keep.services.INoteServices;
 import com.keep.services.IUserServices;
+import com.keep.transformer.NotesSearchCriteriaTransformer;
 import com.keep.transformer.ReminderTypeTransformer;
 import com.keep.utils.GlobalDataUtil;
 
@@ -62,8 +63,8 @@ public class KeepService implements IKeepService {
 	}
 
 	@Override
-	public List<NoteDto> getNote(NotesSearchCriteria searchDto, Integer userId) {
-		return noteService.getNotes(searchDto, userId);
+	public List<NoteDto> getNote(ClientNotesSearchCriteria searchDto, Integer userId) {
+		return noteService.getNotes(NotesSearchCriteriaTransformer.toServerDto(searchDto), userId);
 	}
 
 	@Override

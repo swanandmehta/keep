@@ -40,7 +40,6 @@ export class ListingService implements IListing {
 
     this.notes = new Array<Note>();
     this.reminderTypeList = new Array<ReminderType>();
-    this.getDefaultNotes();
     this.loadReminderTypes();
   }
 
@@ -62,29 +61,19 @@ export class ListingService implements IListing {
     this.remiderTypeCommService.get(url).subscribe(observer);
   }
 
-  private getDefaultNotes(): void {
-    const userId: number =  Number(this.sessionService.getValue("userId"));
-    const typeList: Array<NoteType> = new Array<NoteType>();
-    const lableList: Array<string> = new Array<string>();
-
-    typeList.push(NoteType.Checklist);
-    typeList.push(NoteType.Note);
-    typeList.push(NoteType.Reminder);
-    this.getNotesByCriteria(userId, typeList, lableList);
-  }
-
   public getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>): Array<Note> {
     const url = ServerConfig.serverUrl + ListingServiceUrlConfig.getListingByCriteriaUrl(userId);
     const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, lableList);
     const noteListingPartialObserver: PartialObserver<Array<Note>> = {
       next : (noteList : Array<Note>) => {
+
+        this.notes.splice(0);
+
         noteList.forEach((note: Note)=>{
           this.notes.push(note);
         });
 
         this.successHandler.handleSuccess(noteList, "User with id " + userId + " loaded notes.", LoggerLevel.L);
-
-        return this.notes;
       },
       error : (error: any) => {
         this.errorHandler.handleError(error, "User with id " + userId + " failed to load notes.", LoggerLevel.H);
