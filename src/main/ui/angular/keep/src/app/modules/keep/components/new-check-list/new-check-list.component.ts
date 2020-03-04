@@ -16,6 +16,7 @@ import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { CheckpadService } from 'src/app/core/services/checkpad/checkpad.service';
 import { Note } from '../../dto/note';
+import { Label } from '../../dto/label';
 
 @Component({
   selector: 'app-new-check-list',
@@ -29,6 +30,7 @@ export class NewCheckListComponent implements OnInit {
   public checkListForm: FormGroup;
   public isSubmited: boolean;
   public failedToSave: boolean;
+  public labelList: Array<Label>;
 
   private formBuilder: FormBuilder;
   private taskFormList: FormArray;
@@ -50,6 +52,7 @@ export class NewCheckListComponent implements OnInit {
     this.checkpadService = checkpadService;
     this.isSubmited = false;
     this.failedToSave = false;
+    this.labelList = new Array<Label>();
 
     this.taskFormList = new FormArray([]);
     this.taskFormList.push(this.getTaskForm());
@@ -80,6 +83,7 @@ export class NewCheckListComponent implements OnInit {
       const checkListDto: CheckList = this.checkListForm.value;
       checkListDto.userId = Number(this.sessionService.getValue("userId"));
       checkListDto.type = NoteType.Checklist;
+      checkListDto.labelList= this.labelList;
 
       const partialCheckpadObserver: PartialObserver<Note> = this.getPartialCheckpadObserver();
       this.checkpadService.save(checkListDto).subscribe(partialCheckpadObserver);

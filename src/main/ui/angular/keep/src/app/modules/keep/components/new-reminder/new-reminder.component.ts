@@ -23,6 +23,7 @@ import { SessionService } from 'src/app/core/services/session/session.service';
 import { TimeUtil } from 'src/app/core/util/time-util';
 import { MinDateTodayConfig } from 'src/app/config/min-date-today-config';
 import { validatePastTime } from 'src/app/shared/validator/validate-past-time';
+import { Label } from '../../dto/label';
 
 @Component({
   selector: 'app-new-reminder',
@@ -38,6 +39,7 @@ export class NewReminderComponent implements OnInit {
   public reminderTypeList: Array<ReminderType>;
   public failedToSave: boolean = false;
   public minDate: NgbDateStruct;
+  public labelList: Array<Label>;
 
   private formBuilder: FormBuilder;
   private listingService: IListing;
@@ -57,6 +59,7 @@ export class NewReminderComponent implements OnInit {
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
     this.sessionService = sessionService;
+    this.labelList = new Array<Label>();
     this.minDate = MinDateTodayConfig.getConfig();
 
     this.reminderTypeList = this.listingService.getReminderType();
@@ -87,6 +90,7 @@ export class NewReminderComponent implements OnInit {
 
       reminder.type = NoteType.Reminder;
       reminder.userId =  Number(this.sessionService.getValue("userId"));
+      reminder.labelList= this.labelList;
 
       const observer:PartialObserver<Note> = this.getObserver(reminder);
       this.notepadService.save(reminder).subscribe(observer);
