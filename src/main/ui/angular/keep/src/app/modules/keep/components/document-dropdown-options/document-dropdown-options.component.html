@@ -1,8 +1,8 @@
 <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
         <fa-icon ngbDropdownToggle [icon]="optionIcon"></fa-icon>
     <div ngbDropdownMenu>
-        <button ngbDropdownItem>Archive</button>
-        <button ngbDropdownItem>Edit</button>
-        <button ngbDropdownItem>Remove</button>
+        <button ngbDropdownItem (click)="archive()">Archive</button>
+        <button ngbDropdownItem (click)="edit()">Edit</button>
+        <button ngbDropdownItem (click)="remove()">Remove</button>
     </div>
 </div>

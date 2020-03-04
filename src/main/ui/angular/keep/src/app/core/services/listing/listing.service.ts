@@ -80,29 +80,40 @@ export class ListingService implements IListing {
     return this.notes;
   }
 
-  getNotesByStatus(userId: number, archivalLevelList: Array<ArchiveLevel>): Array<Note> {
-    //To remove compiletion error
+  public getNotesByStatus(userId: number, archivalLevelList: Array<ArchiveLevel>): Array<Note> {
     userId = userId;
     archivalLevelList = archivalLevelList;
     throw new Error("Method not implemented.");
   }
 
-  getNote(noteId: number): Array<Note> {
-    //To remove compilation error
+  public getNote(noteId: number): Array<Note> {
     noteId = noteId;
     throw new Error("Method not implemented.");
   }
 
-  getNotes(): Array<Note> {
+  public getNotes(): Array<Note> {
     return this.notes;
   }
 
-  addNote(note: Note): void {
+  public addNote(note: Note): void {
     this.notes.push(note);
   }
 
-  getReminderType(): Array<ReminderType> {
+  public getReminderType(): Array<ReminderType> {
     return this.reminderTypeList;
+  }
+
+  public removeNoteFromView(noteToRemove: Note): void {
+    const index: number = this.notes.findIndex((note: Note) => {
+      if(note.id === noteToRemove.id){
+        return true;
+      }
+      return false;
+    });
+
+    if(index > -1){
+      this.notes.splice(index, 1);
+    }
   }
 
 }

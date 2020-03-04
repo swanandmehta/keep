@@ -7,7 +7,6 @@ import { validateTime } from 'src/app/shared/validator/time';
 import { IListing } from 'src/app/core/interface/listing/i-listing';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { ReminderType } from '../../dto/reminder-type';
-import { NotepadService } from 'src/app/core/services/notepad/notepad.service';
 import { PartialObserver } from 'rxjs';
 import { Note } from '../../dto/note';
 import { ISuccessHandler } from 'src/app/core/interface/logger/i-success-handler';
@@ -26,6 +25,8 @@ import { validatePastTime } from 'src/app/shared/validator/validate-past-time';
 import { Label } from '../../dto/label';
 import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
+import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
+import { NoteService } from 'src/app/core/services/note/note.service';
 
 @Component({
   selector: 'app-new-reminder',
@@ -45,14 +46,14 @@ export class NewReminderComponent implements OnInit {
 
   private formBuilder: FormBuilder;
   private listingService: IListing;
-  private notepadService: NotepadService;
+  private notepadService: INoteService;
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler
   private sessionService: ISessionService;
   private labelService: ILabelService;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, listingService: ListingService,
-      notepadService: NotepadService, loggerService: LoggerService, sessionService: SessionService,
+      notepadService: NoteService, loggerService: LoggerService, sessionService: SessionService,
       labelService: LabelService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;

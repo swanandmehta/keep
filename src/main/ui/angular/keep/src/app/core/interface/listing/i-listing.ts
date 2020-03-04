@@ -17,4 +17,6 @@ export interface IListing {
 
     getReminderType(): Array<ReminderType>;
 
+    removeNoteFromView(note: Note): void;
+
 }

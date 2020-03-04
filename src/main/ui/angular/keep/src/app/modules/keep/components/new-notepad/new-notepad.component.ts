@@ -5,7 +5,6 @@ import { ISuccessHandler } from './../../../../core/interface/logger/i-success-h
 import { Notepad } from '../../dto/notepad';
 import { Note } from '../../dto/note';
 import { Observable, PartialObserver } from 'rxjs';
-import { NotepadService } from './../../../../core/services/notepad/notepad.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,6 +16,8 @@ import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { Label } from '../../dto/label';
 import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
+import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
+import { NoteService } from 'src/app/core/services/note/note.service';
 
 @Component({
   selector: 'app-new-notepad',
@@ -29,7 +30,7 @@ export class NewNotepadComponent implements OnInit {
   public newNotePad: FormGroup;
 
   private formBuilder: FormBuilder;
-  private notepadService: NotepadService;
+  private notepadService: INoteService;
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler;
   private listingService: IListing;
@@ -40,7 +41,7 @@ export class NewNotepadComponent implements OnInit {
   public failedToSave: boolean;
   public labelList: Array<Label>;
 
-  constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NotepadService,
+  constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NoteService,
               loggerService: LoggerService, listingService: ListingService, sessionService: SessionService,
               labelService: LabelService) {
     this.activeModel =  activeModel;

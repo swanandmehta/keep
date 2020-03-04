@@ -14,11 +14,11 @@ import { IListing } from 'src/app/core/interface/listing/i-listing';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
-import { CheckpadService } from 'src/app/core/services/checkpad/checkpad.service';
 import { Note } from '../../dto/note';
 import { Label } from '../../dto/label';
 import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
+import { NoteService } from 'src/app/core/services/note/note.service';
 
 @Component({
   selector: 'app-new-check-list',
@@ -45,7 +45,7 @@ export class NewCheckListComponent implements OnInit {
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, 
     sessionService: SessionService, loggerService: LoggerService, listingService: ListingService,
-    checkpadService: CheckpadService, labelService: LabelService) {
+    checkpadService: NoteService, labelService: LabelService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;
     this.sessionService = sessionService;
