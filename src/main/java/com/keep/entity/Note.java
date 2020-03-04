@@ -5,6 +5,7 @@ package com.keep.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,7 @@ public class Note implements IKeepEntity {
 	@OneToMany(cascade = {}, fetch = FetchType.LAZY, mappedBy = "note")
 	private Set<NoteLabel> noteLabelSet;
 	
-	@OneToMany(cascade = {}, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "NOTE_LABEL", 
 		joinColumns = @JoinColumn(name = "NOTE_ID"), 
 		inverseJoinColumns = @JoinColumn(name = "LABEL_ID")

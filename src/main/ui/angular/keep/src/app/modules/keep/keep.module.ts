@@ -3,6 +3,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModalModule, NgbDatepickerModule, NgbTimepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatChipsModule } from '@angular/material/chips'
+import { MatIconModule } from '@angular/material/icon'
+import { MatFormFieldModule } from '@angular/material/form-field'
 
 import { KeepRoutingModule } from './keep-routing.module';
 import { HomeComponent } from './components/home/home.component';
@@ -25,13 +28,14 @@ import { SettingComponent } from './components/setting/setting.component';
 import { DocumentDropdownOptionsComponent } from './components/document-dropdown-options/document-dropdown-options.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { NavLabelComponent } from './components/nav-label/nav-label.component';
+import { NoteChipComponent } from './components/note-chip/note-chip.component';
 
 @NgModule({
   declarations: [HomeComponent, HeaderComponent, NavComponent, NewNoteComponent,
     ListingComponent, MainComponent, ListingNoteComponent, ListingCheckListComponent,
     NewCheckListComponent, NewReminderComponent, NewNotepadComponent, ListingReminderComponent,
     NewLabelComponent, ArchiveComponent, TrashComponent, SettingsComponent, SettingComponent, 
-    DocumentDropdownOptionsComponent, AlertComponent, NavLabelComponent],
+    DocumentDropdownOptionsComponent, AlertComponent, NavLabelComponent, NoteChipComponent],
   imports: [
     CommonModule,
     KeepRoutingModule,
@@ -40,7 +44,10 @@ import { NavLabelComponent } from './components/nav-label/nav-label.component';
     NgbDatepickerModule,
     NgbTimepickerModule,
     NgbDropdownModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatChipsModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   bootstrap: [NewCheckListComponent, NewReminderComponent, NewNotepadComponent, NewLabelComponent]
 })

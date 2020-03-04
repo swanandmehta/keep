@@ -14,6 +14,7 @@ import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { SessionService } from 'src/app/core/services/session/session.service';
 import { ISessionService } from 'src/app/core/interface/session/i-session-service';
 import { NoteType } from 'src/app/shared/enum/note-type.enum';
+import { Label } from '../../dto/label';
 
 @Component({
   selector: 'app-new-notepad',
@@ -33,6 +34,7 @@ export class NewNotepadComponent implements OnInit {
   private sessionService: ISessionService;
   public isSubmited: boolean;
   public failedToSave: boolean;
+  public labelList: Array<Label>;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NotepadService,
               loggerService: LoggerService, listingService: ListingService, sessionService: SessionService) {
@@ -45,6 +47,7 @@ export class NewNotepadComponent implements OnInit {
     this.sessionService = sessionService;
     this.isSubmited = false;
     this.failedToSave = false;
+    this.labelList = new Array<Label>();
 
     this.newNotePad = this.formBuilder.group({
       heading : ['', [Validators.required]],
@@ -60,6 +63,8 @@ export class NewNotepadComponent implements OnInit {
     if (this.newNotePad.valid) {
       let notepad: Notepad = this.newNotePad.value;
       notepad.userId = Number(this.sessionService.getValue("userId"));
+      notepad.labelList= this.labelList;
+      
       notepad.type = NoteType.Note;
       const noteObserver: Observable<Note> = this.notepadService.save(notepad);
 

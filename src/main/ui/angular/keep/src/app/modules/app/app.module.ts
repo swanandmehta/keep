@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 import { DashboardModule } from '../dashboard/dashboard.module';
 import { KeepModule } from '../keep/keep.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { KeepModule } from '../keep/keep.module';
     AppRoutingModule,
     LoginModule,
     DashboardModule,
-    KeepModule
+    KeepModule,
+    NoopAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

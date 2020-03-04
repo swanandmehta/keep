@@ -20,6 +20,7 @@ public class NoteDto implements IKeepDto {
 	private DateDto date;
 	private TimeDto time;
 	private String repeat;
+	private List<LabelDto> labelList;
 	
 	public String getHeading() {
 		return heading;
@@ -75,5 +76,13 @@ public class NoteDto implements IKeepDto {
 	public void setRepeat(String repeat) {
 		this.repeat = repeat;
 	}
+	public List<LabelDto> getLabelList() {
+		return labelList;
+	}
+	public void setLabelList(List<LabelDto> labelList) {
+		this.labelList = labelList;
+	}
+	
+	
 	
 }

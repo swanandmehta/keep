@@ -3,8 +3,6 @@ import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { Note } from 'src/app/modules/keep/dto/note';
 import { ArchiveLevel } from 'src/app/shared/enum/archive-level.enum';
 import { HttpCommunicationService } from '../communication/http-communication.service';
-import { ISessionService } from '../../interface/session/i-session-service';
-import { SessionService } from '../session/session.service';
 import { ServerConfig } from 'src/app/config/server-config';
 import { ListingServiceUrlConfig } from 'src/app/config/listing-service-url-config';
 import { IListing } from '../../interface/listing/i-listing';
@@ -24,16 +22,13 @@ export class ListingService implements IListing {
   
   private commService: IHttpCommunicationService<Array<Note>>;
   private remiderTypeCommService: IHttpCommunicationService<Array<ReminderType>>;
-  private sessionService: ISessionService;
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler;
   private notes: Array<Note>;
   private reminderTypeList: Array<ReminderType>;
 
-  constructor(commService: HttpCommunicationService<Array<Note>>, sessionService: SessionService,
-      loggerService: LoggerService, remiderTypeCommService: HttpCommunicationService<Array<ReminderType>>) {
+  constructor(commService: HttpCommunicationService<Array<Note>>, loggerService: LoggerService, remiderTypeCommService: HttpCommunicationService<Array<ReminderType>>) {
     this.commService = commService;
-    this.sessionService = sessionService;
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
     this.remiderTypeCommService = remiderTypeCommService;

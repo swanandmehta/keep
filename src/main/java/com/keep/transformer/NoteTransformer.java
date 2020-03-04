@@ -13,10 +13,12 @@ import java.util.stream.Collectors;
 
 import com.keep.dto.CheckItemDto;
 import com.keep.dto.DateDto;
+import com.keep.dto.LabelDto;
 import com.keep.dto.NoteDto;
 import com.keep.dto.TimeDto;
 import com.keep.entity.Checkpad;
 import com.keep.entity.CheckpadItem;
+import com.keep.entity.Label;
 import com.keep.entity.Note;
 import com.keep.entity.Notepad;
 import com.keep.entity.Reminder;
@@ -44,6 +46,16 @@ public class NoteTransformer {
 			throw new InvalidCaseException("Could not find valid case for Note type");
 		}		
 	}
+	
+	private static Set<Label> getLabelSet(List<LabelDto> labelList) {
+		Set<Label> labelSet = new HashSet<Label>();
+
+		labelList.stream().forEach(e -> {
+			labelSet.add(LabelTransformer.toEntity(e));
+		});
+		
+		return labelSet;
+	}
 
 	private static Note getReminder(NoteDto dto) {
 		Reminder reminder = new Reminder();
@@ -55,6 +67,8 @@ public class NoteTransformer {
 				dto.getDate().getDay(), dto.getTime().getHour(), dto.getTime().getHour(), dto.getTime().getSecond());
 		
 		reminder.setTriggerTime(Timestamp.valueOf(triggerTime));
+		reminder.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
+
 		return reminder;
 	}
 
@@ -63,6 +77,8 @@ public class NoteTransformer {
 		notepad.setData(dto.getNote());
 		notepad.setHeading(dto.getHeading());
 		notepad.setUserId(dto.getUserId());
+		notepad.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
+		
 		return notepad;
 	}
 
@@ -82,6 +98,7 @@ public class NoteTransformer {
 		checkpad.setCheckpadItem(checkpadItemList);
 		checkpad.setHeading(dto.getHeading());
 		checkpad.setUserId(dto.getUserId());
+		checkpad.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
 		
 		return checkpad;
 	}
