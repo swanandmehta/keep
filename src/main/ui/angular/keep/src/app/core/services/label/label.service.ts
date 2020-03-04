@@ -56,7 +56,14 @@ export class LabelService implements ILabelService {
   }
 
   public addLabel(label: Label): void {
-    this.labelList.push(label);
+    const existingElement: Label | undefined = this.labelList.find((element: Label)=>{
+      return label.name == element.name ? element : undefined;
+    });
+
+    if(existingElement === undefined) {
+      this.labelList.push(label);
+    }
+    
   }
 
   private getFetchAllObserver(userId: number): PartialObserver<Array<Label>> {

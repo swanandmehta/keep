@@ -24,6 +24,8 @@ import { TimeUtil } from 'src/app/core/util/time-util';
 import { MinDateTodayConfig } from 'src/app/config/min-date-today-config';
 import { validatePastTime } from 'src/app/shared/validator/validate-past-time';
 import { Label } from '../../dto/label';
+import { ILabelService } from 'src/app/core/interface/label/i-label-service';
+import { LabelService } from 'src/app/core/services/label/label.service';
 
 @Component({
   selector: 'app-new-reminder',
@@ -47,10 +49,11 @@ export class NewReminderComponent implements OnInit {
   private successHandler: ISuccessHandler;
   private errorHandler: IErrorHandler
   private sessionService: ISessionService;
-  
+  private labelService: ILabelService;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, listingService: ListingService,
-      notepadService: NotepadService, loggerService: LoggerService, sessionService: SessionService) {
+      notepadService: NotepadService, loggerService: LoggerService, sessionService: SessionService,
+      labelService: LabelService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;
     this.isSubmited = false;
@@ -59,6 +62,7 @@ export class NewReminderComponent implements OnInit {
     this.successHandler = loggerService;
     this.errorHandler = loggerService;
     this.sessionService = sessionService;
+    this.labelService = labelService;
     this.labelList = new Array<Label>();
     this.minDate = MinDateTodayConfig.getConfig();
 
@@ -104,6 +108,9 @@ export class NewReminderComponent implements OnInit {
         this.successHandler.handleSuccess(savedReminder, 'User with Id ' + reminder.userId
           + ' saved note.', LoggerLevel.L);
           this.activeModel.close("Saved");
+          this.labelList.forEach((label: Label) => {
+            this.labelService.addLabel(label);
+          });
       },
       error: (error: Note) => {
         this.failedToSave = true;

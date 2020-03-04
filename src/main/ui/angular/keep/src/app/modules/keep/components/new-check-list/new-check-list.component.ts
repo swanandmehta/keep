@@ -17,6 +17,8 @@ import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { CheckpadService } from 'src/app/core/services/checkpad/checkpad.service';
 import { Note } from '../../dto/note';
 import { Label } from '../../dto/label';
+import { ILabelService } from 'src/app/core/interface/label/i-label-service';
+import { LabelService } from 'src/app/core/services/label/label.service';
 
 @Component({
   selector: 'app-new-check-list',
@@ -39,10 +41,11 @@ export class NewCheckListComponent implements OnInit {
   private errorHandler: IErrorHandler;
   private listingService: IListing;
   private checkpadService: INoteService;
+  private labelService: ILabelService;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, 
     sessionService: SessionService, loggerService: LoggerService, listingService: ListingService,
-    checkpadService: CheckpadService) {
+    checkpadService: CheckpadService, labelService: LabelService) {
     this.activeModel = activeModel;
     this.formBuilder = formBuilder;
     this.sessionService = sessionService;
@@ -50,6 +53,7 @@ export class NewCheckListComponent implements OnInit {
     this.successHandler = loggerService;
     this.listingService = listingService;
     this.checkpadService = checkpadService;
+    this.labelService = labelService;
     this.isSubmited = false;
     this.failedToSave = false;
     this.labelList = new Array<Label>();
@@ -105,6 +109,10 @@ export class NewCheckListComponent implements OnInit {
         this.successHandler.handleSuccess(checkpad, "User with id "+
           checkpad.userId+" saved note.", LoggerLevel.L);
         this.listingService.addNote(checkpad);
+
+        this.labelList.forEach((label: Label) => {
+          this.labelService.addLabel(label);
+        });
       },
       error: (error: any) => {
         this.failedToSave = true;

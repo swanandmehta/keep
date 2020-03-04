@@ -15,6 +15,8 @@ import { SessionService } from 'src/app/core/services/session/session.service';
 import { ISessionService } from 'src/app/core/interface/session/i-session-service';
 import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { Label } from '../../dto/label';
+import { ILabelService } from 'src/app/core/interface/label/i-label-service';
+import { LabelService } from 'src/app/core/services/label/label.service';
 
 @Component({
   selector: 'app-new-notepad',
@@ -32,12 +34,15 @@ export class NewNotepadComponent implements OnInit {
   private errorHandler: IErrorHandler;
   private listingService: IListing;
   private sessionService: ISessionService;
+  private labelService: ILabelService;
+
   public isSubmited: boolean;
   public failedToSave: boolean;
   public labelList: Array<Label>;
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NotepadService,
-              loggerService: LoggerService, listingService: ListingService, sessionService: SessionService) {
+              loggerService: LoggerService, listingService: ListingService, sessionService: SessionService,
+              labelService: LabelService) {
     this.activeModel =  activeModel;
     this.notepadService = notepadService;
     this.successHandler = loggerService;
@@ -45,6 +50,7 @@ export class NewNotepadComponent implements OnInit {
     this.formBuilder = formBuilder;
     this.listingService = listingService;
     this.sessionService = sessionService;
+    this.labelService = labelService;
     this.isSubmited = false;
     this.failedToSave = false;
     this.labelList = new Array<Label>();
@@ -77,6 +83,11 @@ export class NewNotepadComponent implements OnInit {
           + ' saved note.', LoggerLevel.L);
 
           this.listingService.addNote(savedNote);
+
+          this.labelList.forEach((label: Label) => {
+            this.labelService.addLabel(label);
+          });
+          
         },
         error: (error: any) => {
 
