@@ -101,4 +101,11 @@ public class NoteService extends CrudService<NoteDto, Note> implements INoteServ
 		return noteDtoList;
 	}
 
+	@Override
+	public NoteDto archiveNote(NoteDto noteDto) {
+		Note note = findById(noteDto.getId()).get();
+		
+		return toDto(note);
+	}
+
 }

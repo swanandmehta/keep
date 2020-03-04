@@ -40,6 +40,9 @@ public class Note implements IKeepEntity {
 	@Column(name = "USER_ID")
 	private Integer userId;
 	
+	@Column(name = "NOTE_STATE_ID")
+	private Integer noteStateId;
+	
 	@OneToOne(cascade = {}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_ID", insertable = false, updatable = false)
 	private User user;
@@ -53,7 +56,11 @@ public class Note implements IKeepEntity {
 		inverseJoinColumns = @JoinColumn(name = "LABEL_ID")
 	)
 	private Set<Label> labelSet;
-
+	
+	@OneToOne(cascade = {}, fetch = FetchType.LAZY)
+	@JoinColumn(name = "NOTE_STATE_ID", insertable = false, updatable = false)
+	private NoteState noteState;
+	
 	public Integer getId() {
 		return id;
 	}

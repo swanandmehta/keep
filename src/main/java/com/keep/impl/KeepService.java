@@ -86,4 +86,9 @@ public class KeepService implements IKeepService {
 	public List<LabelDto> saveLabel(LabelDto label) {
 		return labelService.toDtoList(labelService.persist(label));
 	}
+
+	@Override
+	public NoteDto archiveNote(NoteDto noteDto) {
+		return noteService.archiveNote(noteDto);
+	}
 }

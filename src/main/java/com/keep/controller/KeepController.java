@@ -68,6 +68,11 @@ public class KeepController {
 		return keepService.saveNote(noteDto);
 	}
 	
+	@PostMapping(path="/keep/note/archive")
+	public NoteDto archiveNote(@RequestBody NoteDto noteDto) {
+		return keepService.archiveNote(noteDto);
+	}
+	
 	//labels
 	@GetMapping(path="/keep/label")
 	public List<LabelDto> getLabels(@RequestParam(name="userId") Integer userId, @RequestParam(name="label", required = false) String label) {

@@ -25,8 +25,9 @@ public class AppStartupRunner implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments arguments) throws Exception {
-		runnerService.loadCheckitemStateValues();
-		runnerService.loadReminderTypeRepostiory();
+		runnerService.loadCheckitemStates();
+		runnerService.loadReminderTypes();
+		runnerService.loadNoteStates();
 	}
 
 }

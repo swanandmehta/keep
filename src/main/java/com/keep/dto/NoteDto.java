@@ -11,28 +11,30 @@ import java.util.List;
  */
 public class NoteDto implements IKeepDto {
 
+	private Integer id;
 	private String heading;
-	private String note;
 	private Integer userId;
 	private String type;
-	private Integer id;
-	private List<CheckItemDto> itemList;
+	private String note;
 	private DateDto date;
 	private TimeDto time;
 	private String repeat;
 	private List<LabelDto> labelList;
+	private List<CheckItemDto> itemList;
 	
+	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getHeading() {
 		return heading;
 	}
 	public void setHeading(String heading) {
 		this.heading = heading;
-	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
 	}
 	public Integer getUserId() {
 		return userId;
@@ -46,17 +48,11 @@ public class NoteDto implements IKeepDto {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public Integer getId() {
-		return id;
+	public String getNote() {
+		return note;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public List<CheckItemDto> getItemList() {
-		return itemList;
-	}
-	public void setItemList(List<CheckItemDto> itemList) {
-		this.itemList = itemList;
+	public void setNote(String note) {
+		this.note = note;
 	}
 	public DateDto getDate() {
 		return date;
@@ -82,7 +78,11 @@ public class NoteDto implements IKeepDto {
 	public void setLabelList(List<LabelDto> labelList) {
 		this.labelList = labelList;
 	}
-	
-	
+	public List<CheckItemDto> getItemList() {
+		return itemList;
+	}
+	public void setItemList(List<CheckItemDto> itemList) {
+		this.itemList = itemList;
+	}
 	
 }

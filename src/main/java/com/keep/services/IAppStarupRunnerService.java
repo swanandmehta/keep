@@ -9,8 +9,10 @@ package com.keep.services;
  */
 public interface IAppStarupRunnerService {
 
-	void loadCheckitemStateValues();
+	void loadCheckitemStates();
 
-	void loadReminderTypeRepostiory();
+	void loadReminderTypes();
+
+	void loadNoteStates();
 
 }
