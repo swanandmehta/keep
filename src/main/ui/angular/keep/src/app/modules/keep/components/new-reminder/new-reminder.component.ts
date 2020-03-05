@@ -27,6 +27,7 @@ import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { NoteService } from 'src/app/core/services/note/note.service';
+import { NoteStates } from 'src/app/shared/enum/note-states.enum';
 
 @Component({
   selector: 'app-new-reminder',
@@ -94,6 +95,7 @@ export class NewReminderComponent implements OnInit {
       const reminder: Reminder = this.newReminderForm.value as Reminder;
 
       reminder.type = NoteType.Reminder;
+      reminder.state = NoteStates.Active;
       reminder.userId =  Number(this.sessionService.getValue("userId"));
       reminder.labelList= this.labelList;
 

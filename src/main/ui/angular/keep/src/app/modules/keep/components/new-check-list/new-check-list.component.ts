@@ -19,6 +19,7 @@ import { Label } from '../../dto/label';
 import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
 import { NoteService } from 'src/app/core/services/note/note.service';
+import { NoteStates } from 'src/app/shared/enum/note-states.enum';
 
 @Component({
   selector: 'app-new-check-list',
@@ -87,6 +88,7 @@ export class NewCheckListComponent implements OnInit {
       const checkListDto: CheckList = this.checkListForm.value;
       checkListDto.userId = Number(this.sessionService.getValue("userId"));
       checkListDto.type = NoteType.Checklist;
+      checkListDto.state = NoteStates.Active;
       checkListDto.labelList= this.labelList;
 
       const partialCheckpadObserver: PartialObserver<Note> = this.getPartialCheckpadObserver();

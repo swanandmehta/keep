@@ -22,9 +22,5 @@ export class NoteService implements INoteService  {
     const url = ServerConfig.serverUrl + NotepadServiceUrlConfig.getSaveNoteUrl();
     return this.commService.post(url, note);
   }
-
-  public archiveNote(note: Note): Observable<Note> {
-    const url = ServerConfig.serverUrl + NotepadServiceUrlConfig.getArchiveUrl();
-    return this.commService.post(url, note);
-  }
+  
 }

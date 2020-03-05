@@ -18,6 +18,7 @@ import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { NoteService } from 'src/app/core/services/note/note.service';
+import { NoteStates } from 'src/app/shared/enum/note-states.enum';
 
 @Component({
   selector: 'app-new-notepad',
@@ -73,6 +74,7 @@ export class NewNotepadComponent implements OnInit {
       notepad.labelList= this.labelList;
       
       notepad.type = NoteType.Note;
+      notepad.state = NoteStates.Active;
       const noteObserver: Observable<Note> = this.notepadService.save(notepad);
 
       const partialNoteObserver: PartialObserver<Note> = {

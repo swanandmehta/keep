@@ -10,6 +10,7 @@ import { LoggerService } from 'src/app/core/services/logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { IListing } from 'src/app/core/interface/listing/i-listing';
+import { NoteStates } from 'src/app/shared/enum/note-states.enum';
 
 
 @Component({
@@ -44,7 +45,8 @@ export class DocumentDropdownOptionsComponent implements OnInit {
 
   public archive(): void {
     const noteObserver: PartialObserver<Note> = this.getArchiveObserver(this.note);
-    this.noteService.archiveNote(this.note).subscribe(noteObserver);
+    this.note.state = NoteStates.Archive;
+    this.noteService.save(this.note).subscribe(noteObserver);
   }
 
   private getArchiveObserver(note: Note): PartialObserver<Note> {
