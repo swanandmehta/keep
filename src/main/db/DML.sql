@@ -12,4 +12,4 @@ INSERT INTO keep.checkpad_state(name) values('True'),('False');
 
 INSERT INTO keep.reminder_repeat_type (NAME) values ('One-time'),('Hourly'),('Daily'),('Weekly'),('Monthly'),('Yearly'),('Custom');
 
-INSERT INTO keep.note_state(NAME) VALUES ('Archive'),('Trash');
+INSERT INTO keep.note_state(NAME) VALUES ('Active'),('Archive'),('Trash');

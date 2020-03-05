@@ -87,8 +87,4 @@ public class KeepService implements IKeepService {
 		return labelService.toDtoList(labelService.persist(label));
 	}
 
-	@Override
-	public NoteDto archiveNote(NoteDto noteDto) {
-		return noteService.archiveNote(noteDto);
-	}
 }

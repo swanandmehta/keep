@@ -17,6 +17,4 @@ public interface INoteServices extends ICrudService<NoteDto, Note> {
 
 	List<NoteDto> getNotes(ServerNotesSearchCriteria searchDto, Integer userId);
 
-	NoteDto archiveNote(NoteDto noteDto);
-
 }

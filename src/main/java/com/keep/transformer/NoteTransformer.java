@@ -48,17 +48,17 @@ public class NoteTransformer {
 	}
 	
 	private static Set<Label> getLabelSet(List<LabelDto> labelList) {
-		Set<Label> labelSet = new HashSet<Label>();
-
-		labelList.stream().forEach(e -> {
-			labelSet.add(LabelTransformer.toEntity(e));
-		});
+		if(labelList != null && !labelList.isEmpty()) {
+			return labelList.stream().map(e -> LabelTransformer.toEntity(e)).collect(Collectors.toSet());			
+		}
 		
-		return labelSet;
+		return new HashSet<Label>(0);
+
 	}
 
 	private static Note getReminder(NoteDto dto) {
 		Reminder reminder = new Reminder();
+		reminder.setId(dto.getId());
 		reminder.setUserId(dto.getUserId());
 		reminder.setHeading(dto.getHeading());
 		reminder.setReminderTypeId(ReminderTypeTransformer.getReminderTypeId(dto.getRepeat()));
@@ -68,17 +68,19 @@ public class NoteTransformer {
 		
 		reminder.setTriggerTime(Timestamp.valueOf(triggerTime));
 		reminder.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
+		reminder.setNoteStateId(NoteUtil.getStateId(dto.getState()));
 
 		return reminder;
 	}
 
 	private static Note getNotepad(NoteDto dto) {
 		Notepad notepad = new Notepad();
+		notepad.setId(dto.getId());
 		notepad.setData(dto.getNote());
 		notepad.setHeading(dto.getHeading());
 		notepad.setUserId(dto.getUserId());
 		notepad.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
-		
+		notepad.setNoteStateId(NoteUtil.getStateId(dto.getState()));		
 		return notepad;
 	}
 
@@ -88,6 +90,7 @@ public class NoteTransformer {
 		
 		dto.getItemList().stream().forEach(item -> {
 			CheckpadItem checkpadItem = new CheckpadItem();
+			checkpadItem.setId(item.getId());
 			checkpadItem.setCheckpadState(NoteUtil.getCheckPadState(item.getStatus()));
 			checkpadItem.setCheckpadStateId(NoteUtil.getCheckPadState(item.getStatus()).getId());
 			checkpadItem.setData(item.getText());
@@ -99,6 +102,8 @@ public class NoteTransformer {
 		checkpad.setHeading(dto.getHeading());
 		checkpad.setUserId(dto.getUserId());
 		checkpad.setLabelSet(NoteTransformer.getLabelSet(dto.getLabelList()));
+		checkpad.setNoteStateId(NoteUtil.getStateId(dto.getState()));
+		checkpad.setId(dto.getId());
 		
 		return checkpad;
 	}
@@ -107,10 +112,12 @@ public class NoteTransformer {
 		NoteDto dto = new NoteDto();
 		dto.setUserId(entity.getUserId());
 		dto.setId(entity.getId());
-		dto.setHeading(entity.getHeading());		
+		dto.setHeading(entity.getHeading());	
+		dto.setState(NoteUtil.getStateName(entity.getNoteStateId()));
 		
 		if(entity instanceof Notepad) {
 			dto.setType(NoteType.Note.getType());
+			
 			dto.setNote(((Notepad) entity).getData());
 		} else if(entity instanceof Reminder) {
 			LocalDateTime localDateTime = ((Reminder) entity).getTriggerTime().toLocalDateTime();

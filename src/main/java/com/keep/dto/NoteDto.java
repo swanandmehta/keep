@@ -19,10 +19,9 @@ public class NoteDto implements IKeepDto {
 	private DateDto date;
 	private TimeDto time;
 	private String repeat;
+	private String state;
 	private List<LabelDto> labelList;
 	private List<CheckItemDto> itemList;
-	
-	
 	
 	public Integer getId() {
 		return id;
@@ -71,6 +70,12 @@ public class NoteDto implements IKeepDto {
 	}
 	public void setRepeat(String repeat) {
 		this.repeat = repeat;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	public List<LabelDto> getLabelList() {
 		return labelList;

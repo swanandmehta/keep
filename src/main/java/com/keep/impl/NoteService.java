@@ -52,29 +52,31 @@ public class NoteService extends CrudService<NoteDto, Note> implements INoteServ
 	public Note save(Note entity) {
 		Set<Label> labelSet = entity.getLabelSet();
 		
-		Set<String> labelNameSet = labelSet.stream()
-											.map(label -> label.getName().toUpperCase())
-											.collect(Collectors.toSet());
-		
-		Set<Label> dbLabelSet = labelRepository.findByName(labelNameSet);
-		
-		labelSet.addAll(dbLabelSet);
-		
-		Map<String, Label> commonValues = labelSet.stream()
-													.collect(Collectors.toMap(
-																	label -> label.getName().toUpperCase(), 
-																	label -> label,
-																	(addedLabel, newLabel) -> {
-																		if(addedLabel.getId() != null) {
-																			return addedLabel;																			
-																		}else if(newLabel.getId() != null) {
-																			return newLabel;
-																		}
-																		return newLabel;
-																	}
-																)
-															);
-		entity.setLabelSet(new HashSet<Label>(commonValues.values()));
+		if(!labelSet.isEmpty()) {
+			Set<String> labelNameSet = labelSet.stream()
+					.map(label -> label.getName().toUpperCase())
+					.collect(Collectors.toSet());
+
+			Set<Label> dbLabelSet = labelRepository.findByName(labelNameSet);
+			
+			labelSet.addAll(dbLabelSet);
+			
+			Map<String, Label> commonValues = labelSet.stream()
+										.collect(Collectors.toMap(
+														label -> label.getName().toUpperCase(), 
+														label -> label,
+														(addedLabel, newLabel) -> {
+															if(addedLabel.getId() != null) {
+																return addedLabel;																			
+															}else if(newLabel.getId() != null) {
+																return newLabel;
+															}
+															return newLabel;
+														}
+													)
+												);
+			entity.setLabelSet(new HashSet<Label>(commonValues.values()));
+		}
 		
 		return super.save(entity);
 	}
@@ -99,13 +101,6 @@ public class NoteService extends CrudService<NoteDto, Note> implements INoteServ
 		}
 		
 		return noteDtoList;
-	}
-
-	@Override
-	public NoteDto archiveNote(NoteDto noteDto) {
-		Note note = findById(noteDto.getId()).get();
-		
-		return toDto(note);
 	}
 
 }

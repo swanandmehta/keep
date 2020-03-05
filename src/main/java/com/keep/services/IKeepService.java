@@ -36,6 +36,4 @@ public interface IKeepService {
 
 	List<LabelDto> saveLabel(LabelDto label);
 
-	NoteDto archiveNote(NoteDto noteDto);
-
 }

@@ -23,7 +23,7 @@ public class NoteState implements IKeepEntity {
 	@Column(name = "ID")
 	private Integer id;
 	
-	@Column(name = "TYPE")
+	@Column(name = "Name")
 	private String name;
 
 	public Integer getId() {

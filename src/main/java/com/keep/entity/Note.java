@@ -60,7 +60,7 @@ public class Note implements IKeepEntity {
 	@OneToOne(cascade = {}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "NOTE_STATE_ID", insertable = false, updatable = false)
 	private NoteState noteState;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -85,6 +85,14 @@ public class Note implements IKeepEntity {
 		this.userId = userId;
 	}
 
+	public Integer getNoteStateId() {
+		return noteStateId;
+	}
+
+	public void setNoteStateId(Integer noteStateId) {
+		this.noteStateId = noteStateId;
+	}
+
 	public User getUser() {
 		return user;
 	}
@@ -107,6 +115,14 @@ public class Note implements IKeepEntity {
 
 	public void setLabelSet(Set<Label> labelSet) {
 		this.labelSet = labelSet;
+	}
+
+	public NoteState getNoteState() {
+		return noteState;
+	}
+
+	public void setNoteState(NoteState noteState) {
+		this.noteState = noteState;
 	}
 	
 }
