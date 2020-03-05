@@ -63,4 +63,24 @@ export class DocumentDropdownOptionsComponent implements OnInit {
     return noteObserver;
   }
 
+  public remove(): void {
+    const noteObserver: PartialObserver<Note> = this.getTrashObserver(this.note);
+    this.note.state = NoteStates.Trash;
+    this.noteService.save(this.note).subscribe(noteObserver);
+  }
+
+  private getTrashObserver(note: Note): PartialObserver<Note> {
+    const noteObserver: PartialObserver<Note> = {
+      next: (note: Note) => {
+        this.successHandle.handleSuccess(note, "Note with id "+note.id+" mvoed to trash.", LoggerLevel.L);
+        this.listingService.removeNoteFromView(note);
+      },
+      error: (error: any) => {
+        this.errorHandle.handleError(error, "User failed to move Note with id "+note.id+" to trash.", LoggerLevel.H);
+      }
+    };
+
+    return noteObserver;
+  }
+
 }

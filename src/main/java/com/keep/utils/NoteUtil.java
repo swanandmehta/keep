@@ -37,7 +37,11 @@ public class NoteUtil {
 			findNoteQuery.append(" AND label.name IN :labelNameList ");			
 		}
 		
-		findNoteQuery.append(" AND state.name = 'Active' ");
+		if(searchDto.getNoteStateId() != null && !searchDto.getNoteStateId().isEmpty()) {
+			findNoteQuery.append(" AND state.id IN :noteStateIdList ");			
+		}
+		
+
 		
 		return findNoteQuery;
 	}

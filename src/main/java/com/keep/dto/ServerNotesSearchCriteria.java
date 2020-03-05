@@ -16,6 +16,8 @@ public class ServerNotesSearchCriteria implements IKeepDto {
 	private List<String> labelList;
 	
 	private List<NoteType> typeList;
+	
+	private List<Integer> noteStateId;
 
 	public List<String> getLabelList() {
 		return labelList;
@@ -31,6 +33,14 @@ public class ServerNotesSearchCriteria implements IKeepDto {
 
 	public void setTypeList(List<NoteType> typeList) {
 		this.typeList = typeList;
+	}
+
+	public List<Integer> getNoteStateId() {
+		return noteStateId;
+	}
+
+	public void setNoteStateId(List<Integer> noteStateId) {
+		this.noteStateId = noteStateId;
 	}
 	
 }

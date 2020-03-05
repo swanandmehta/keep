@@ -14,6 +14,7 @@ import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
 import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { ReminderType } from 'src/app/modules/keep/dto/reminder-type';
+import { NoteStates } from 'src/app/shared/enum/note-states.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -56,9 +57,10 @@ export class ListingService implements IListing {
     this.remiderTypeCommService.get(url).subscribe(observer);
   }
 
-  public getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>): Array<Note> {
+  public getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>, 
+    noteStatusList: Array<NoteStates>): Array<Note> {
     const url = ServerConfig.serverUrl + ListingServiceUrlConfig.getListingByCriteriaUrl(userId);
-    const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, lableList);
+    const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, lableList, noteStatusList);
     const noteListingPartialObserver: PartialObserver<Array<Note>> = {
       next : (noteList : Array<Note>) => {
 

@@ -1,5 +1,6 @@
 import { NoteType } from '../shared/enum/note-type.enum';
 import { ListingCriteria } from '../modules/keep/dto/listing-criteria';
+import { NoteStates } from '../shared/enum/note-states.enum';
 
 export class ListingServiceUrlConfig {
 
@@ -9,10 +10,14 @@ export class ListingServiceUrlConfig {
         return url;
     }
 
-    public static getListingByCriteriaPayload(typeList: Array<NoteType>, lableList: Array<string>) : ListingCriteria {
+    public static getListingByCriteriaPayload(typeList: Array<NoteType>, lableList: Array<string>,
+        noteStatusList: Array<NoteStates>) : ListingCriteria {
+
         const criteria: ListingCriteria = new ListingCriteria();
         criteria.lableList = lableList;
         criteria.typeList = typeList;
+        criteria.noteStatus = noteStatusList;
+
         return criteria;
     }
 
