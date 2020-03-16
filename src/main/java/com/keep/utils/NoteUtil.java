@@ -41,6 +41,9 @@ public class NoteUtil {
 			findNoteQuery.append(" AND state.id IN :noteStateIdList ");			
 		}
 		
+		if(searchDto.getIdList() != null && !searchDto.getIdList().isEmpty()) {
+			findNoteQuery.append(" AND e.id IN :noteIdList ");
+		}
 
 		
 		return findNoteQuery;

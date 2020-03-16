@@ -16,6 +16,8 @@ public class ClientNotesSearchCriteria implements IKeepDto {
 	private List<String> typeList;
 	
 	private List<String> noteStatus;
+	
+	private List<Integer> idList;
 
 	public List<String> getLableList() {
 		return lableList;
@@ -40,5 +42,12 @@ public class ClientNotesSearchCriteria implements IKeepDto {
 	public void setNoteStatus(List<String> noteStatus) {
 		this.noteStatus = noteStatus;
 	}
-	
+
+	public List<Integer> getIdList() {
+		return idList;
+	}
+
+	public void setIdList(List<Integer> idList) {
+		this.idList = idList;
+	}	
 }

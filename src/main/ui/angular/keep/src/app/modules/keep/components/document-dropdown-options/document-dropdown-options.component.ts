@@ -11,7 +11,12 @@ import { LoggerLevel } from 'src/app/shared/enum/logger-level.enum';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
 import { IListing } from 'src/app/core/interface/listing/i-listing';
 import { NoteStates } from 'src/app/shared/enum/note-states.enum';
-
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NoteType } from 'src/app/shared/enum/note-type.enum';
+import { ModelConfig } from 'src/app/config/model-config';
+import { NewCheckListComponent } from '../new-check-list/new-check-list.component';
+import { NewReminderComponent } from '../new-reminder/new-reminder.component';
+import { NewNotepadComponent }  from '../new-notepad/new-notepad.component';
 
 @Component({
   selector: 'app-document-dropdown-options',
@@ -27,17 +32,20 @@ export class DocumentDropdownOptionsComponent implements OnInit {
   private successHandle: ISuccessHandler;
   private errorHandle: IErrorHandler;
   private listingService: IListing;
+  private modelService: NgbModal;
 
   @Input("note")
   public set setNote(note: Note) {
     this.note = note;
   }
 
-  constructor(noteService: NoteService, loggerService: LoggerService, listingService: ListingService) {
+  constructor(noteService: NoteService, loggerService: LoggerService, listingService: ListingService,
+    modelService: NgbModal) {
     this.noteService = noteService
     this.successHandle = loggerService;
     this.errorHandle = loggerService;
     this.listingService = listingService;
+    this.modelService = modelService;
   }
 
   ngOnInit() {
@@ -81,6 +89,22 @@ export class DocumentDropdownOptionsComponent implements OnInit {
     };
 
     return noteObserver;
+  }
+
+  public edit(): void {
+
+    const modelOptions = ModelConfig.newNoteModelOptions;
+    let modalRef: NgbModalRef;
+    if (this.note.type === NoteType.Note.toString()) {
+      modalRef = this.modelService.open(NewNotepadComponent, modelOptions);
+      modalRef.componentInstance.note = this.note;
+    } else if (this.note.type === NoteType.Checklist.toString()) {
+      modalRef = this.modelService.open(NewCheckListComponent, modelOptions);
+      modalRef.componentInstance.note = this.note;
+    } else if (this.note.type === NoteType.Reminder.toString()) {
+      modalRef = this.modelService.open(NewReminderComponent, modelOptions);
+      modalRef.componentInstance.note = this.note;
+    }
   }
 
 }

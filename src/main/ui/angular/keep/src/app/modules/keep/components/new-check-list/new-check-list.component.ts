@@ -1,5 +1,5 @@
 import { IconDefinition, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators, FormArray, AbstractControl } from '@angular/forms';
 import { CheckList } from '../../dto/check-list';
@@ -20,6 +20,7 @@ import { ILabelService } from 'src/app/core/interface/label/i-label-service';
 import { LabelService } from 'src/app/core/services/label/label.service';
 import { NoteService } from 'src/app/core/services/note/note.service';
 import { NoteStates } from 'src/app/shared/enum/note-states.enum';
+import { CheckItem } from '../../dto/check-item';
 
 @Component({
   selector: 'app-new-check-list',
@@ -34,6 +35,7 @@ export class NewCheckListComponent implements OnInit {
   public isSubmited: boolean;
   public failedToSave: boolean;
   public labelList: Array<Label>;
+  public note: CheckList;
 
   private formBuilder: FormBuilder;
   private taskFormList: FormArray;
@@ -43,6 +45,11 @@ export class NewCheckListComponent implements OnInit {
   private listingService: IListing;
   private checkpadService: INoteService;
   private labelService: ILabelService;
+
+  @Input("note")
+  public set setNote(note: CheckList) {
+    this.note = note;
+  }
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, 
     sessionService: SessionService, loggerService: LoggerService, listingService: ListingService,
@@ -57,24 +64,50 @@ export class NewCheckListComponent implements OnInit {
     this.labelService = labelService;
     this.isSubmited = false;
     this.failedToSave = false;
-    this.labelList = new Array<Label>();
-
-    this.taskFormList = new FormArray([]);
-    this.taskFormList.push(this.getTaskForm());
-
-    this.checkListForm = this.formBuilder.group({
-      heading : ['', [Validators.required]],
-      itemList: this.taskFormList
-    });
 
   }
 
   ngOnInit() {
 
+    if(this.note == undefined || this.note == null){
+      this.note = new CheckList();
+      const checkItem: CheckItem = new CheckItem();
+
+      this.note.itemList = new Array<CheckItem>();
+      this.note.itemList.push(checkItem);
+
+      this.labelList = new Array<Label>();
+    }else{
+      this.labelList = this.note.labelList;
+    }
+
+    this.taskFormList = this.getTaskFormArray(this.note.itemList);
+
+    this.checkListForm = this.formBuilder.group({
+      heading : [this.note.heading, [Validators.required]],
+      itemList: this.taskFormList
+    });
+
+  }
+
+  private getTaskFormArray(itemList: Array<CheckItem>): FormArray {
+    let formArray: FormArray = new FormArray([]);
+
+    itemList.forEach((item: CheckItem) => {
+      let itemFormGroup = this.formBuilder.group({
+        status : [item.status, []],
+        text : [item.text, [Validators.required]]
+      });
+
+      formArray.push(itemFormGroup);
+    });
+
+    return formArray;
   }
 
   public addNewEntry(): void {
-    this.taskFormList.push(this.getTaskForm());
+    let checkItem: CheckItem = new CheckItem();
+    this.taskFormList.push(this.getTaskForm(checkItem));
   }
 
   public getTaskControls() : Array<AbstractControl> {
@@ -97,10 +130,10 @@ export class NewCheckListComponent implements OnInit {
     }
   }
 
-  private getTaskForm(): FormGroup{
+  private getTaskForm(checkItem: CheckItem): FormGroup{
     return this.formBuilder.group({
-      status : [false, []],
-      text : ['', [Validators.required]]
+      status : [checkItem.status, []],
+      text : [checkItem.text, [Validators.required]]
     });
   }
 

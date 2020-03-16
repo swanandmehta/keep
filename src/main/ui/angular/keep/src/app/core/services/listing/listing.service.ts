@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { Note } from 'src/app/modules/keep/dto/note';
-import { ArchiveLevel } from 'src/app/shared/enum/archive-level.enum';
 import { HttpCommunicationService } from '../communication/http-communication.service';
 import { ServerConfig } from 'src/app/config/server-config';
 import { ListingServiceUrlConfig } from 'src/app/config/listing-service-url-config';
@@ -80,12 +79,6 @@ export class ListingService implements IListing {
     this.commService.post(url, listingCriteriaDto).subscribe(noteListingPartialObserver);
     
     return this.notes;
-  }
-
-  public getNotesByStatus(userId: number, archivalLevelList: Array<ArchiveLevel>): Array<Note> {
-    userId = userId;
-    archivalLevelList = archivalLevelList;
-    throw new Error("Method not implemented.");
   }
 
   public getNote(noteId: number): Array<Note> {

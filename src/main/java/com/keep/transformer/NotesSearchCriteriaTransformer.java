@@ -21,7 +21,10 @@ public class NotesSearchCriteriaTransformer {
 	public static ServerNotesSearchCriteria toServerDto(ClientNotesSearchCriteria searchDto) {
 		ServerNotesSearchCriteria criteria = new ServerNotesSearchCriteria();
 		
-		criteria.setLabelList(searchDto.getLableList());
+		if(searchDto.getLableList() != null && !searchDto.getLableList().isEmpty()) {
+			criteria.setLabelList(searchDto.getLableList());			
+		}
+
 		
 		if(searchDto.getTypeList() != null && !searchDto.getTypeList().isEmpty()) {
 			
@@ -46,6 +49,10 @@ public class NotesSearchCriteriaTransformer {
 			
 			criteria.setNoteStateId(noteStatusIdList);
 																		
+		}
+		
+		if(searchDto.getIdList() != null && !searchDto.getIdList().isEmpty()) {
+			criteria.setIdList(searchDto.getIdList());
 		}
 
 		return criteria;

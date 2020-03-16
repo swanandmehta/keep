@@ -6,7 +6,7 @@ import { Notepad } from '../../dto/notepad';
 import { Note } from '../../dto/note';
 import { Observable, PartialObserver } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IListing } from 'src/app/core/interface/listing/i-listing';
 import { ListingService } from 'src/app/core/services/listing/listing.service';
@@ -29,6 +29,9 @@ export class NewNotepadComponent implements OnInit {
 
   public activeModel: NgbActiveModal;
   public newNotePad: FormGroup;
+  public isSubmited: boolean;
+  public failedToSave: boolean;
+  public labelList: Array<Label>;
 
   private formBuilder: FormBuilder;
   private notepadService: INoteService;
@@ -37,10 +40,13 @@ export class NewNotepadComponent implements OnInit {
   private listingService: IListing;
   private sessionService: ISessionService;
   private labelService: ILabelService;
+  private note: Notepad;
 
-  public isSubmited: boolean;
-  public failedToSave: boolean;
-  public labelList: Array<Label>;
+
+  @Input("note")
+  public set setNote(note: Notepad){
+    this.note = note;
+  }
 
   constructor(activeModel: NgbActiveModal, formBuilder: FormBuilder, notepadService: NoteService,
               loggerService: LoggerService, listingService: ListingService, sessionService: SessionService,
@@ -55,15 +61,23 @@ export class NewNotepadComponent implements OnInit {
     this.labelService = labelService;
     this.isSubmited = false;
     this.failedToSave = false;
-    this.labelList = new Array<Label>();
-
-    this.newNotePad = this.formBuilder.group({
-      heading : ['', [Validators.required]],
-      note : ['']
-    });
+    
   }
 
   ngOnInit() {
+    
+    if(this.note === undefined || this.note === null){
+      this.note = new Notepad();
+      this.labelList = new Array<Label>();
+    }else{
+      this.labelList = this.note.labelList;
+    }
+
+    this.newNotePad = this.formBuilder.group({
+      heading : [this.note.heading, [Validators.required]],
+      note : [this.note.note]
+    });
+
   }
 
   public close(): void {
