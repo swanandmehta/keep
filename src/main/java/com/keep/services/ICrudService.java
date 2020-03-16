@@ -90,9 +90,9 @@ public interface ICrudService<Dto, Entity> {
 	}
 	
 	default List<Dto> toDtoList(Dto dto){
-		List<Dto> entityList = new ArrayList<Dto>(1);
-		entityList.add(dto);
-		return entityList;
+		List<Dto> dtoList = new ArrayList<Dto>(1);
+		dtoList.add(dto);
+		return dtoList;
 	}
 	
 	Dto toDto(Entity entity);

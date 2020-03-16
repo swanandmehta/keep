@@ -2,13 +2,14 @@ import { Note } from 'src/app/modules/keep/dto/note';
 import { NoteType } from 'src/app/shared/enum/note-type.enum';
 import { ReminderType } from 'src/app/modules/keep/dto/reminder-type';
 import { NoteStates } from 'src/app/shared/enum/note-states.enum';
+import { Observable } from 'rxjs';
 
 export interface IListing {
 
     getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>, 
         noteStatusList: Array<NoteStates>) : Array<Note>;
 
-    getNote(noteId: number) : Array<Note>;
+    getNote(noteId: number, userId: number) : Observable<Array<Note>>;
 
     getNotes(): Array<Note>;
 

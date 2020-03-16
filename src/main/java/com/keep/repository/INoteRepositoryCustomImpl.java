@@ -49,6 +49,10 @@ public class INoteRepositoryCustomImpl implements INoteRepositoryCustom {
 			query.setParameter("noteStateIdList", searchDto.getNoteStateId());
 		}
 		
+		if(searchDto.getIdList() != null && !searchDto.getIdList().isEmpty()) {
+			query.setParameter("noteIdList", searchDto.getIdList());
+		}
+		
 		return query.getResultList();
 	}
 
@@ -69,6 +73,10 @@ public class INoteRepositoryCustomImpl implements INoteRepositoryCustom {
 			query.setParameter("noteStateIdList", searchDto.getNoteStateId());
 		}
 		
+		if(searchDto.getIdList() != null && !searchDto.getIdList().isEmpty()) {
+			query.setParameter("noteIdList", searchDto.getIdList());
+		}
+		
 		return query.getResultList();
 	}
 
@@ -87,6 +95,10 @@ public class INoteRepositoryCustomImpl implements INoteRepositoryCustom {
 		
 		if(searchDto.getNoteStateId() != null && !searchDto.getNoteStateId().isEmpty()) {
 			query.setParameter("noteStateIdList", searchDto.getNoteStateId());
+		}
+		
+		if(searchDto.getIdList() != null && !searchDto.getIdList().isEmpty()) {
+			query.setParameter("noteIdList", searchDto.getIdList());
 		}
 		
 		return query.getResultList();

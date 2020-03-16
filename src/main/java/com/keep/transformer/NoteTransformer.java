@@ -114,10 +114,10 @@ public class NoteTransformer {
 		dto.setId(entity.getId());
 		dto.setHeading(entity.getHeading());	
 		dto.setState(NoteUtil.getStateName(entity.getNoteStateId()));
+		dto.setLabelList(getLabelList(entity));
 		
 		if(entity instanceof Notepad) {
 			dto.setType(NoteType.Note.getType());
-			
 			dto.setNote(((Notepad) entity).getData());
 		} else if(entity instanceof Reminder) {
 			LocalDateTime localDateTime = ((Reminder) entity).getTriggerTime().toLocalDateTime();
@@ -131,6 +131,18 @@ public class NoteTransformer {
 		}
 		
 		return dto;
+	}
+
+	private static List<LabelDto> getLabelList(Note entity) {
+		return entity.getLabelSet().parallelStream()
+									.map(label -> {
+										LabelDto dto = new LabelDto();
+										dto.setId(label.getId());
+										dto.setName(label.getName());
+										dto.setUserId(label.getUserId());
+										return dto;
+									})
+									.collect(Collectors.toList());
 	}
 
 	private static DateDto getDate(LocalDateTime localDateTime) {

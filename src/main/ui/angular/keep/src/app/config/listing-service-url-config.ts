@@ -11,12 +11,13 @@ export class ListingServiceUrlConfig {
     }
 
     public static getListingByCriteriaPayload(typeList: Array<NoteType>, lableList: Array<string>,
-        noteStatusList: Array<NoteStates>) : ListingCriteria {
+        noteStatusList: Array<NoteStates>, idList: Array<number>) : ListingCriteria {
 
         const criteria: ListingCriteria = new ListingCriteria();
         criteria.lableList = lableList;
         criteria.typeList = typeList;
         criteria.noteStatus = noteStatusList;
+        criteria.idList = idList;
 
         return criteria;
     }

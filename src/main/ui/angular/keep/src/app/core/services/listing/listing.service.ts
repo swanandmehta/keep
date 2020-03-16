@@ -7,7 +7,7 @@ import { ListingServiceUrlConfig } from 'src/app/config/listing-service-url-conf
 import { IListing } from '../../interface/listing/i-listing';
 import { ListingCriteria } from 'src/app/modules/keep/dto/listing-criteria';
 import { IHttpCommunicationService } from '../../interface/communication/i-http-communication-service';
-import { PartialObserver } from 'rxjs';
+import { PartialObserver, Observable } from 'rxjs';
 import { ISuccessHandler } from '../../interface/logger/i-success-handler';
 import { IErrorHandler } from '../../interface/logger/i-error-handler';
 import { LoggerService } from '../logger/logger.service';
@@ -58,8 +58,9 @@ export class ListingService implements IListing {
 
   public getNotesByCriteria(userId: number, typeList: Array<NoteType>, lableList: Array<string>, 
     noteStatusList: Array<NoteStates>): Array<Note> {
+    const idList: Array<number> = new Array<number>(); 
     const url = ServerConfig.serverUrl + ListingServiceUrlConfig.getListingByCriteriaUrl(userId);
-    const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, lableList, noteStatusList);
+    const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, lableList, noteStatusList, idList);
     const noteListingPartialObserver: PartialObserver<Array<Note>> = {
       next : (noteList : Array<Note>) => {
 
@@ -79,11 +80,6 @@ export class ListingService implements IListing {
     this.commService.post(url, listingCriteriaDto).subscribe(noteListingPartialObserver);
     
     return this.notes;
-  }
-
-  public getNote(noteId: number): Array<Note> {
-    noteId = noteId;
-    throw new Error("Method not implemented.");
   }
 
   public getNotes(): Array<Note> {
@@ -109,6 +105,24 @@ export class ListingService implements IListing {
     if(index > -1){
       this.notes.splice(index, 1);
     }
+  }
+
+  public getNote(noteId: number, userId: number): Observable<Array<Note>> {
+    let typeList: Array<NoteType> = new Array<NoteType>();
+    let labelList: Array<string> = new Array<string>();
+    let noteStatusList: Array<NoteStates> = new Array<NoteStates>();
+    let idList: Array<number> = new Array<number>();
+
+    typeList.push(NoteType.Note);
+    typeList.push(NoteType.Checklist);
+    typeList.push(NoteType.Reminder);
+
+    idList.push(noteId);
+
+    const url = ServerConfig.serverUrl + ListingServiceUrlConfig.getListingByCriteriaUrl(userId);
+    const listingCriteriaDto: ListingCriteria = ListingServiceUrlConfig.getListingByCriteriaPayload(typeList, labelList, noteStatusList, idList);
+
+    return this.commService.post(url, listingCriteriaDto);
   }
 
 }

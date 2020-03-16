@@ -6,5 +6,6 @@ export class ListingCriteria {
     typeList : Array<NoteType>;
     lableList : Array<string>;
     noteStatus : Array<NoteStates>;
+    idList: Array<number>;
     
 }

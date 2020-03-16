@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Note } from '../../dto/note';
 import { INoteService } from 'src/app/core/interface/checkpad/i-note-service';
 import { NoteService } from 'src/app/core/services/note/note.service';
-import { PartialObserver } from 'rxjs';
+import { PartialObserver, Observable } from 'rxjs';
 import { ISuccessHandler } from 'src/app/core/interface/logger/i-success-handler';
 import { IErrorHandler } from 'src/app/core/interface/logger/i-error-handler';
 import { LoggerService } from 'src/app/core/services/logger/logger.service';
@@ -17,6 +17,8 @@ import { ModelConfig } from 'src/app/config/model-config';
 import { NewCheckListComponent } from '../new-check-list/new-check-list.component';
 import { NewReminderComponent } from '../new-reminder/new-reminder.component';
 import { NewNotepadComponent }  from '../new-notepad/new-notepad.component';
+import { ISessionService } from 'src/app/core/interface/session/i-session-service';
+import { SessionService } from 'src/app/core/services/session/session.service';
 
 @Component({
   selector: 'app-document-dropdown-options',
@@ -33,6 +35,7 @@ export class DocumentDropdownOptionsComponent implements OnInit {
   private errorHandle: IErrorHandler;
   private listingService: IListing;
   private modelService: NgbModal;
+  private sessionService: ISessionService
 
   @Input("note")
   public set setNote(note: Note) {
@@ -40,12 +43,13 @@ export class DocumentDropdownOptionsComponent implements OnInit {
   }
 
   constructor(noteService: NoteService, loggerService: LoggerService, listingService: ListingService,
-    modelService: NgbModal) {
+    modelService: NgbModal, sessionService: SessionService) {
     this.noteService = noteService
     this.successHandle = loggerService;
     this.errorHandle = loggerService;
     this.listingService = listingService;
     this.modelService = modelService;
+    this.sessionService = sessionService;
   }
 
   ngOnInit() {
@@ -92,18 +96,44 @@ export class DocumentDropdownOptionsComponent implements OnInit {
   }
 
   public edit(): void {
+    const userId: number = Number(this.sessionService.getValue("userId"));
+    const editObserver: PartialObserver<Array<Note>> = this.getEditObserver(this.note);
+    const editObservable: Observable<Array<Note>> = this.listingService.getNote(this.note.id, userId);
+    editObservable.subscribe(editObserver);
+  }
 
+  private getEditObserver(note: Note): PartialObserver<Array<Note>> {
+    const editObserver: PartialObserver<Array<Note>> = {
+      next: (noteList: Array<Note>) => {
+        this.successHandle.handleSuccess(noteList, "User with Id : "+note.userId+ " was able to load note.", LoggerLevel.L);
+
+        if(noteList.length > 0){
+          this.openNote(noteList[0]);
+        }
+
+      },
+
+      error: (error: any) => {
+        this.errorHandle.handleError(error, "User with Id : "+note.userId+ " failed to load note.", LoggerLevel.H);
+      }
+    }
+
+    return editObserver;
+  }
+
+
+  private openNote(note: Note): void {
     const modelOptions = ModelConfig.newNoteModelOptions;
     let modalRef: NgbModalRef;
-    if (this.note.type === NoteType.Note.toString()) {
+    if (note.type === NoteType.Note.toString()) {
       modalRef = this.modelService.open(NewNotepadComponent, modelOptions);
-      modalRef.componentInstance.note = this.note;
-    } else if (this.note.type === NoteType.Checklist.toString()) {
+      modalRef.componentInstance.note = note;
+    } else if (note.type === NoteType.Checklist.toString()) {
       modalRef = this.modelService.open(NewCheckListComponent, modelOptions);
-      modalRef.componentInstance.note = this.note;
-    } else if (this.note.type === NoteType.Reminder.toString()) {
+      modalRef.componentInstance.note = note;
+    } else if (note.type === NoteType.Reminder.toString()) {
       modalRef = this.modelService.open(NewReminderComponent, modelOptions);
-      modalRef.componentInstance.note = this.note;
+      modalRef.componentInstance.note = note;
     }
   }
 
